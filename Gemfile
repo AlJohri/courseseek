@@ -6,8 +6,8 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-ui-rails'
-  gem "compass-rails", ">= 1.0.3"
-  gem "zurb-foundation", ">= 3.2.3"
+  gem 'compass-rails', ">= 1.0.3"
+  gem 'zurb-foundation', ">= 3.2.3"
 end
 group :development do
 	gem "quiet_assets", ">= 1.0.1"
@@ -18,7 +18,7 @@ end
 
 gem 'foreman'
 gem 'delayed_job_active_record'
-gem "daemons"
+gem 'daemons'
 gem 'mechanize'
 gem 'jquery-plugins-rails'
 gem 'jquery-rails'
