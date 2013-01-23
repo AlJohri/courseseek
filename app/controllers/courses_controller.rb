@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
 
 	def get
 		course = CourseJob.new
-		course.scrape_courses
+		course.delay.scrape_courses
 	end
 
 end

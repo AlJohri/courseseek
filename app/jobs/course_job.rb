@@ -148,7 +148,7 @@ class CourseJob
       end
 		}
 	end
-	handle_asynchronously :scrape_courses
+	#handle_asynchronously :scrape_courses
 
 	def backup_database()
 		exec '/usr/local/bin/mysqldump -u atul --databases caesar > caesar.sql'
