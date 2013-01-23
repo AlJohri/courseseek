@@ -6,3 +6,19 @@
 *= require slick/controls/columnpicker
 *= require slick/controls/pager
 */
+
+#myGrid * {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+#myGrid [class*="column"]:last-child {
+  float: none;
+}
+
+.slick-header-column {
+   -webkit-box-sizing: content-box;
+   -moz-box-sizing: content-box;
+   box-sizing: content-box;
+}

@@ -1,5 +1,16 @@
 class CoursesController < ApplicationController
 
+  def index
+    @courses = Course.all
+
+    # respond_to { |format|
+    #   format.json { render :json => @courses }
+    # }
+    
+    render :json => @courses 
+
+  end
+
 	def get
 		course = CourseJob.new
 		course.delay.scrape_courses
