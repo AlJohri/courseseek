@@ -11,6 +11,66 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130123074209) do
+
+  create_table "careers", :force => true do |t|
+    t.string "career", :limit => 4
+    t.string "title"
+  end
+
+  create_table "courses", :force => true do |t|
+    t.string   "unique_id"
+    t.string   "term"
+    t.string   "subject"
+    t.string   "number"
+    t.string   "section"
+    t.string   "title"
+    t.boolean  "M"
+    t.boolean  "T"
+    t.boolean  "W"
+    t.boolean  "R"
+    t.boolean  "F"
+    t.string   "start"
+    t.string   "end"
+    t.string   "room"
+    t.string   "instructor"
+    t.integer  "seats"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "courses", ["unique_id"], :name => "index_courses_on_unique_id", :unique => true
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "institutions", :force => true do |t|
+    t.string "institution"
+    t.string "title"
+  end
+
+  create_table "subjects", :force => true do |t|
+    t.string "subject", :limit => 10
+    t.string "title"
+  end
+
+  create_table "terms", :force => true do |t|
+    t.integer "unique_id"
+    t.string  "title"
+  end
 
 end

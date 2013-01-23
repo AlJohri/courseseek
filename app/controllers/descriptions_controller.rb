@@ -1,0 +1,2 @@
+class DescriptionsController < ApplicationController
+end
