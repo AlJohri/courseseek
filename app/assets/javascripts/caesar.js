@@ -25,12 +25,13 @@ jQuery(function() {
 
 	var options = {
 	  editable: true,
+	  sortable: true,
 	  enableAddRow: false,
 	  enableCellNavigation: true,
 	  enableColumnReorder: false
 	};
 
-  jQuery.getJSON('http://localhost:3000/courses', function(data) {
+  jQuery.getJSON('courses', function(data) {
   	
   	for (var i = 0; i < data.length; i++) {
   		days = "";
