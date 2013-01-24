@@ -15,4 +15,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require slick
+//= require slick/dataview
+//= require slick/editors
+//= require slick/formatters
 //= require_tree .

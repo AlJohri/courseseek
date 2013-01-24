@@ -3,3 +3,21 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.top {
+	height: 420px;
+}
+
+#myGrid, #loadGrid {
+	height: 340px;
+}
+
+#loadGrid {
+	background-image:url('http://i.imgur.com/9354Whe.gif');
+	background-repeat:no-repeat;
+	background-position:center; 	
+}
+
+.hide {
+	//display:none;
+	visibility:hidden;
+}

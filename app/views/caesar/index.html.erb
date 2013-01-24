@@ -1,20 +1,126 @@
   <div class="row">
     <div class="twelve columns">
 
-      <!-- Navigation -->
-
-          <ul class="nav-bar">
-          <li class="active"><a href="#">Nav Item 1</a></li>
-          <li><a href="#">Nav Item 2</a></li>
-          <li><a href="#">Nav Item 3</a></li>
+      <!-- Basic Needs -->
+      <nav class="top-bar">
+        <ul>
+          <li class="name"><h1><a href="#">Coursica</a></h1></li>
+          <li class="toggle-topbar"><a href="#"></a></li>
         </ul>
+        <section>
+          <ul class="left">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
 
-      <!-- End Navigation -->
+          <ul class="right">
+            <li><a href="#">Something</a></li>
+          </ul>
+        </section>
+      </nav>
+
+      <!-- Positioning the Top Bar -->
+      <div class="fixed contain-to-grid">
+        <!-- <nav> goes here -->
+      </div>   
+      
+      <!-- Header Content -->
+
+        <div class="row">
+
+          <div class="twelve mobile-four columns">
+
+            <div class="top panel">
+
+              <div class="twelve mobile-four columns">
+                <input id="search" placeholder="Filter here..." type="text" />
+              </div>
+
+              <div class="two mobile-one columns">
+
+                <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+                </select>
+
+                <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+                </select>
+
+                <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+                </select>                                
+
+                <p></p>
+
+                <input type="checkbox" name="option1" value="Milk">Milk<br>
+                <input type="checkbox" name="option2" value="Butter">Butter<br>
+                <input type="checkbox" name="option3" value="Cheese">Cheese<br>
+                <input type="checkbox" name="option1" value="Milk">Milk<br>
+                <input type="checkbox" name="option2" value="Butter">Butter<br>
+                <input type="checkbox" name="option3" value="Cheese">Cheese<br>
+                <input type="checkbox" name="option1" value="Milk">Milk<br>
+                <input type="checkbox" name="option2" value="Butter">Butter<br>
+                <input type="checkbox" name="option3" value="Cheese">Cheese<br>
+        
+              </div>
+
+              <div class="ten mobile-three columns">
+                <div id="loadGrid" class="hide"></div>
+                <div id="myGrid" class="hide"></div>                
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      <!-- End Header Content -->
+
+
+      <!-- Footer -->
+
+        <footer class="row">
+        <div class="twelve columns"><hr />
+            <div class="row">
+
+              <div class="six columns">
+                  <p>&copy; Copyright no one at all. Go to town.</p>
+              </div>
+
+              <div class="six columns">
+                  <ul class="link-list right">
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                    <li><a href="#">Link 4</a></li>
+                  </ul>
+              </div>
+
+            </div>
+        </div>
+      </footer>
+
+      <!-- End Footer -->
+
+
+    </div>
+  </div>
+
 
 
       <!-- Search Bar -->
 
-        <div class="row">
+        <!--div class="row">
 
           <div class="twelve columns">
             <div class="radius panel">
@@ -22,12 +128,12 @@
             <form>
               <div class="row collapse">
 
-                <div class="ten mobile-three columns">
-                  <input type="text" />
+                <div class="twelve mobile-four columns">
+                  <input id="query" type="text" />
                 </div>
 
                 <div class="two mobile-one columns">
-                  <a href="#" class="postfix button expand">Search</a>
+                  <a id="search" href="onClick:search();" class="postfix button expand">Search</a>
                 </div>
 
               </div>
@@ -36,88 +142,9 @@
           </div>
           </div>
 
-        </div>
+        </div-->
 
       <!-- End Search Bar -->
-      
-      <!-- Header Content -->
-
-        <div class="row">
-
-          <div class="twelve columns">
-
-            <div class="top panel">
-            	<div id="myGrid"></div>
-            </div>
-
-           <!--div class="row">
-          	
-          	<div class="twelve columns">
-
-          		<div class="bottom left panel two columns">
-          		  <input type="text" value="">
-          		  
-                <hr />
-          			
-                <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-                </select>
-					      
-                <hr />
-      					
-                <input type="checkbox" name="option1" value="Milk">Milk<br>
-      					<input type="checkbox" name="option2" value="Butter">Butter<br>
-      					<input type="checkbox" name="option3" value="Cheese">Cheese<br>
-					      
-                <hr />
-      					
-                <input type="radio" name="group1" value="Milk"> Milk<br>
-      					<input type="radio" name="group1" value="Butter" checked> Butter<br>
-      					<input type="radio" name="group1" value="Cheese"> Cheese
-      					
-                <hr />
-      					
-                <input type="radio" name="group2" value="Water"> Water<br>
-      					<input type="radio" name="group2" value="Beer"> Beer<br>
-      					<input type="radio" name="group2" value="Wine" checked> Wine<br>
-          		</div>
-
-          		<div class="bottom right panel ten columns">
-                <div id="slickGrid2"></div>
-          		</div>
-
-          	</div>
-
-          </div-->
-
-
-          <!--div class="row">
-              <div class="six mobile-two columns">
-                <div class="panel">
-                  <h5>Header</h5>
-                <h6 class="subheader">Praesent placerat dui tincidunt elit suscipit sed.</h6>
-                <a href="#" class="small button">BUTTON TIME!</a>
-                </div>
-              </div>
-
-              <div class="six mobile-two columns">
-                <div class="panel">
-                  <h5>Header</h5>
-                <h6 class="subheader">Praesent placerat dui tincidunt elit suscipit sed.</h6>
-                <a href="#" class="small button">BUTTON TIME!</a>
-                </div>
-              </div>
-          </div-->
-
-          </div>
-
-        </div>
-
-      <!-- End Header Content -->
-
 
 
 
@@ -159,34 +186,67 @@
 
         </div-->
 
-      <!-- End Thumbnails -->
+      <!-- End Thumbnails -->      
 
 
-      <!-- Footer -->
+           <!--div class="row">
+            
+            <div class="twelve columns">
 
-        <footer class="row">
-        <div class="twelve columns"><hr />
-            <div class="row">
-
-              <div class="six columns">
-                  <p>&copy; Copyright no one at all. Go to town.</p>
+              <div class="bottom left panel two columns">
+                <input type="text" value="">
+                
+                <hr />
+                
+                <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+                </select>
+                
+                <hr />
+                
+                <input type="checkbox" name="option1" value="Milk">Milk<br>
+                <input type="checkbox" name="option2" value="Butter">Butter<br>
+                <input type="checkbox" name="option3" value="Cheese">Cheese<br>
+                
+                <hr />
+                
+                <input type="radio" name="group1" value="Milk"> Milk<br>
+                <input type="radio" name="group1" value="Butter" checked> Butter<br>
+                <input type="radio" name="group1" value="Cheese"> Cheese
+                
+                <hr />
+                
+                <input type="radio" name="group2" value="Water"> Water<br>
+                <input type="radio" name="group2" value="Beer"> Beer<br>
+                <input type="radio" name="group2" value="Wine" checked> Wine<br>
               </div>
 
-              <div class="six columns">
-                  <ul class="link-list right">
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                    <li><a href="#">Link 4</a></li>
-                  </ul>
+              <div class="bottom right panel ten columns">
+                <div id="slickGrid2"></div>
               </div>
 
             </div>
-        </div>
-      </footer>
 
-      <!-- End Footer -->
+          </div-->
 
 
-    </div>
-  </div>
+          <!--div class="row">
+              <div class="six mobile-two columns">
+                <div class="panel">
+                  <h5>Header</h5>
+                <h6 class="subheader">Praesent placerat dui tincidunt elit suscipit sed.</h6>
+                <a href="#" class="small button">BUTTON TIME!</a>
+                </div>
+              </div>
+
+              <div class="six mobile-two columns">
+                <div class="panel">
+                  <h5>Header</h5>
+                <h6 class="subheader">Praesent placerat dui tincidunt elit suscipit sed.</h6>
+                <a href="#" class="small button">BUTTON TIME!</a>
+                </div>
+              </div>
+          </div-->      
