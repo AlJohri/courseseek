@@ -13,9 +13,21 @@
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
+//= require jquery.handsontable.full
 //= require foundation
 //= require slick
 //= require slick/dataview
 //= require slick/editors
 //= require slick/formatters
+//= require slick/sorters
+//= require slick/plugins/cellcopymanager
+//= require slick/plugins/cellrangedecorator
+//= require slick/plugins/cellselectionmodel
+//= require slick/plugins/cellrangeselector
+//= require slick/plugins/rowselectionmodel
+//= require slick/plugins/autotooltips.js
+//= require slick/controls/pager
+//= require slick/controls/columnpicker
+//- require
+//= 
 //= require_tree .

@@ -1,3 +1,13 @@
+GIT
+  remote: git@github.com:zurb/foundation.git
+  revision: 6bcce8afb9d64e7ada2e084170a2387e86b6bfda
+  specs:
+    zurb-foundation (3.2.5)
+      compass (>= 0.12.2)
+      modular-scale (= 1.0.6)
+      rake
+      sass (>= 3.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -178,11 +188,6 @@ GEM
       unf_ext
     unf_ext (0.0.5)
     webrobots (0.0.13)
-    zurb-foundation (3.2.4)
-      compass (>= 0.12.2)
-      modular-scale (= 1.0.6)
-      rake
-      sass (>= 3.2.0)
 
 PLATFORMS
   ruby
@@ -211,4 +216,4 @@ DEPENDENCIES
   slickgrid-rails
   thin (>= 1.5.0)
   uglifier (>= 1.0.3)
-  zurb-foundation (>= 3.2.3)
+  zurb-foundation!
