@@ -5,8 +5,8 @@ class CoursesController < ApplicationController
     #render :json => Course.connection.select_all("SELECT * FROM public.courses, public.descriptions 
     #  WHERE courses.unique_id = descriptions.unique_id;")
 
-    render :json => Course.connection.select_all("SELECT courses.*, descriptions.overview FROM public.courses LEFT JOIN public.descriptions
-ON courses.unique_id = descriptions.unique_id;")
+    #render :json => Course.connection.select_all("SELECT courses.*, descriptions.overview FROM public.courses LEFT JOIN public.descriptions ON courses.unique_id = descriptions.unique_id;")
+    render :json => Course.connection.select_all("SELECT courses.* FROM public.courses;")
 
     #courses = Course.joins
     #render :text => Course.reflect_on_all_associations(:has_one)
