@@ -10,11 +10,9 @@ $(document).ready(function() {
       allowCalEventOverlap : true,
       overlapEventsSeparate: true,
       firstDayOfWeek : 1,
-      businessHours :{start: 8, end: 18, limitDisplay: true },
-      daysToShow : 7,
-      height : function($calendar) {
-         return $(window).height() - $("h1").outerHeight() - 1;
-      },
+      businessHours : {start: 8, end: 18, limitDisplay: true },
+      daysToShow : 5,
+      height : function($calendar) { return 420; },
       eventRender : function(calEvent, $event) {
          if (calEvent.end.getTime() < new Date().getTime()) {
             $event.css("backgroundColor", "#aaa");
@@ -24,12 +22,8 @@ $(document).ready(function() {
             });
          }
       },
-      draggable : function(calEvent, $event) {
-         return calEvent.readOnly != true;
-      },
-      resizable : function(calEvent, $event) {
-         return calEvent.readOnly != true;
-      },
+      draggable : function(calEvent, $event) { return calEvent.readOnly != true; },
+      resizable : function(calEvent, $event) { return calEvent.readOnly != true; },
       eventNew : function(calEvent, $event) {
          var $dialogContent = $("#event_edit_container");
          resetForm($dialogContent);
@@ -37,7 +31,6 @@ $(document).ready(function() {
          var endField = $dialogContent.find("select[name='end']").val(calEvent.end);
          var titleField = $dialogContent.find("input[name='title']");
          var bodyField = $dialogContent.find("textarea[name='body']");
-
 
          $dialogContent.dialog({
             modal: true,
@@ -68,18 +61,12 @@ $(document).ready(function() {
 
          $dialogContent.find(".date_holder").text($calendar.weekCalendar("formatDate", calEvent.start));
          setupStartAndEndTimeFields(startField, endField, calEvent, $calendar.weekCalendar("getTimeslotTimes", calEvent.start));
-
       },
-      eventDrop : function(calEvent, $event) {
-        
-      },
-      eventResize : function(calEvent, $event) {
-      },
+      eventDrop : function(calEvent, $event) { },
+      eventResize : function(calEvent, $event) {},
       eventClick : function(calEvent, $event) {
 
-         if (calEvent.readOnly) {
-            return;
-         }
+         if (calEvent.readOnly) {return;}
 
          var $dialogContent = $("#event_edit_container");
          resetForm($dialogContent);
@@ -125,16 +112,10 @@ $(document).ready(function() {
          $(window).resize().resize(); //fixes a bug in modal overlay size ??
 
       },
-      eventMouseover : function(calEvent, $event) {
-      },
-      eventMouseout : function(calEvent, $event) {
-      },
-      noEvents : function() {
-
-      },
-      data : function(start, end, callback) {
-         callback(getEventData());
-      }
+      eventMouseover : function(calEvent, $event) {},
+      eventMouseout : function(calEvent, $event) {},
+      noEvents : function() {},
+      data : function(start, end, callback) { callback(getEventData()); }
    });
 
    function resetForm($dialogContent) {
@@ -153,31 +134,36 @@ $(document).ready(function() {
                "id":1,
                "start": new Date(year, month, day, 12),
                "end": new Date(year, month, day, 13, 30),
-               "title":"Lunch with Mike"
+               "title":"Lunch with Mike",
+               readOnly : true     
             },
             {
                "id":2,
                "start": new Date(year, month, day, 14),
                "end": new Date(year, month, day, 14, 45),
-               "title":"Dev Meeting"
+               "title":"Dev Meeting",
+               readOnly : true               
             },
             {
                "id":3,
                "start": new Date(year, month, day + 1, 17),
                "end": new Date(year, month, day + 1, 17, 45),
-               "title":"Hair cut"
+               "title":"Hair cut",
+               readOnly : true
             },
             {
                "id":4,
                "start": new Date(year, month, day - 1, 8),
                "end": new Date(year, month, day - 1, 9, 30),
-               "title":"Team breakfast"
+               "title":"Team breakfast",
+               readOnly : true               
             },
             {
                "id":5,
                "start": new Date(year, month, day + 1, 14),
                "end": new Date(year, month, day + 1, 15),
-               "title":"Product showcase"
+               "title":"Product showcase",
+               readOnly : true               
             },
             {
                "id":6,
@@ -244,25 +230,6 @@ $(document).ready(function() {
          $endTimeField.find("option:eq(1)").attr("selected", "selected");
       }
 
-   });
-
-
-   var $about = $("#about");
-
-   $("#about_button").click(function() {
-      $about.dialog({
-         title: "About this calendar demo",
-         width: 600,
-         close: function() {
-            $about.dialog("destroy");
-            $about.hide();
-         },
-         buttons: {
-            close : function() {
-               $about.dialog("close");
-            }
-         }
-      }).show();
    });
 
 

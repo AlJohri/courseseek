@@ -59,12 +59,13 @@ function convertDays (resp) {
 
 /* HandsonTable */
 
+/*
 jQuery(function() {
 
 	$("#loadGrid").removeClass("hide");
-	$("#exampleGrid").addClass("hide");
+	$("#myGrid").addClass("hide");
 
-	$("#exampleGrid").handsontable({
+	$("#myGrid").handsontable({
 	  startRows: 8,
 	  startCols: 12,
 	  rowHeaders: true,
@@ -73,7 +74,7 @@ jQuery(function() {
 	  contextMenu: true,
 	});
 
-	var handsontable = $("#exampleGrid").data('handsontable');
+	var handsontable = $("#myGrid").data('handsontable');
 
 	$.ajax({
 		url: "courses", // https://dl.dropbox.com/u/2623300/courses.json
@@ -91,11 +92,11 @@ jQuery(function() {
 			}
 			handsontable.loadData(data2);
 			$("#loadGrid").addClass("hide"); 
-			$("#exampleGrid").removeClass("hide");
+			$("#myGrid").removeClass("hide");
 		}
 	});
 });
-
+*/
 
 
 
