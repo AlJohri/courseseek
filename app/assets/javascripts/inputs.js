@@ -90,11 +90,13 @@ $(document).ready(function() {
 				var finalstart = new Date('Mon Apr 8 2013 ' + starthr + ':' + startmin + ':00');
 				var finalend = new Date('Mon Apr 8 2013 ' + endhr + ':' + endmin + ':00');
 				
-				var calEvent = { "id" : idcount,
-				"start" : finalstart,
-				"end" : finalend,
-				"title" : course.subject + " " + course.number + " " + course.title};
-				idcount++;
+				var calEvent = { 
+					"unique_id" : course.unique_id,
+					"colorid" : i,
+					"start" : finalstart,
+					"end" : finalend,
+					"title" : course.subject + " " + course.number + " " + course.title
+				};
 				console.log(calEvent);
 				$("#calendar").weekCalendar("updateEvent", calEvent);
 			}
@@ -106,11 +108,13 @@ $(document).ready(function() {
 				var finalstart = new Date('Tue Apr 9 2013 ' + starthr + ':' + startmin + ':00');
 				var finalend = new Date('Tue Apr 9 2013 ' + endhr + ':' + endmin + ':00');
 
-				var calEvent = { "id" : idcount,
-				"start" : finalstart,
-				"end" : finalend,
-				"title" : course.subject + " " + course.number + " " + course.title};
-				idcount++;
+				var calEvent = { 
+					"unique_id" : course.unique_id,
+					"colorid" : i,
+					"start" : finalstart,
+					"end" : finalend,
+					"title" : course.subject + " " + course.number + " " + course.title
+				};
 				console.log(calEvent);
 				$("#calendar").weekCalendar("updateEvent", calEvent);
 			}
@@ -122,13 +126,13 @@ $(document).ready(function() {
 				var finalend = new Date('Wed Apr 10 2013 ' + endhr + ':' + endmin + ':00');
 				
 				var calEvent = { 
-					"id" : idcount,
+					"unique_id" : course.unique_id,
+					"colorid" : i,
 					"start" : finalstart,
 					"end" : finalend,
 					"title" : course.subject + " " + course.number + " " + course.title 
 				};
 
-				idcount++;
 				console.log(calEvent);
 				$("#calendar").weekCalendar("updateEvent", calEvent);
 			}
@@ -139,13 +143,13 @@ $(document).ready(function() {
 				var finalend = new Date('Thu Apr 11 2013 ' + endhr + ':' + endmin + ':00');
 
 				var calEvent = { 
-					"id" : idcount,
+					"unique_id" : course.unique_id,
+					"colorid" : i,
 					"start" : finalstart,
 					"end" : finalend,
 					"title" : course.subject + " " + course.number + " " + course.title
 				};
 
-				idcount++;
 				console.log(calEvent);
 				$("#calendar").weekCalendar("updateEvent", calEvent);
 			}
@@ -156,12 +160,12 @@ $(document).ready(function() {
 				var finalend = new Date('Fri Apr 12 2013 ' + endhr + ':' + endmin + ':00');
 
 				var calEvent = { 
-					"id" : idcount,
+					"unique_id" : course.unique_id,
+					"colorid" : i,
 					"start" : finalstart,
 					"end" : finalend,
 					"title" : course.subject + " " + course.number + " " + course.title
 				};
-				idcount++;
 				console.log(calEvent);
 				$("#calendar").weekCalendar("updateEvent", calEvent);
 			}
