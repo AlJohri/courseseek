@@ -61,6 +61,8 @@ $(document).ready(function() {
 
 	$('#makecalbutton').click(function() {
 
+		$("#calendar").weekCalendar("clear");
+
 		var numberOfCourses = courselist.length;
 		for(var i = 0; i < numberOfCourses; i++) {
 			var stringcomps = courselist[i];
@@ -72,7 +74,7 @@ $(document).ready(function() {
 			var startampm = starttime[1].substr(2,4);
 			console.log(startampm);
 			
-			if(startampm=="PM"){
+			if(startampm=="PM" && parseInt(starthr) != 12) {
 				var temp = parseInt(starthr) + 12;
 				starthr = temp.toString();
 			}
@@ -82,7 +84,7 @@ $(document).ready(function() {
 			var endmin = endtime[1].substr(0,2);
 			var endampm = endtime[1].substr(2,4);
 
-			if(endampm=="PM"){
+			if(endampm=="PM" && parseInt(endhr) != 12) {				
 				var temp = parseInt(endhr) + 12;
 				endhr = temp.toString();
 			}

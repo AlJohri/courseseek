@@ -14,7 +14,7 @@ $(document).ready(function() {
       allowCalEventOverlap : true,
       overlapEventsSeparate: true,
       firstDayOfWeek : 1,
-      businessHours : { start: 8, end: 18, limitDisplay: true },
+      businessHours : { start: 6, end: 22, limitDisplay: true },
       daysToShow : 5,
       textSize : 3, 
       height : function($calendar) { return 370; },
