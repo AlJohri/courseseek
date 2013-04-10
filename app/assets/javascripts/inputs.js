@@ -16,7 +16,7 @@ function getClass(dept,classNr,termID,jsonArr) {
 
 $(document).ready(function() { 
 
-    var CUR_TERM_ID = "4500";
+  var CUR_TERM_ID = "4500";
     
 	var data;
 	$.getJSON('courses', function(resp) {
@@ -37,11 +37,18 @@ $(document).ready(function() {
 		var stringcomps = string.split(' ');
 		console.log(stringcomps);
 
-
 		var course = getClass(stringcomps[0], stringcomps[1], CUR_TERM_ID, data);
 		console.log(course);
 
-		if(course != null) {
+		var exists = false;
+		for (var i = 0; i < courselist.length - 1; i++) {
+			if (courselist[i] == stringcomps) {
+				exists = true;
+				break;
+			}
+		}
+
+		if(course != null  && !exists) {
 			courselist[count] = stringcomps;
 			count++;
 
@@ -51,7 +58,11 @@ $(document).ready(function() {
 			addednotif.innerHTML = "Added course: " + string;
 			$("#searchArea").append(addednotif);
 		}
-		else{
+		else if (exists) {
+			console.log("error: course already in list");
+
+		}
+		else {
 			console.log("error: course does not exist");
 		}
 
