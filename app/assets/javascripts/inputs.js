@@ -35,6 +35,7 @@ $(document).ready(function() {
 
 		var string = $('#search').val();
 		var stringcomps = string.split(' ');
+		stringcomps[0] = stringcomps[0].toUpperCase();
 		console.log(stringcomps);
 
 		var course = getClass(stringcomps[0], stringcomps[1], CUR_TERM_ID, data);
