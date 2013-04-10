@@ -39,7 +39,7 @@ class CourseJob
 			match_type = "E"
 			career = "UGRD"
 			open_course_only = "N"
-			term = "4490"
+			term = "4500" #"4490"
 
 			ajax_headers = { 'Content-Type' => 'application/x-www-form-urlencoded; charset=utf-8'}
 			params = {

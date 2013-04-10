@@ -13,7 +13,7 @@ function unhideGrid() { $("#loadGrid").addClass("hide"); $("#myGrid").removeClas
 
 /* HandsonTable */
 
-
+/*
 jQuery(function() {
 
 	$("#loadGrid").removeClass("hide");
@@ -35,8 +35,8 @@ jQuery(function() {
 		url: "courses", // https://dl.dropbox.com/u/2623300/courses.json
 		dataType: 'json',
 		type: 'GET',
-		success: function (res) {
-			data = convertDays(res);
+		success: function (resp) {
+			data = convertDays(resp);
 			var data2 = [];
 			for (i in data) {
 				data[i]['overview'] = ""
@@ -72,3 +72,4 @@ function convertDays (resp) {
 	}
 	return resp;
 }
+*/
