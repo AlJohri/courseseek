@@ -24,11 +24,11 @@ $(document).ready(function() {
 
 	$("#enterbutton").click(function() {
 
-		var string = $('#classinput').val();
+		var string = $('#search').val();
 		var stringcomps = string.split(' ');
 		console.log(stringcomps);
 
-		$.getJSON('courses.json', function(data){
+		$.getJSON('courses', function(data){
 			console.log('JSON loaded properly');
 			var course = getClass(stringcomps[0], stringcomps[1], data);
 			console.log(course);
@@ -48,9 +48,9 @@ $(document).ready(function() {
 
 	});
 
-	$('#makecal').click(function() {
+	$('#makecalbutton').click(function() {
 
-		$.getJSON('courses.json', function(data){
+		$.getJSON('courses', function(data){
 			var numberOfCourses = courselist.length;
 			for(var i = 0; i < numberOfCourses; i++){
 				var stringcomps = courselist[i];
