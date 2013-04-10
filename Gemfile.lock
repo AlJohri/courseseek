@@ -149,12 +149,6 @@ GEM
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    slickgrid-rails (0.2.0)
-      coffee-rails
-      jquery-plugins-rails
-      jquery-rails
-      railties (~> 3.0)
-      sass-rails
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -177,7 +171,7 @@ GEM
       unf_ext
     unf_ext (0.0.5)
     webrobots (0.0.13)
-    zurb-foundation (3.2.4)
+    zurb-foundation (3.2.5)
       compass (>= 0.12.2)
       modular-scale (= 1.0.6)
       rake
@@ -207,7 +201,6 @@ DEPENDENCIES
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)
   simple_form (>= 2.0.4)
-  slickgrid-rails
   thin (>= 1.5.0)
   uglifier (>= 1.0.3)
-  zurb-foundation
+  zurb-foundation (= 3.2.5)

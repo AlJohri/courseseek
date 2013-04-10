@@ -27,7 +27,7 @@
          use24Hour : false,
          daysToShow : 7,
          firstDayOfWeek : 0, // 0 = Sunday, 1 = Monday, 2 = Tuesday, ... , 6 = Saturday
-         useShortDayNames: false,
+         useShortDayNames: true,
          timeSeparator : " to ",
          startParam : "start",
          endParam : "end",
@@ -281,7 +281,7 @@
             self._renderEvents({events:currentEvents, options: newOptions}, self.element.find(".wc-day-column-inner"))
         }
 
-	   },
+     },
       
 
       // compute dynamic options based on other config values
@@ -462,7 +462,7 @@
          $calendarContainer.find(".wc-time-slot").height(options.timeslotHeight - 1); //account for border
 
          $calendarContainer.find(".wc-time-header-cell").css({
-            height :  (options.timeslotHeight * options.timeslotsPerHour) - 11,
+            height :  (options.timeslotHeight * options.timeslotsPerHour) - 2,
             padding: 5
          });
 
@@ -601,9 +601,9 @@
 
             var dayName = options.useShortDayNames ? options.shortDays[currentDay.getDay()] : options.longDays[currentDay.getDay()];
 
-            $(this).html(dayName + "<br/>" + self._formatDate(currentDay, options.dateFormat));
+            $(this).html(dayName /*+ "<br/>" + self._formatDate(currentDay, options.dateFormat)*/);
             if (self._isToday(currentDay)) {
-               $(this).addClass("wc-today");
+               //$(this).addClass("wc-today");
             } else {
                $(this).removeClass("wc-today");
             }
@@ -618,7 +618,7 @@
             $(this).data("startDate", self._cloneDate(currentDay));
             $(this).data("endDate", new Date(currentDay.getTime() + (MILLIS_IN_DAY)));
             if (self._isToday(currentDay)) {
-               $(this).parent().addClass("wc-today");
+               //$(this).parent().addClass("wc-today");
             } else {
                $(this).parent().removeClass("wc-today");
             }
@@ -1289,15 +1289,15 @@
          for (var i = 0; i < format.length; i++) {
             var curChar = format.charAt(i);
             if ($.isFunction(this._replaceChars[curChar])) {
-	           var res = this._replaceChars[curChar](date, options);
+             var res = this._replaceChars[curChar](date, options);
 
-	           if (res === '00' && options.alwaysDisplayTimeMinutes === false) {
-		          //remove previous character
-		          returnStr = returnStr.slice(0, -1);
-		        } else {
+             if (res === '00' && options.alwaysDisplayTimeMinutes === false) {
+              //remove previous character
+              returnStr = returnStr.slice(0, -1);
+            } else {
                  
-	               returnStr += res;
-	           }
+                 returnStr += res;
+             }
             } else {
                returnStr += curChar;
             }

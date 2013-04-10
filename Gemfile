@@ -7,8 +7,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-ui-rails'
   gem 'compass-rails', ">= 1.0.3"
-  #gem 'zurb-foundation', ">= 3.2.3"
-  gem "zurb-foundation" #, :git => "git@github.com:zurb/foundation.git"
+  gem 'zurb-foundation', "= 3.2.5"
+  #gem "zurb-foundation", :git => "git@github.com:zurb/foundation.git"
 end
 group :development do
 	gem "quiet_assets", ">= 1.0.1"
@@ -23,7 +23,6 @@ gem 'daemons'
 gem 'mechanize'
 gem 'jquery-plugins-rails'
 gem 'jquery-rails'
-gem 'slickgrid-rails'
 gem 'thin', '>= 1.5.0'
 gem 'pg', '>= 0.14.1'
 gem 'simple_form', '>= 2.0.4'
