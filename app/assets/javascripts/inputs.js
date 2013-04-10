@@ -1,11 +1,13 @@
-function getClass(dept,classNr,jsonArr) {
+function getClass(dept,classNr,termID,jsonArr) {
     // add a "-0" if necessary
     if (classNr.indexOf("-0") === -1) {
         classNr += "-0"
     }
     for (var n in jsonArr) {
-        if (jsonArr[n].subject == dept && jsonArr[n].number == classNr) {
-            return jsonArr[n];
+        if (jsonArr[n].term == termID) {
+            if (jsonArr[n].subject == dept && jsonArr[n].number == classNr) {
+                return jsonArr[n];
+            }
         }
     }
     return null;
@@ -14,6 +16,8 @@ function getClass(dept,classNr,jsonArr) {
 
 $(document).ready(function() { 
 
+    var CUR_TERM_ID = "4500";
+    
 	var data;
 	$.getJSON('courses', function(resp) {
 		data = resp;
@@ -34,7 +38,7 @@ $(document).ready(function() {
 		console.log(stringcomps);
 
 
-		var course = getClass(stringcomps[0], stringcomps[1], data);
+		var course = getClass(stringcomps[0], stringcomps[1], CUR_TERM_ID, data);
 		console.log(course);
 
 		if(course != null) {
@@ -60,7 +64,7 @@ $(document).ready(function() {
 		var numberOfCourses = courselist.length;
 		for(var i = 0; i < numberOfCourses; i++) {
 			var stringcomps = courselist[i];
-			var course = getClass(stringcomps[0], stringcomps[1], data);
+			var course = getClass(stringcomps[0], stringcomps[1], CUR_TERM_ID, data);
 
 			var starttime = course.start.split(':');
 			var starthr = starttime[0];
