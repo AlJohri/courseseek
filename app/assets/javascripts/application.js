@@ -15,6 +15,6 @@
 //= require jquery_ujs
 //= require jquery.handsontable.full
 //= require foundation
-//- require
-//= 
 //= require_tree .
+
+$(document).foundation();
