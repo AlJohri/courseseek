@@ -17,6 +17,8 @@ module Coursica
       
     end
 
+    config.assets.initialize_on_precompile = false
+
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.autoload_paths += Dir["#{config.root}/app/jobs/**/"]
 
