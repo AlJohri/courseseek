@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 gem 'rails', '3.2.11'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -11,6 +12,7 @@ group :assets do
   gem 'zurb-foundation', '~> 4.0.0'
   #gem "zurb-foundation", :git => "git@github.com:zurb/foundation.git"
 end
+
 group :development do
 	gem "quiet_assets", ">= 1.0.1"
 	gem "better_errors", ">= 0.3.2"
