@@ -11,10 +11,6 @@ var handsontable;
 function hideGrid() { $("#loadGrid").removeClass("hide"); }
 function unhideGrid() { $("#loadGrid").addClass("hide"); $("#myGrid").removeClass("hide"); }
 
-$(document).ready(function() {
-  $(':checkbox').iphoneStyle();
-});
-
 /* HandsonTable */
 
 /*

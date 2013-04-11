@@ -17,4 +17,8 @@
 //= require foundation
 //= require_tree .
 
+$(document).ready(function() {
+  $(':checkbox').iphoneStyle();
+});
+
 $(document).foundation();

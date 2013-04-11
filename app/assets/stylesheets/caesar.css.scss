@@ -28,14 +28,14 @@
 }
 
 .addednotif {
-	@include panel;
+	//@include panel;
+	margin: 10px 10px;
+	height: 28px;
 }
 
 #searchArea {
 	height: 320px;
 	overflow: auto;
-	padding-top: 10px;
-	padding-right: 5px;	
 }
 
 // .wc-nav {

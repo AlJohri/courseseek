@@ -57,9 +57,11 @@ $(document).ready(function() {
 
 			var addednotif = document.createElement('div');
 			addednotif.className = "addednotif";
-			addednotif.innerHTML = "Added course: " + string;
+			//addednotif.innerHTML = string;
+			addednotif.innerHTML += '<hr style="margin-bottom: 10px;" /><div class="item" style="float: left; height: 27px; line-height: 27px; margin-right: 10px;">' + string + '</div> <div class="item" style="float: right; height: 27px;"> <input type="checkbox" value="' + string+ '" /> </div>'
 
 			$("#searchArea").append(addednotif);
+			$(':checkbox').iphoneStyle();
 		}
 		else if (exists) {
 			console.log("error: course already in list");
