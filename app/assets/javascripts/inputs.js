@@ -56,7 +56,9 @@ $(document).ready(function() {
 			console.log(courselist);
 
 			var addednotif = document.createElement('div');
+			addednotif.className = "addednotif";
 			addednotif.innerHTML = "Added course: " + string;
+
 			$("#searchArea").append(addednotif);
 		}
 		else if (exists) {

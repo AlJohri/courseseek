@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "foundation/foundation-global", "foundation/components/global", "foundation/components/panels";
+
 
 .top, .bottom {
 	height: 420px;
@@ -24,6 +26,17 @@
 
 #event_edit_container {
   display: none;
+}
+
+.addednotif {
+	@include panel;
+}
+
+#searchArea {
+	height: 320px;
+	overflow: auto;
+	padding-top: 10px;
+	padding-right: 5px;	
 }
 
 // .wc-nav {
