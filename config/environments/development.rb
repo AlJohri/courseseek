@@ -31,6 +31,7 @@ Coursica::Application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
 
+  config.action_dispatch.x_sendfile_header = nil # for heroku
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
