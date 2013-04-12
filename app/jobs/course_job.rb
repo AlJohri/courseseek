@@ -64,7 +64,8 @@ class CourseJob
 			error = doc.search("span[id^='DERIVED_CLSMSG_ERROR_TEXT']/text()")
 			courses = doc.search("span[id^='DERIVED_CLSRCH_DESCR200$']/text()").to_a
 
-			partsCounter = 0
+			partsCounter1 = 0
+			partsCounter2 = 0
 
       if (error.empty?)
 			  courses.each_with_index { |x,i| 
@@ -76,13 +77,24 @@ class CourseJob
           title = $4
 					parts = doc.search("div[id='win6div$ICField108GP$" + i.to_s + "'] > table > tr > td[2] > span[3]/text()").to_s.gsub(/1.*of\s/, "").to_i
 
+					checkEdgeCase = doc.search("div[id='win6divSSR_CLSRCH_MTG1$" + partsCounter1.to_s + "'] > table > tr")
+
+					if (checkEdgeCase.length > 2)
+						puts "ERROR EDGE CASE #{department} #{number}"
+						partsCounter1 += checkEdgeCase.length - 1
+						partsCounter2 += 1
+						next
+					end
+
+					puts "--------------#{department} #{number} has #{parts} parts"
+
           parts.times { |x|
-          	uniqueid_sec = doc.search("a[id='DERIVED_CLSRCH_SSR_CLASSNAME_LONG$" + partsCounter.to_s + "']").text
+          	uniqueid_sec = doc.search("a[id='DERIVED_CLSRCH_SSR_CLASSNAME_LONG$" + partsCounter2.to_s + "']").text
           	uniqueid_sec =~ /(\w+)-\w+\((\d+)\)/
           	section = $1
           	unique_id = $2
 
-          	days_time = doc.search("span[id='MTG_DAYTIME$" + partsCounter.to_s + "']").text
+          	days_time = doc.search("span[id='MTG_DAYTIME$" + partsCounter1.to_s + "']").text
           	if (days_time != "TBA")
 	          	days_time =~ /^(\w+) (\d\d?:\d\d(AM|PM)) - (\d\d?:\d\d(AM|PM))/
 						 	days = $1
@@ -94,11 +106,11 @@ class CourseJob
 							end_time = "TBA"
 						end
 
-          	room = doc.search("span[id='MTG_ROOM$" + partsCounter.to_s + "']").text
-          	instructor = doc.search("span[id='MTG_INSTR$" + partsCounter.to_s + "']").text
-          	dates = doc.search("span[id='MTG_TOPIC$" + partsCounter.to_s + "']").text
-          	seats = doc.search("span[id='NW_DERIVED_SS3_AVAILABLE_SEATS$" + partsCounter.to_s + "']").text
-          	status = doc.search("div[id='win6divDERIVED_CLSRCH_SSR_STATUS_LONG$" + partsCounter.to_s + "'] > div > img")[0]['alt']
+          	room = doc.search("span[id='MTG_ROOM$" + partsCounter1.to_s + "']").text
+          	instructor = doc.search("span[id='MTG_INSTR$" + partsCounter1.to_s + "']").text
+          	dates = doc.search("span[id='MTG_TOPIC$" + partsCounter1.to_s + "']").text
+          	seats = doc.search("span[id='NW_DERIVED_SS3_AVAILABLE_SEATS$" + partsCounter1.to_s + "']").text
+          	status = doc.search("div[id='win6divDERIVED_CLSRCH_SSR_STATUS_LONG$" + partsCounter2.to_s + "'] > div > img")[0]['alt']
 
             # http://stackoverflow.com/questions/452859/inserting-multiple-rows-in-a-single-sql-query
             # course_list.insert(:uniqueid => uniqueid, :dept => department, :course => course, :sec => sec, :title => title, :days => days, :start_time => start_time, :end_time => end_time, :room => room, :instructor => instructor, :seats => seats, :status => status, :datescraped => datescraped)
@@ -109,6 +121,7 @@ class CourseJob
             th = days.include? ("Th")
             fr = days.include? ("Fr")
 
+            puts "#{subject} #{number} #{title} #{instructor} #{days} #{start_time} #{end_time} #{partsCounter1}"
             course = Course.find_or_create_by_unique_id(unique_id) { |c|
             	c.term = term
             	c.subject = subject
@@ -128,7 +141,8 @@ class CourseJob
             	c.status = status
             }
 
-          	partsCounter+=1
+          	partsCounter1+=1
+          	partsCounter2+=1
           }
           
         }
