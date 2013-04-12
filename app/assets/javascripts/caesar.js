@@ -9,51 +9,14 @@
 
 //= require jquery-ui.min
 
-$(document).ready(function() {
-
-	colors = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed ", "Indigo ", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"]
-
-  var $calendar = $('#calendar');
-  var id = 10;
-
-// https://github.com/themouette/jquery-week-calendar/wiki/Public-methods
-// https://github.com/themouette/jquery-week-calendar/wiki/Script-options
-
-   $calendar.weekCalendar({
-      buttons : false,
-      timeslotsPerHour : 4,
-      timeslotHeight : 10,
-      allowCalEventOverlap : true,
-      overlapEventsSeparate: true,
-      firstDayOfWeek : 1,
-      businessHours : { start: 6, end: 22, limitDisplay: true },
-      daysToShow : 5,
-      textSize : 10, 
-      height : function($calendar) { return 370; },
-      eventRender : function(calEvent, $event) {
-      	console.log($event);
-        $event.css("backgroundColor", colors[calEvent.colorid]);
-        $event.find(".wc-time, .wc-title").css({
-           "backgroundColor" : colors[calEvent.colorid],
-           //"border" : "1px solid #888",
-           "color" : "black"
-        });
-      }
-   });
-
-});
 
 function getClass(dept,classNr,termID,jsonArr) {
-    // add a "-0" if necessary
-    if (classNr.indexOf("-0") === -1) classNr += "-0"
+    if (classNr.indexOf("-0") === -1) classNr += "-0" // add a "-0" if necessary
 
-    for (var n in jsonArr) {
-        if (jsonArr[n].term == termID) {
-            if (jsonArr[n].subject == dept && jsonArr[n].number == classNr) {
-                return jsonArr[n];
-            }
-        }
-    }
+    for (var n in jsonArr)
+        if (jsonArr[n].term == termID)
+            if (jsonArr[n].subject == dept && jsonArr[n].number == classNr) return jsonArr[n];
+
     return null;
 }
 
@@ -64,32 +27,62 @@ function getMonday(d) {
 }
 
 
-$(document).ready(function() { 
+
+
+$(document).ready(function() {
+
+	var data;
+
+	$.getJSON('courses', function(resp) { data = resp; });
+
+	// http://www.w3schools.com/html/html_colornames.asp
+	colors = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed ", "Indigo ", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"]
+
+  var $calendar = $('#calendar');
+  var id = 10;
+
+	// https://github.com/themouette/jquery-week-calendar/wiki/Public-methods
+	// https://github.com/themouette/jquery-week-calendar/wiki/Script-options
+
+  $calendar.weekCalendar({
+  	buttons : false,
+    timeslotsPerHour : 2,
+    timeslotHeight : 20,
+    allowCalEventOverlap : true,
+    overlapEventsSeparate: true,
+    firstDayOfWeek : 1,
+    businessHours : { start: 6, end: 22, limitDisplay: true },
+    daysToShow : 5,
+    textSize : 10, 
+    height : function($calendar) { return 370; },
+    eventRender : function(calEvent, $event) {
+    	console.log($event);
+      $event.css("backgroundColor", colors[calEvent.colorid]);
+      $event.find(".wc-time, .wc-title").css({
+         "backgroundColor" : colors[calEvent.colorid],
+         //"border" : "1px solid #888",
+         "color" : "black"
+      });
+    }
+ 	});
 
   var CUR_TERM_ID = "4500";
     
-	var data;
-	$.getJSON('courses', function(resp) {
-		data = resp;
-	});
-
 	var courselist = new Array();
 	var count = 0;
 	var idcount = 0;
 
-	$("input[type=text]").click(function() {
-	   $(this).select();
-	});
+	$("input[type=text]").click(function() { $(this).select(); });
 
 	$("#enterbutton").click(function() {
 
 		var string = $('#search').val();
 		var stringcomps = string.split(' ');
 		stringcomps[0] = stringcomps[0].toUpperCase();
-		//console.log(stringcomps);
+		console.log("Search: " + stringcomps);
 
 		var course = getClass(stringcomps[0], stringcomps[1], CUR_TERM_ID, data);
-		//console.log(course);
+		if (course) console.log("Found: " + course.unique_id + " " + course.subject + " " + course.number);
 
 		var exists = false;
 		for (var i = 0; i < courselist.length - 1; i++) {
@@ -103,23 +96,22 @@ $(document).ready(function() {
 			courselist[count] = stringcomps;
 			count++;
 
-			//console.log(courselist);
-
 			var addednotif = document.createElement('div');
 			addednotif.className = "addednotif";
 			addednotif.innerHTML += '<hr style="margin-bottom: 10px;" /><div class="item" style="float: left; height: 27px; line-height: 27px; margin-right: 10px;">' + string + '</div> <div class="item" style="float: right; height: 27px;"> <input type="checkbox" value="' + string+ '" /> </div>'
 
 			$("#searchArea").append(addednotif);
 			$(':checkbox').iphoneStyle();
+
+		  $("#search").val("");
+			makeCalendar();
 		}
 		else if (exists) console.log("error: course already in list");
-		else console.log("error: course does not exist");
-
-
+		else console.log("course does not exist");
 
 	});
 
-	$('#makecalbutton').click(function() {
+	function makeCalendar() {
 
 		/* Clear Calendar */
 		$("#calendar").weekCalendar("clear");
@@ -151,10 +143,14 @@ $(document).ready(function() {
 					$("#calendar").weekCalendar("updateEvent", calEvent);					
 				}
 			}
-
 		}
-		
-	});
+	}
+
+	$("#search").keyup(function(event){
+	    if(event.keyCode == 13){
+	        $("#enterbutton").click();
+	    }
+	});	
 
 });
 
