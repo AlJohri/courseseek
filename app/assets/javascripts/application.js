@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery.ui.all
-//= require jquery_ujs
 //= require jquery.handsontable.full
 //= require foundation
 //= require_tree .

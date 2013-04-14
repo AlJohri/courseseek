@@ -1,14 +1,4 @@
-// # Place all the behaviors and hooks related to the matching controller here.
-// # All this logic will automatically be available in application.js.
-// # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
-// # We need to wait for the DOM to be loaded so we wrap our AJAX call in a
-// # jQuery call that's the equivalent of document.ready()
-// 
-
-
 //= require jquery-ui.min
-
 
 function getClass(dept,classNr,termID,jsonArr) {
     if (classNr.indexOf("-0") === -1) classNr += "-0" // add a "-0" if necessary
@@ -26,24 +16,30 @@ function getMonday(d) {
   return new Date(d.setDate(diff));
 }
 
-
-
+var sidebar = false;
 
 $(document).ready(function() {
 
-	var data;
+	$("#back").click(function() {
+		if (!sidebar) {
+			$("#container").css("margin-left", "80%");
+			sidebar = true;
+		}
+		else {
+			$("#container").css("margin-left", "0");
+			sidebar = false;
+		}
+	});	
 
-	$.getJSON('courses', function(resp) { data = resp; });
+	var data; $.getJSON('courses', function(resp) { data = resp; });
 
 	// http://www.w3schools.com/html/html_colornames.asp
-	colors = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed ", "Indigo ", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"]
-
-  var $calendar = $('#calendar');
-  var id = 10;
+	colors = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed ", "Indigo ", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
 
 	// https://github.com/themouette/jquery-week-calendar/wiki/Public-methods
 	// https://github.com/themouette/jquery-week-calendar/wiki/Script-options
 
+	var $calendar = $('#calendar');
   $calendar.weekCalendar({
   	buttons : false,
     timeslotsPerHour : 2,
@@ -54,53 +50,66 @@ $(document).ready(function() {
     businessHours : { start: 6, end: 22, limitDisplay: true },
     daysToShow : 5,
     textSize : 10, 
-    height : function($calendar) { return 370; },
+    height : function($calendar) { 
+
+    	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+ 				return 280;
+			}
+			else {
+				return 428;
+			}
+
+    	// return 700;
+    	// return $(window).height();
+    },
     eventRender : function(calEvent, $event) {
     	console.log($event);
       $event.css("backgroundColor", colors[calEvent.colorid]);
       $event.find(".wc-time, .wc-title").css({
          "backgroundColor" : colors[calEvent.colorid],
-         //"border" : "1px solid #888",
+         //"border" : "1px solid black",
          "color" : "black"
       });
     }
  	});
 
   var CUR_TERM_ID = "4500";
-    
+
 	var courselist = new Array();
 	var count = 0;
 	var idcount = 0;
 
 	$("input[type=text]").click(function() { $(this).select(); });
-
 	$("#enterbutton").click(function() {
 
-		var string = $('#search').val();
-		var stringcomps = string.split(' ');
-		stringcomps[0] = stringcomps[0].toUpperCase();
-		console.log("Search: " + stringcomps);
+		var query = $('#search').val();
+		var splitquery = query.split(' ');
+		splitquery[0] = splitquery[0].toUpperCase();
+		console.log("Search: " + splitquery);
 
-		var course = getClass(stringcomps[0], stringcomps[1], CUR_TERM_ID, data);
+		var course = getClass(splitquery[0], splitquery[1], CUR_TERM_ID, data);
 		if (course) console.log("Found: " + course.unique_id + " " + course.subject + " " + course.number);
 
 		var exists = false;
 		for (var i = 0; i < courselist.length - 1; i++) {
-			if (courselist[i] == stringcomps) {
+			if (courselist[i] == splitquery) {
 				exists = true;
 				break;
 			}
 		}
 
 		if(course != null  && !exists) {
-			courselist[count] = stringcomps;
+			courselist[count] = splitquery;
 			count++;
 
-			var addednotif = document.createElement('div');
-			addednotif.className = "addednotif";
-			addednotif.innerHTML += '<hr style="margin-bottom: 10px;" /><div class="item" style="float: left; height: 27px; line-height: 27px; margin-right: 10px;">' + string + '</div> <div class="item" style="float: right; height: 27px;"> <input type="checkbox" value="' + string+ '" /> </div>'
+			var addedcoursenotif = document.createElement('div');
+			addedcoursenotif.className = "addednotif";
+			addedcoursenotif.innerHTML += 
+				'<div class="item" style="float: left; height: 27px; line-height: 27px; margin-right: 10px;">' + query.toUpperCase() + '</div>' + 
+				'<div class="item" style="float: right; height: 27px;">' + 
+				'<input type="checkbox" value="' + query.toUpperCase() + '" /> </div>'
 
-			$("#searchArea").append(addednotif);
+			$("#searchOutput").append(addedcoursenotif);
 			$(':checkbox').iphoneStyle();
 
 		  $("#search").val("");

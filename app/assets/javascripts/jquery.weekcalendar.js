@@ -565,7 +565,8 @@
          $calEvent = $(eventHtml);
          $modifiedEvent = options.eventRender(calEvent, $calEvent);
          $calEvent = $modifiedEvent ? $modifiedEvent.appendTo($weekDay) : $calEvent.appendTo($weekDay);
-         $calEvent.css({lineHeight: (options.timeslotHeight - 2) + "px", fontSize: (options.timeslotHeight / 2) + "px"});
+         $calEvent.css({lineHeight: (options.timeslotHeight / 2) + "px", fontSize: (options.timeslotHeight / 2) + "px"});
+         // options.timeslotHeight / 2
 
          self._refreshEventDetails(calEvent, $calEvent);
          self._positionEvent($weekDay, $calEvent);

@@ -7,6 +7,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-ui-rails'
+  #gem 'jquery_mobile_rails'
   #gem 'compass-rails', ">= 1.0.3"
   #gem 'zurb-foundation', "= 3.2.5"
   gem 'zurb-foundation', '~> 4.0.0'

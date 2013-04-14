@@ -2,7 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import "foundation/foundation-global", "foundation/components/global", "foundation/components/panels";
+// @import "foundation/foundation-global", "foundation/components/global";
+//"foundation/components/panels"
+
 
 .top, .bottom {
 	height: 420px;
@@ -31,16 +33,61 @@
 	//@include panel;
 	margin: 10px 10px;
 	height: 28px;
+	width: 100%;
 }
 
-#searchArea {
-	width: 320px;
-	height: 400px;
+#searchInput {
+	height: 75px;
+}
+
+#searchOutput {
+	width: 100%;
+	height: 350px;
 	overflow: auto;
 	float: left;
+	padding-top: 10px;
 }
 
-// .wc-nav {
-// 	display: none;
-// }
+#search {
+	float: left;
+	width: 75%;
+}
 
+#enterbutton {
+	float: right;
+	width: 22%;
+}
+
+#ribbon {
+	height: 30px;
+	background-color: #443266;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.panel {
+	background: #F1F0FF;
+}
+
+.top-bar {
+	background: #520063;
+}
+
+#container {
+	background: white;
+}
+
+.wc-scrollable-grid {
+	height: 420px;
+}
+
+#back {
+	height: 100%;
+}
+
+#container {
+	-webkit-transition: 0.3s margin ease-in-out; 
+	-moz-transition: 0.3s margin ease-in-out; 
+	-o-transition: 0.3s margin ease-in-out; 
+	transition: 0.3s margin ease-in-out; 
+}
