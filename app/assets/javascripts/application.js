@@ -19,5 +19,8 @@
 
 
 
-$(document).ready(function() { $(':checkbox').iphoneStyle(); });
-$(document).foundation();
+$(document).ready(function() { 
+	$(':checkbox').iphoneStyle(); 
+	$(document).foundation();
+});
+
