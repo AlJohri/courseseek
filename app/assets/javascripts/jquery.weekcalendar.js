@@ -561,6 +561,8 @@
          eventHtml = "<div class=\"" + eventClass + " ui-corner-all\">\
                 <div class=\"wc-title\"></div></div>";
 
+                //<div class=\"wc-time ui-corner-all\"></div>\
+
          $calEvent = $(eventHtml);
          $modifiedEvent = options.eventRender(calEvent, $calEvent);
          $calEvent = $modifiedEvent ? $modifiedEvent.appendTo($weekDay) : $calEvent.appendTo($weekDay);

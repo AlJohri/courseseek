@@ -92,28 +92,28 @@
 	transition: 0.3s margin ease-in-out; 
 }
 
-#searchOutput .addednotif .classTitle{
-float: left;
-height: 27px;
-line-height: 27px; 
-margin-right: 20px;
-text-transform:uppercase;
-text-align: center;
- }
+#searchOutput .addednotif .classTitle {
+	float: left;
+	height: 27px;
+	line-height: 27px; 
+	margin-right: 20px;
+	text-transform:uppercase;
+	text-align: center;
+}
 
-#searchOutput .addednotif .iphoneCheck{
+#searchOutput .addednotif .iphoneCheck {
  float: right; 
  height: 27px;
- }
+}
 
- #searchOutput .addednotif .removeClass{
-float: left;
-width: 10%;
-height: 100%;
-margin-right: 5px;
-background-image: url(removeClass.png);
-z-index: 1;
- background-repeat: no-repeat;
- background-position: right center;
- background-size: contain;
- }
+#searchOutput .addednotif .removeClass {
+	float: left;
+	width: 10%;
+	height: 100%;
+	margin-right: 5px;
+	background-image: url(removeClass.png);
+	z-index: 1;
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-size: contain;
+}
