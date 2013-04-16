@@ -1,5 +1,3 @@
-//= require jquery-ui.min
-
 function getClass(dept,classNr,termID,jsonArr) {
     if (classNr.indexOf("-0") === -1) classNr += "-0" // add a "-0" if necessary
 

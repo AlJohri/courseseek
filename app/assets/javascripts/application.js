@@ -12,12 +12,13 @@
 //
 //= require jquery
 //= require jquery.ui.all
-//= require jquery.handsontable.full
 //= require foundation
 //= require_tree .
+
+// require jquery.handsontable.full
+
+$(document).foundation();
 
 $(document).ready(function() {
   $(':checkbox').iphoneStyle();
 });
-
-$(document).foundation();
