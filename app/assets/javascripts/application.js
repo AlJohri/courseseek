@@ -17,8 +17,7 @@
 
 // require jquery.handsontable.full
 
-$(document).foundation();
 
-$(document).ready(function() {
-  $(':checkbox').iphoneStyle();
-});
+
+$(document).ready(function() { $(':checkbox').iphoneStyle(); });
+$(document).foundation();

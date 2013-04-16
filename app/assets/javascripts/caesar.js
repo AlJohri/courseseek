@@ -169,6 +169,8 @@ $(document).ready(function() {
 	    }
 	});	
 
+	$(document).foundation('joyride', 'start');
+
 });
 
 
