@@ -80,6 +80,13 @@ $(document).ready(function() {
 	var idcount = 0;
 
 	$("input[type=text]").click(function() { $(this).select(); });
+
+	/* Removes an event from the shopping cart on click */
+	$('.removeClass').click(function(){
+			console.log("hello!");
+	});
+
+
 	$("#enterbutton").click(function() {
 
 		var query = $('#search').val();
@@ -121,12 +128,6 @@ $(document).ready(function() {
 		else if (exists) console.log("error: course already in list");
 		else console.log("course does not exist");
 
-	});
-
-
-	/* Removes an event from the shopping cart on click */
-	$('.removeClass').click(function(){
-			console.log("hello!");
 	});
 
 	function makeCalendar() {
