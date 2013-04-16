@@ -91,8 +91,8 @@ $(document).ready(function() {
 		if (course) console.log("Found: " + course.unique_id + " " + course.subject + " " + course.number);
 
 		var exists = false;
-		for (var i = 0; i < courselist.length - 1; i++) {
-			if (courselist[i] == splitquery) {
+		for (var i = 0; i < courselist.length; i++) {
+			if (courselist[i][0] == splitquery[0] && courselist[i][1] == splitquery[1]) {
 				exists = true;
 				break;
 			}
