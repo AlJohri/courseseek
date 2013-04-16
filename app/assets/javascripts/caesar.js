@@ -34,13 +34,13 @@ $(document).ready(function() {
 	var data; $.getJSON('courses', function(resp) { data = resp; });
 
 	// http://www.w3schools.com/html/html_colornames.asp
-	colors = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed ", "Indigo ", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
+	colors = ["Aqua", "Aquamarine", "Beige", "Bisque", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed ", "Indigo ", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
 
 	// https://github.com/themouette/jquery-week-calendar/wiki/Public-methods
 	// https://github.com/themouette/jquery-week-calendar/wiki/Script-options
 
 	var $calendar = $('#calendar');
-  $calendar.weekCalendar({
+  	$calendar.weekCalendar({
   	buttons : false,
     timeslotsPerHour : 2,
     timeslotHeight : 20,
@@ -105,19 +105,28 @@ $(document).ready(function() {
 			var addedcoursenotif = document.createElement('div');
 			addedcoursenotif.className = "addednotif";
 			addedcoursenotif.innerHTML += 
-				'<div class="item" style="float: left; height: 27px; line-height: 27px; margin-right: 10px;">' + query.toUpperCase() + '</div>' + 
-				'<div class="item" style="float: right; height: 27px;">' + 
+				'<div class="removeClass"></div>' +
+				'<div class="classTitle">' + query.toUpperCase() + '</div>' + 
+				'<div class="iphoneCheck">' + 
 				'<input type="checkbox" value="' + query.toUpperCase() + '" /> </div>'
 
 			$("#searchOutput").append(addedcoursenotif);
 			$(':checkbox').iphoneStyle();
 
-		  $("#search").val("");
+		 	$("#search").val("");
+			
+		 	//Here is where we'll put the functionality for toggling classes on and off
 			makeCalendar();
 		}
 		else if (exists) console.log("error: course already in list");
 		else console.log("course does not exist");
 
+	});
+
+
+	/* Removes an event from the shopping cart on click */
+	$('.removeClass').click(function(){
+			console.log("hello!");
 	});
 
 	function makeCalendar() {
@@ -131,8 +140,8 @@ $(document).ready(function() {
 			var course = getClass(stringcomps[0], stringcomps[1], CUR_TERM_ID, data);
 
 			var year = new Date().getFullYear();
-      var month = new Date().getMonth();
-      var day = getMonday(new Date()).getDate();
+      		var month = new Date().getMonth();
+      		var day = getMonday(new Date()).getDate();
 
 			var days = [course.M, course.T, course.W, course.R, course.F];
 
