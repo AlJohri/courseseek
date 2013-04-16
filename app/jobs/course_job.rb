@@ -90,9 +90,10 @@ class CourseJob
 
           parts.times { |x|
           	uniqueid_sec = doc.search("a[id='DERIVED_CLSRCH_SSR_CLASSNAME_LONG$" + partsCounter2.to_s + "']").text
-          	uniqueid_sec =~ /(\w+)-\w+\((\d+)\)/
+          	uniqueid_sec =~ /(\w+)-(\w+)\((\d+)\)/
           	section = $1
-          	unique_id = $2
+          	lecdisc = $2
+          	unique_id = $3
 
           	days_time = doc.search("span[id='MTG_DAYTIME$" + partsCounter1.to_s + "']").text
           	if (days_time != "TBA")
@@ -121,7 +122,7 @@ class CourseJob
             th = days.include? ("Th")
             fr = days.include? ("Fr")
 
-            puts "#{subject} #{number} #{title} #{instructor} #{days} #{start_time} #{end_time} #{partsCounter1}"
+            puts "#{subject} #{number} #{title} #{lecdisc} #{instructor} #{days} #{start_time} #{end_time} #{partsCounter1}"
             course = Course.find_or_create_by_unique_id(unique_id) { |c|
             	c.term = term
             	c.subject = subject
@@ -138,6 +139,7 @@ class CourseJob
             	c.room = room
             	c.instructor = instructor
             	c.seats = seats
+            	c.lecdisc = lecdisc
             	c.status = status
             }
 

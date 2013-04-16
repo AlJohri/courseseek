@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20130123074209) do
     t.string   "room"
     t.string   "instructor"
     t.integer  "seats"
+    t.string   "lecdisc"
     t.string   "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

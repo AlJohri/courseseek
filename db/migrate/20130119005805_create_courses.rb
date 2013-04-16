@@ -17,6 +17,7 @@ class CreateCourses < ActiveRecord::Migration
         t.string "room"
         t.string "instructor"
         t.integer "seats"
+        t.string "lecdisc"
         t.string "status"
         t.timestamps
     end
