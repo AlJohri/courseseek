@@ -1,3 +1,6 @@
+//= require jquery-ui.min
+//= require fuse.min
+
 function getClass(dept,classNr,termID,jsonArr) {
     if (classNr.indexOf("-0") === -1) classNr += "-0" // add a "-0" if necessary
 
@@ -6,6 +9,111 @@ function getClass(dept,classNr,termID,jsonArr) {
             if (jsonArr[n].subject == dept && jsonArr[n].number == classNr) return jsonArr[n];
 
     return null;
+}
+
+function findMatchingClasses(searchQuery,data,keyList) {
+	var options = {
+		keys: keyList,
+		threshold: '0.5'
+	}
+	var f = new Fuse(data,options);
+	return f.search(searchQuery);
+}
+
+function addCourseSelectionTable(classes) {
+	console.log("adding table");
+	$('.searchResult').remove();
+	for (var i in classes) {
+		var matchingCourse = document.createElement('div');
+		matchingCourse.className = "searchResult";
+		matchingCourse.innerHTML += classes[i][0].subject + ' ' + classes[i][0].number;
+
+		$("#searchInput").append(matchingCourse);
+	}
+	// add a class from the search result list to the shopping cart
+	$('.searchResult').click(function(){
+		addToCart($(this).html());
+		$('.searchResult').remove();
+	});
+}
+
+function addToCart(classname) {
+	var addedcoursenotif = document.createElement('div');
+	addedcoursenotif.className = "addednotif";
+	addedcoursenotif.innerHTML += 
+	'<div class="removeClass"></div>' +
+	'<div class="classTitle">' + classname.toUpperCase() + '</div>' + 
+	'<div class="iphoneCheck">' + 
+	'<input type="checkbox" value="' + classname.toUpperCase() + '" /> </div>'
+
+	$("#searchOutput").append(addedcoursenotif);
+	$(':checkbox').iphoneStyle();
+	
+	// todo: add it to calendar here too?
+}
+
+// format a raw array of classes
+// output format: { EECS394-0: [ <class1>, <class2>, … ], … }
+// each class contains a field "sections", which is an array of all sections for that class
+function mergeClasses(classList,maxCount) {
+
+	/* todo: handle deferred sections at the end */
+
+	function findLECforDIS(dis_id,list) {
+		best_match = [-1,null];
+		for (var i in list) {
+			lec_id = list[i].section;
+			if (lec_id < dis_id && lec_id > best_match[0]) {
+				best_match = [lec_id,list[i]];
+			}
+		}
+		return best_match[1];
+	}
+	
+	var merged = {};
+	var deferredSections = [];
+	var count = 0;
+	
+	for (var i in classList) {
+		if (count >= maxCount) {
+			return merged;
+		}
+		curClass = classList[i];
+		// this ID is unique for each class, eg. "EECS 211", and the same for all sections of that class
+		classID = curClass.subject + curClass.number;
+		if (merged[classID] === undefined) {
+			// if curClass is the lecture, add it
+			if (curClass.lecdisc == "LEC") {
+				merged[classID] = new Array();
+                merged[classID].push(curClass);
+                count++;
+			} else { // else, defer processing it for later
+				deferredSections.push(curClass);
+			}
+		} else {
+			if (curClass.lecdisc == "LEC") {
+				merged[classID].push(curClass);
+				count++;
+			} else { //class is not LEC
+				// find LEC with the next-lowest ID (eg. DIS 54 should be assigned to LEC 50, not LEC 40)
+				var lecID = findLECforDIS(curClass.section,merged[classID]);
+				if (lecID !== null) {
+					lecID = lecID.unique_id;
+                	console.log(lecID);
+                	console.log(merged);
+                	for (var n in merged[classID]) {
+                    	if (merged[classID][n].unique_id == lecID) {
+                        	if (merged[classID][n].sections === undefined) {
+                            	merged[classID][n]['sections'] = new Array();
+                        	}
+                        	merged[classID][n].sections.push(curClass);
+                    	}
+                	}
+                }
+			}
+		}
+	}
+	return merged;
 }
 
 function getMonday(d) {
@@ -78,22 +186,21 @@ $(document).ready(function() {
 	var idcount = 0;
 
 	$("input[type=text]").click(function() { $(this).select(); });
-
-	/* Removes an event from the shopping cart on click */
-	$('.removeClass').click(function(){
-			console.log("hello!");
-	});
-
-
+	
 	$("#enterbutton").click(function() {
 
 		var query = $('#search').val();
 		var splitquery = query.split(' ');
-		splitquery[0] = splitquery[0].toUpperCase();
-		console.log("Search: " + splitquery);
-
-		var course = getClass(splitquery[0], splitquery[1], CUR_TERM_ID, data);
-		if (course) console.log("Found: " + course.unique_id + " " + course.subject + " " + course.number);
+		
+		var courses = {};
+		var result = null;
+		
+		if (splitquery.length == 2) {
+			splitquery[0] = splitquery[0].toUpperCase();
+			console.log("Search: " + splitquery);
+		
+			result = getClass(splitquery[0], splitquery[1], CUR_TERM_ID, data);
+		}
 
 		var exists = false;
 		for (var i = 0; i < courselist.length; i++) {
@@ -103,20 +210,11 @@ $(document).ready(function() {
 			}
 		}
 
-		if(course != null  && !exists) {
+		if(result != null  && !exists) {
 			courselist[count] = splitquery;
 			count++;
 
-			var addedcoursenotif = document.createElement('div');
-			addedcoursenotif.className = "addednotif";
-			addedcoursenotif.innerHTML += 
-				'<div class="removeClass"></div>' +
-				'<div class="classTitle">' + query.toUpperCase() + '</div>' + 
-				'<div class="iphoneCheck">' + 
-				'<input type="checkbox" value="' + query.toUpperCase() + '" /> </div>'
-
-			$("#searchOutput").append(addedcoursenotif);
-			$(':checkbox').iphoneStyle();
+			addToCart(query);
 
 		 	$("#search").val("");
 			
@@ -126,6 +224,12 @@ $(document).ready(function() {
 		else if (exists) console.log("error: course already in list");
 		else console.log("course does not exist");
 
+	});
+
+
+	/* Removes an event from the shopping cart on click */
+	$('.removeClass').click(function(){
+			console.log("hello!");
 	});
 
 	function makeCalendar() {
@@ -167,10 +271,16 @@ $(document).ready(function() {
 	    if(event.keyCode == 13){
 	        $("#enterbutton").click();
 	    }
+	    else if (event.keyCode >= 65 && event.keyCode <= 122) {
+	    	var query = $('#search').val();
+	    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
+	    	matches = mergeClasses(matches,15);
+	    	addCourseSelectionTable(matches);
+	    }
 	});	
-
+	
 	$(document).foundation('joyride', 'start');
-
+	
 });
 
 
