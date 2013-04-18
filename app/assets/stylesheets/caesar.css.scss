@@ -67,16 +67,18 @@
 	float: left;
 	cursor: pointer;
 	font-weight: bold;
-	height: 27px;
+	height: 30px;
 	line-height: 27px; 
+	margin-top: 10px;
 	text-transform:uppercase;
 	}
-
+	
 .addedCourseSec {	
 	width: 100%;
 	float: left;
 	margin: 5px 0px 0px 0px;
-
+	padding-left: 10px;
+	font-size: 10px;
 	}
 
 .courseSection {
@@ -128,9 +130,9 @@
 	text-align: center;
 }
 
-#searchOutput .addednotif .iphoneCheck {
- float: right; 
- height: 27px;
+#searchOutput .addedCourseButton .iphoneCheck {
+	 float: right; 
+	 height: 27px;
 }
 
 #searchOutput .addednotif .removeClass {

@@ -92,17 +92,24 @@ function addToCart(coursename) {
 	addedcoursenotif.className = "addedCourseButton";
 	addedcoursenotif.id = keySpaceless;
 	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + 
-									key;
+									key + 
+									'<div class="iphoneCheck"><input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>';
 
 	var coursesections = document.createElement('div');
 	coursesections.className = "addedCourseSec";
-	var sectionHtml = '';
-	var sectionlength = 5;
-	for (var i = 0; i < sectionlength; i++){
-		sectionHtml += '<div class="courseSection">section ' + i + '</div>';
-	}
+	// var sectionHtml = '';
+	// var sectionlength = 5;
+	// for (var i = 0; i < sectionlength; i++){
+	// 	sectionHtml += '<div class="courseSection">section ' + i + '</div>';
+	// }
 
-	coursesections.innerHTML = sectionHtml;		
+	coursesections.innerHTML += '<div class="LEC">LEC:' +
+								'<form><select id="LEClist">'+
+ 								'<option></option><option>Section 1</option></select></form></div>' +
+								'<div class="DIS">DIS: </div>' +
+								'<form><select id="DISlist">'+
+ 								'<option></option><option>Section 1</option></select></form></div>';		
+
 
 	$("#addedCourses").append(addedcoursenotif);
 	$("#addedCourses").append(coursesections);
@@ -118,7 +125,7 @@ function addToCart(coursename) {
 
 	//Collapse divs on new search
 	$("div.addedCourseSec").hide();
-	$(':checkbox').iphoneStyle();
+	// $(':checkbox').iphoneStyle();
 
 	//Remove Class functionality
 	$('.removeClass').click(function(){
