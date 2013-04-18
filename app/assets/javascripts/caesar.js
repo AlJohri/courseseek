@@ -6,55 +6,58 @@
 // Note: I'm not sure if it's better style to have these as globals, or put everything 
 // (eg. addCourseSelectionTable, addToCart and these two) into $(document).ready
 var CUR_TERM_ID = "4500";
-var COURSE_LIST = new Array();
+var COURSE_LIST = {};
+var SEARCH_RESULT_LIST = {};
 /***********/
-
-function addCourseSelectionTable(classes) {
-	console.log("adding table");
-	$('.searchResult').remove();
-	for (var i in classes) {
-		var matchingCourse = document.createElement('div');
-		matchingCourse.className = "searchResult";
-		matchingCourse.innerHTML += classes[i][0].subject + ' ' + classes[i][0].number;
-
-		$("#searchInput").append(matchingCourse);
-	}
-	// add a class from the search result list to the shopping cart
-	$('.searchResult').click(function(){
-		addToCart($(this).html());
-		$('.searchResult').remove();
-		makeCalendar();
-		return;
-	});
-}
 
 function addToCart(coursename) {
 
-	var nameparts = coursename.toUpperCase().split(' ');
-	COURSE_LIST.push(nameparts);
+	var key = coursename.toUpperCase();
+	COURSE_LIST[key] = SEARCH_RESULT_LIST[key];
+
+	// var addedcoursenotif = document.createElement('div');
+	// addedcoursenotif.className = "addednotif";
+	// addedcoursenotif.innerHTML += 
+	// '<div class="removeClass"></div>' +
+	// '<div class="classTitle">' + coursename.toUpperCase() + '</div>' + 
+	// '<div class="iphoneCheck">' + 
+	// '<input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>'
 
 
 	var addedcoursenotif = document.createElement('div');
-	addedcoursenotif.className = "addednotif";
-	addedcoursenotif.id = course_ID;
-	addedcoursenotif.innerHTML += 
-	'<div class="removeClass"></div>' +
-	'<div class="classTitle">' + coursename.toUpperCase() + '</div>' + 
-	'<div class="iphoneCheck">' + 
-	'<input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>'
+	addedcoursenotif.className = "addedCourseButton";
+	addedcoursenotif.id = (coursename.toUpperCase()).replace(/\s+/g,'');
+	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + 
+									coursename.toUpperCase();
 
+	var coursesections = document.createElement('div');
+	coursesections.className = "addedCourseSec";
+	var sectionHtml = '';
+	var sectionlength = 5;
+	for (var i = 0; i < sectionlength; i++){
+		sectionHtml += '<div class="courseSection">section ' + i + '</div>';
+	}
 
+	coursesections.innerHTML = sectionHtml;		
 
-	$("#searchOutput").append(addedcoursenotif);
-	$(':checkbox').iphoneStyle();
+	$("#addedCourses").append(addedcoursenotif);
+	$("#addedCourses").append(coursesections);
 	
+	// console.log((query.toUpperCase()).replace(/\s+/g,''))
+	$('#' + (coursename.toUpperCase()).replace(/\s+/g,'')).click(function() {
+		if($(this).next().is(':hidden')) {					
+			$(this).next().slideDown('fast');
+		} else {
+			$(this).next().slideUp('fast');}			
+   
+	}); 
+	//Collapse divs on new search
+	$("div.addedCourseSec").hide();
+	$(':checkbox').iphoneStyle();
 
-	$('.removeClass').click(function(){
-		console.log('hello');
-		console.log($(this).closest('div').attr('id'));
-
-		});	
-
+	// $("#searchOutput").append(addedcoursenotif);
+	// $(':checkbox').iphoneStyle();
+	
 	// todo: add it to calendar here too?
 }
 
@@ -126,39 +129,10 @@ $(document).ready(function() {
 	$("input[type=text]").click(function() { $(this).select(); });
 	
 	$("#enterbutton").click(function() {
-
-		var query = $('#search').val();
-		var splitquery = query.split(' ');
-		
-		var result = null;
-		
-		if (splitquery.length == 2) {
-			splitquery[0] = splitquery[0].toUpperCase();
-			console.log("Search: " + splitquery);
-		
-			result = getClass(splitquery[0], splitquery[1], CUR_TERM_ID, data);
-		}
-
-		var exists = false;
-		for (var i = 0; i < COURSE_LIST.length; i++) {
-			if (COURSE_LIST[i][0] == splitquery[0] && COURSE_LIST[i][1] == splitquery[1]) {
-				exists = true;
-				break;
-			}
-		}
-
-		if(result != null  && !exists) {
-
-			addToCart(query);
-
-		 	$("#search").val("");
-			
-		 	//Here is where we'll put the functionality for toggling classes on and off
+		if ($('#search').val() != '') {
+			addToCart(SEARCH_RESULT_LIST[$('.searchResult').html()]);
 			makeCalendar();
 		}
-		else if (exists) console.log("error: course already in list");
-		else console.log("course does not exist");
-
 	});
 
 
@@ -172,26 +146,22 @@ $(document).ready(function() {
 		/* Clear Calendar */
 		$("#calendar").weekCalendar("clear");
 
-		var numberOfCourses = COURSE_LIST.length;
-		for(var i = 0; i < numberOfCourses; i++) {
-			var stringcomps = COURSE_LIST[i];
-			console.log(COURSE_LIST);
-			var course = getClass(stringcomps[0], stringcomps[1], CUR_TERM_ID, data);
-
+		var colorCounter = 0;
+		for (var k in COURSE_LIST) {
+			var course = COURSE_LIST[k][0]; //just use first course for now
+			
 			var year = new Date().getFullYear();
       		var month = new Date().getMonth();
       		var day = getMonday(new Date()).getDate();
-
-			var days = [course.M, course.T, course.W, course.R, course.F];
-
-			// console.log(days);
+      		
+      		var days = [course.M, course.T, course.W, course.R, course.F];
 
 			/* Create Events */
 			for (var j = 0; j < 5; j++) {
 				if (days[j] == "t") {
 					var calEvent = { 
 						"unique_id" : course.unique_id,
-						"colorid" : i,
+						"colorid" : colorCounter,
 						"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
 						"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
 						"title" : course.subject + " " + course.number + " " + course.title
@@ -200,6 +170,7 @@ $(document).ready(function() {
 					$("#calendar").weekCalendar("updateEvent", calEvent);					
 				}
 			}
+			colorCounter++;
 		}
 		//$('#calendar').weekCalendar('scrollToHour', '9'); :: make a starting time default to 9 am
 	}
@@ -213,6 +184,10 @@ $(document).ready(function() {
 			matchingCourse.innerHTML += classes[i][0].subject + ' ' + classes[i][0].number;
 
 			$("#searchInput").append(matchingCourse);
+			
+			// add class to search result list
+			var key = classes[i][0].subject + ' ' + classes[i][0].number;
+			SEARCH_RESULT_LIST[key] = classes[i];
 		}
 		// add a class from the search result list to the shopping cart
 		$('.searchResult').click(function(){
