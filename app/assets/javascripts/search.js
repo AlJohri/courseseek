@@ -9,12 +9,11 @@ function getClass(dept,classNr,termID,jsonArr) {
 }
 
 function findMatchingClasses(searchQuery,data,keyList) {
-	var options = {
-		keys: keyList,
-		threshold: '0.5'
-	}
+
+	var options = { keys: keyList, threshold: '0' }
 	var f = new Fuse(data,options);
 	return f.search(searchQuery);
+
 }
 
 // format a raw array of classes
@@ -40,7 +39,7 @@ function mergeClasses(classList,maxCount) {
 	var count = 0;
 	
 	for (var i in classList) {
-		if (count >= maxCount) {
+		if (maxCount!= -1 && count >= maxCount) {
 			return merged;
 		}
 		curClass = classList[i];
@@ -64,8 +63,8 @@ function mergeClasses(classList,maxCount) {
 				var lecID = findLECforDIS(curClass.section,merged[classID]);
 				if (lecID !== null) {
 					lecID = lecID.unique_id;
-                	console.log(lecID);
-                	console.log(merged);
+                	//console.log(lecID);
+                	//console.log(merged);
                 	for (var n in merged[classID]) {
                     	if (merged[classID][n].unique_id == lecID) {
                         	if (merged[classID][n].sections === undefined) {

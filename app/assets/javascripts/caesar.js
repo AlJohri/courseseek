@@ -71,6 +71,8 @@ $(document).ready(function() {
     textSize : 10, 
     height : function($calendar) { 
 
+    	/* if one changes user agent model */
+
     	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
  				return 280;
 			}
@@ -134,7 +136,7 @@ $(document).ready(function() {
 						"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
 						"title" : course.subject + " " + course.number + " " + course.title
 					};
-					console.log(calEvent);
+					// console.log(calEvent);
 					$("#calendar").weekCalendar("updateEvent", calEvent);					
 				}
 			}
@@ -144,7 +146,7 @@ $(document).ready(function() {
 	}
 
 	function addCourseSelectionTable(classes) {
-		console.log("adding table");
+		//console.log("adding table");
 		$('.searchResult').remove();
 		for (var i in classes) {
 			var matchingCourse = document.createElement('div');
@@ -165,15 +167,30 @@ $(document).ready(function() {
 		});
 	}
 
+	function containsNumber(input) {
+		var matches = input.match(/\d+/g);
+		if (matches != null) {
+		    return true;
+		}
+	}	
+
 	$("#search").keyup(function(event){
 	    if(event.keyCode == 13){
 	        $("#enterbutton").click();
 	    }
-	    else if ((event.keyCode >= 65 && event.keyCode <= 122) || event.keyCode == 8) {
+	    else if ((event.keyCode >= 48 && event.keyCode <= 122) || event.keyCode == 8) {
 	    	var query = $('#search').val();
-	    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
-	    	matches = mergeClasses(matches,15);
-	    	addCourseSelectionTable(matches);
+	    	if (!containsNumber(query)) {
+		    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
+		    	matches = mergeClasses(matches,-1);
+		    	addCourseSelectionTable(matches);
+	    	}
+	    	else {
+	    		for (var i in SEARCH_RESULT_LIST) {
+	    			if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
+	    		}
+	    		console.log(SEARCH_RESULT_LIST);
+	    	}
 	    }
 	});	
 	
