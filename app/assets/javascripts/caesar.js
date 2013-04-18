@@ -1,13 +1,50 @@
 //= require jquery-ui.min
+//= require fuse.min
+//= require search
 
-function getClass(dept,classNr,termID,jsonArr) {
-    if (classNr.indexOf("-0") === -1) classNr += "-0" // add a "-0" if necessary
+/* GLOBALS */
+// Note: I'm not sure if it's better style to have these as globals, or put everything 
+// (eg. addCourseSelectionTable, addToCart and these two) into $(document).ready
+var CUR_TERM_ID = "4500";
+var COURSE_LIST = new Array();
+/***********/
 
-    for (var n in jsonArr)
-        if (jsonArr[n].term == termID)
-            if (jsonArr[n].subject == dept && jsonArr[n].number == classNr) return jsonArr[n];
+function addCourseSelectionTable(classes) {
+	console.log("adding table");
+	$('.searchResult').remove();
+	for (var i in classes) {
+		var matchingCourse = document.createElement('div');
+		matchingCourse.className = "searchResult";
+		matchingCourse.innerHTML += classes[i][0].subject + ' ' + classes[i][0].number;
 
-    return null;
+		$("#searchInput").append(matchingCourse);
+	}
+	// add a class from the search result list to the shopping cart
+	$('.searchResult').click(function(){
+		addToCart($(this).html());
+		$('.searchResult').remove();
+		makeCalendar();
+		return;
+	});
+}
+
+function addToCart(coursename) {
+
+	var nameparts = coursename.toUpperCase().split(' ');
+	COURSE_LIST.push(nameparts);
+
+	var addedcoursenotif = document.createElement('div');
+	addedcoursenotif.className = "addednotif";
+	addedcoursenotif.innerHTML += 
+	'<div class="removeClass"></div>' +
+	'<div class="classTitle">' + coursename.toUpperCase() + '</div>' + 
+	'<div class="iphoneCheck">' + 
+	'<input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>'
+
+	$("#searchOutput").append(addedcoursenotif);
+	$(':checkbox').iphoneStyle();
+	
+	// todo: add it to calendar here too?
 }
 
 function getMonday(d) {
@@ -73,66 +110,35 @@ $(document).ready(function() {
     }
  	});
 
-  var CUR_TERM_ID = "4500";
-
-	var courselist = new Array();
-	var count = 0;
 	var idcount = 0;
 
 	$("input[type=text]").click(function() { $(this).select(); });
-
-
+	
 	$("#enterbutton").click(function() {
 
 		var query = $('#search').val();
 		var splitquery = query.split(' ');
-		splitquery[0] = splitquery[0].toUpperCase();
-		console.log("Search: " + splitquery);
-
-		var course = getClass(splitquery[0], splitquery[1], CUR_TERM_ID, data);
-		if (course) console.log("Found: " + course.unique_id + " " + course.subject + " " + course.number);
+		
+		var result = null;
+		
+		if (splitquery.length == 2) {
+			splitquery[0] = splitquery[0].toUpperCase();
+			console.log("Search: " + splitquery);
+		
+			result = getClass(splitquery[0], splitquery[1], CUR_TERM_ID, data);
+		}
 
 		var exists = false;
-		for (var i = 0; i < courselist.length; i++) {
-			if (courselist[i][0] == splitquery[0] && courselist[i][1] == splitquery[1]) {
+		for (var i = 0; i < COURSE_LIST.length; i++) {
+			if (COURSE_LIST[i][0] == splitquery[0] && COURSE_LIST[i][1] == splitquery[1]) {
 				exists = true;
 				break;
 			}
 		}
 
-		if(course != null  && !exists) {
-			courselist[count] = splitquery;
-			count++;
+		if(result != null  && !exists) {
 
-			/*variables for Removing the Class*/
-			var course_ID = course.unique_id;
-			var courseToRemove;
-
-			var addedcoursenotif = document.createElement('div');
-			addedcoursenotif.className = "addednotif";
-			addedcoursenotif.innerHTML += 
-				'<div class="removeClass"></div>' + 
-				'<div class="classTitle">' + query.toUpperCase() + '</div>' + 
-				'<div class="iphoneCheck" id="' + course_ID + '">' + 
-				'<input type="checkbox" value="' + query.toUpperCase() + '" /> </div>'
-
-			$("#searchOutput").append(addedcoursenotif);
-			$(':checkbox').iphoneStyle();
-			
-			/* Removes an event from the shopping cart on click */
-			$('.removeClass').click(function(){
-				console.log('Course ID ::: ' + course_ID);
-				for (var i = 0; i < courselist.length; i++) {
-					courseToRemove = getClass(courselist[i][0], courselist[i][1], CUR_TERM_ID, data);
-					if(courseToRemove.unique_id == course_ID){
-						console.log('Course Found ::' + courseToRemove.subject + ' '+ courseToRemove.number);
-						//delete courselist[i];
-						console.log('courselist :: ' + courselist);
-						console.log('index is :: ' + i);
-						//makeCalendar();
-					}
-				}
-			});	
+			addToCart(query);
 
 		 	$("#search").val("");
 			
@@ -144,14 +150,21 @@ $(document).ready(function() {
 
 	});
 
+
+	/* Removes an event from the shopping cart on click */
+	$('.removeClass').click(function(){
+			console.log("hello!");
+	});
+
 	function makeCalendar() {
 
 		/* Clear Calendar */
 		$("#calendar").weekCalendar("clear");
 
-		var numberOfCourses = courselist.length;
+		var numberOfCourses = COURSE_LIST.length;
 		for(var i = 0; i < numberOfCourses; i++) {
-			var stringcomps = courselist[i];
+			var stringcomps = COURSE_LIST[i];
+			console.log(COURSE_LIST);
 			var course = getClass(stringcomps[0], stringcomps[1], CUR_TERM_ID, data);
 
 			var year = new Date().getFullYear();
@@ -180,12 +193,38 @@ $(document).ready(function() {
 		//$('#calendar').weekCalendar('scrollToHour', '9'); :: make a starting time default to 9 am
 	}
 
+	function addCourseSelectionTable(classes) {
+		console.log("adding table");
+		$('.searchResult').remove();
+		for (var i in classes) {
+			var matchingCourse = document.createElement('div');
+			matchingCourse.className = "searchResult";
+			matchingCourse.innerHTML += classes[i][0].subject + ' ' + classes[i][0].number;
+
+			$("#searchInput").append(matchingCourse);
+		}
+		// add a class from the search result list to the shopping cart
+		$('.searchResult').click(function(){
+			addToCart($(this).html());
+			$('.searchResult').remove();
+			makeCalendar();
+		});
+	}
+
 	$("#search").keyup(function(event){
 	    if(event.keyCode == 13){
 	        $("#enterbutton").click();
 	    }
+	    else if ((event.keyCode >= 65 && event.keyCode <= 122) || event.keyCode == 8) {
+	    	var query = $('#search').val();
+	    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
+	    	matches = mergeClasses(matches,15);
+	    	addCourseSelectionTable(matches);
+	    }
 	});	
-
+	
+	$(document).foundation('joyride', 'start');
+	
 });
 
 

@@ -5,6 +5,10 @@
 // @import "foundation/foundation-global", "foundation/components/global";
 //"foundation/components/panels"
 
+.logo {
+	height: 30px;
+	padding-top: 10px;
+}
 
 .top, .bottom {
 	height: 420px;
@@ -65,14 +69,6 @@
 	margin-bottom: 10px;
 }
 
-.panel {
-	background: #F1F0FF;
-}
-
-.top-bar {
-	background: #520063;
-}
-
 #container {
 	background: white;
 }
@@ -92,30 +88,56 @@
 	transition: 0.3s margin ease-in-out; 
 }
 
-#searchOutput .addednotif .classTitle{
-float: left;
-height: 27px;
-line-height: 27px; 
-margin-right: 20px;
-text-transform:uppercase;
-text-align: center;
- }
+#searchOutput .addednotif .classTitle {
+	float: left;
+	height: 27px;
+	line-height: 27px; 
+	margin-right: 20px;
+	text-transform:uppercase;
+	text-align: center;
+}
 
-#searchOutput .addednotif .iphoneCheck{
+#searchOutput .addednotif .iphoneCheck {
  float: right; 
  height: 27px;
- }
+}
 
- #searchOutput .addednotif .removeClass{
-float: left;
-width: 10%;
-height: 100%;
-margin-right: 5px;
-background-image: url(removeClass.png);
-z-index: 1;
- background-repeat: no-repeat;
- background-position: right center;
- background-size: contain;
- }
+#searchOutput .addednotif .removeClass {
+	float: left;
+	width: 10%;
+	height: 100%;
+	margin-right: 5px;
+	background-image: url(removeClass.png);
+	z-index: 1;
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-size: contain;
+}
 
+// .whiteboard {
+	// background-image: url('http://www.teacherfiles.com/clipart/xbackgrounds/lined_paper_light.jpg');
+	// background-repeat: no-repeat;
+	// background-size: 1000px 500px;
 
+	// border-style: solid;
+	// border-width: 5px;
+	// border-color: #520063;
+	// padding-top: 19px;
+	// z-index: 2;
+// }
+
+// #container {
+// 	background-image: url('http://www.teacherfiles.com/clipart/xbackgrounds/lined_paper_light.jpg');
+// 	background-repeat: repeat-both;
+// 	//background-size: 100% auto;
+// }
+
+footer {
+	z-index: -1;
+}
+
+// grey: #e0e0e0
+// dark purple: rgb(39, 0, 48);
+// #333
+
+// light purple rgb(143, 42, 165);

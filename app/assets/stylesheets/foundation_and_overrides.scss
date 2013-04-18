@@ -541,33 +541,33 @@ $blockquote-cite-link-color: $blockquote-cite-font-color;
 //
 
 // Controlling default Joyride styles
-// $joyride-tip-bg: rgb(0,0,0);
-// $joyride-tip-default-width: 300px;
-// $joyride-tip-padding: emCalc(18px) emCalc(20px) emCalc(24px);
-// $joyride-tip-border: solid 1px #555;
-// $joyride-tip-radius: 4px;
-// $joyride-tip-position-offset: 22px;
+$joyride-tip-bg: rgb(0,0,0);
+$joyride-tip-default-width: 300px;
+$joyride-tip-padding: emCalc(18px) emCalc(20px) emCalc(24px);
+$joyride-tip-border: solid 1px #555;
+$joyride-tip-radius: 4px;
+$joyride-tip-position-offset: 22px;
 
 // Here, we're setting the tip dont styles
-// $joyride-tip-font-color: #fff;
-// $joyride-tip-font-size: emCalc(14px);
-// $joyride-tip-header-weight: bold;
+$joyride-tip-font-color: #fff;
+$joyride-tip-font-size: emCalc(14px);
+$joyride-tip-header-weight: bold;
 
 // This changes the nub size
-// $joyride-tip-nub-size: 14px;
+$joyride-tip-nub-size: 14px;
 
 // This adjusts the styles for the timer when its enabled
-// $joyride-tip-timer-width: 50px;
-// $joyride-tip-timer-height: 3px;
-// $joyride-tip-timer-color: #666;
+$joyride-tip-timer-width: 50px;
+$joyride-tip-timer-height: 3px;
+$joyride-tip-timer-color: #666;
 
 // This changes up the styles for the close button
-// $joyride-tip-close-color: #777;
-// $joyride-tip-close-size: 30px;
-// $joyride-tip-close-weight: normal;
+$joyride-tip-close-color: #777;
+$joyride-tip-close-size: 30px;
+$joyride-tip-close-weight: normal;
 
 // When Joyride is filling the screen, we use this style for the bg
-// $joyride-screenfill: rgba(0,0,0,0.5);
+$joyride-screenfill: rgba(0,0,0,0.5);
 
 //
 // Keystroke Variables
@@ -670,21 +670,21 @@ $blockquote-cite-link-color: $blockquote-cite-font-color;
 //
 
 // We use these to control the background and border styles
-// $panel-bg: darken(#fff, 5%);
-// $panel-border-style: solid;
-// $panel-border-size: 1px;
+$panel-bg: $secondary-color; //darken(#fff, 5%);
+$panel-border-style: solid;
+$panel-border-size: 1px;
 
 // We use this % to control how much we darken things on hover
-// $panel-function-factor: 10%;
-// $panel-border-color: darken($panel-bg, $panel-function-factor);
+$panel-function-factor: 10%;
+$panel-border-color: darken($panel-bg, $panel-function-factor);
 
 // We use these to set default inner padding and bottom margin
-// $panel-margin-bottom: emCalc(20px);
-// $panel-padding: emCalc(20px);
+$panel-margin-bottom: emCalc(20px);
+$panel-padding: emCalc(20px);
 
 // We use these to set default font colors
-// $panel-font-color: #333;
-// $panel-font-color-alt: #fff;
+$panel-font-color: #333;
+$panel-font-color-alt: #fff;
 
 //
 // Pricing Table Variables
@@ -963,50 +963,50 @@ $blockquote-cite-link-color: $blockquote-cite-font-color;
 // $tooltip-radius: $global-radius;
 // $tooltip-pip-size: 5px;
 
-//
+// 
 // Top Bar Variables
-//
+// 
 
 // Background color for the top bar
-// $topbar-bg: #111;
+$topbar-bg: $primary-color; //#111;
 
 // Height and margin
-// $topbar-height: 45px;
-// $topbar-margin-bottom: emCalc(30px);
+$topbar-height: 45px;
+$topbar-margin-bottom: emCalc(30px);
 
 // Control Input height for top bar
-// $topbar-input-height: 2.45em;
+$topbar-input-height: 2.45em;
 
 // Controlling the styles for the title in the top bar
-// $topbar-title-weight: bold;
-// $topbar-title-font-size: emCalc(17px);
+$topbar-title-weight: bold;
+$topbar-title-font-size: emCalc(17px);
 
 // Set the link colors and styles for top-level nav
-// $topbar-link-color: #fff;
-// $topbar-link-weight: bold;
-// $topbar-link-font-size: emCalc(13px);
+$topbar-link-color: #fff;
+$topbar-link-weight: bold;
+$topbar-link-font-size: emCalc(13px);
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: #333;
-// $topbar-dropdown-link-color: #fff;
-// $topbar-dropdown-toggle-size: 5px;
-// $topbar-dropdown-toggle-color: #fff;
-// $topbar-dropdown-toggle-alpha: 0.5;
-// $dropdown-label-color: #555;
+$topbar-dropdown-bg: #333;
+$topbar-dropdown-link-color: #fff;
+$topbar-dropdown-toggle-size: 5px;
+$topbar-dropdown-toggle-color: #fff;
+$topbar-dropdown-toggle-alpha: 0.5;
+$dropdown-label-color: #555;
 
 // Top menu icon styles
-// $topbar-menu-link-transform: uppercase;
-// $topbar-menu-link-font-size: emCalc(13px);
-// $topbar-menu-link-weight: bold;
-// $topbar-menu-link-color: #fff;
-// $topbar-menu-icon-color: #fff;
-// $topbar-menu-link-color-toggled: #888;
-// $topbar-menu-icon-color-toggled: #888;
+$topbar-menu-link-transform: uppercase;
+$topbar-menu-link-font-size: emCalc(13px);
+$topbar-menu-link-weight: bold;
+$topbar-menu-link-color: #fff;
+$topbar-menu-icon-color: #fff;
+$topbar-menu-link-color-toggled: #888;
+$topbar-menu-icon-color-toggled: #888;
 
 // Transitions and breakpoint styles
-// $topbar-transition-speed: 300ms;
-// $topbar-breakpoint: emCalc(940px); // Change to 9999px for always mobile layout
-// $topbar-media-query: "only screen and (min-width "#{$topbar-breakpoint}")";
+$topbar-transition-speed: 300ms;
+$topbar-breakpoint: emCalc(940px); // Change to 9999px for always mobile layout
+$topbar-media-query: "only screen and (min-width "#{$topbar-breakpoint}")";
 
 
 @import 'foundation';
