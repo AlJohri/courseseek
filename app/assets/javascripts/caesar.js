@@ -10,9 +10,44 @@ var COURSE_LIST = {};
 var SEARCH_RESULT_LIST = {};
 /***********/
 
+function makeCalendar() {
+
+		/* Clear Calendar */
+		$("#calendar").weekCalendar("clear");
+
+		var colorCounter = 0;
+		for (var k in COURSE_LIST) {
+			var course = COURSE_LIST[k][0]; //just use first course for now
+			
+			var year = new Date().getFullYear();
+      		var month = new Date().getMonth();
+      		var day = getMonday(new Date()).getDate();
+      		
+      		var days = [course.M, course.T, course.W, course.R, course.F];
+
+			/* Create Events */
+			for (var j = 0; j < 5; j++) {
+				if (days[j] == "t") {
+					var calEvent = { 
+						"unique_id" : course.unique_id,
+						"colorid" : colorCounter,
+						"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
+						"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
+						"title" : course.subject + " " + course.number + " " + course.title
+					};
+					console.log(calEvent);
+					$("#calendar").weekCalendar("updateEvent", calEvent);					
+				}
+			}
+			colorCounter++;
+		}
+		//$('#calendar').weekCalendar('scrollToHour', '9'); :: make a starting time default to 9 am
+}
+
 function addToCart(coursename) {
 
 	var key = coursename.toUpperCase();
+	var keySpaceless = coursename.toUpperCase().replace(/\s+/g,'');
 	COURSE_LIST[key] = SEARCH_RESULT_LIST[key];
 
 	// var addedcoursenotif = document.createElement('div');
@@ -26,9 +61,9 @@ function addToCart(coursename) {
 
 	var addedcoursenotif = document.createElement('div');
 	addedcoursenotif.className = "addedCourseButton";
-	addedcoursenotif.id = (coursename.toUpperCase()).replace(/\s+/g,'');
+	addedcoursenotif.id = keySpaceless;
 	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + 
-									coursename.toUpperCase();
+									key;
 
 	var coursesections = document.createElement('div');
 	coursesections.className = "addedCourseSec";
@@ -42,18 +77,27 @@ function addToCart(coursename) {
 
 	$("#addedCourses").append(addedcoursenotif);
 	$("#addedCourses").append(coursesections);
+	console.log(key);
 	
 	// console.log((query.toUpperCase()).replace(/\s+/g,''))
-	$('#' + (coursename.toUpperCase()).replace(/\s+/g,'')).click(function() {
+	$('#' + keySpaceless).click(function() {
 		if($(this).next().is(':hidden')) {					
 			$(this).next().slideDown('fast');
 		} else {
 			$(this).next().slideUp('fast');}			
    
-	}); 
+	});
+
 	//Collapse divs on new search
 	$("div.addedCourseSec").hide();
 	$(':checkbox').iphoneStyle();
+
+	//Remove Class functionality
+	$('.removeClass').click(function(){
+		delete COURSE_LIST[this.parentNode.id.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2')];
+		$('#' + this.parentNode.id).remove();
+		makeCalendar();
+	});	
 
 	// $("#searchOutput").append(addedcoursenotif);
 	// $(':checkbox').iphoneStyle();
@@ -141,39 +185,7 @@ $(document).ready(function() {
 			console.log("hello!");
 	});
 
-	function makeCalendar() {
 
-		/* Clear Calendar */
-		$("#calendar").weekCalendar("clear");
-
-		var colorCounter = 0;
-		for (var k in COURSE_LIST) {
-			var course = COURSE_LIST[k][0]; //just use first course for now
-			
-			var year = new Date().getFullYear();
-      		var month = new Date().getMonth();
-      		var day = getMonday(new Date()).getDate();
-      		
-      		var days = [course.M, course.T, course.W, course.R, course.F];
-
-			/* Create Events */
-			for (var j = 0; j < 5; j++) {
-				if (days[j] == "t") {
-					var calEvent = { 
-						"unique_id" : course.unique_id,
-						"colorid" : colorCounter,
-						"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
-						"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
-						"title" : course.subject + " " + course.number + " " + course.title
-					};
-					console.log(calEvent);
-					$("#calendar").weekCalendar("updateEvent", calEvent);					
-				}
-			}
-			colorCounter++;
-		}
-		//$('#calendar').weekCalendar('scrollToHour', '9'); :: make a starting time default to 9 am
-	}
 
 	function addCourseSelectionTable(classes) {
 		console.log("adding table");
