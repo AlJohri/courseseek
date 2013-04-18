@@ -20,7 +20,7 @@
 
 
 $(document).ready(function() { 
+
 	$(':checkbox').iphoneStyle(); 
 	$(document).foundation();
 });
-

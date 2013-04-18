@@ -64,20 +64,24 @@
 
       <div id="shoppingCart" class="large-4 columns"> <!--hide-for-small-->
           <div id="searchInput" class="panel">
-            <input id="search" placeholder="Filter here..." type="text" />
+            <div>
+              <input id="search" placeholder="Enter courses here..." type="text" />
+              <div class="searchResultContainer"></div>
+            </div>
             <input id="enterbutton" value="Add" type="button" class="small button" />
           </div>
+
 
           <div id="searchOutput" class="panel">
           <div id="addedCourses"></div>
           </div>
 
-          <div id="loadGrid" class="hide" style="display: none;"></div>
           <div id="myGrid" style="display:none; height:340px; overflow: auto"></div>
         
       </div>
 
       <div class="large-8 columns">
+          <div id="loadDiv" class="hide"></div>        
         <div id='calendar'></div>
       </div>
     </div>

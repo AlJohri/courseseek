@@ -5,6 +5,8 @@
 /* GLOBALS */
 // Note: I'm not sure if it's better style to have these as globals, or put everything 
 // (eg. addCourseSelectionTable, addToCart and these two) into $(document).ready
+
+var data;
 var CUR_TERM_ID = "4500";
 var COURSE_LIST = {};
 var SEARCH_RESULT_LIST = {};
@@ -38,16 +40,16 @@ var SEARCH_LIST_FROM_NUM = {};
 								"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
 								"title" : course.subject + " " + course.number + " " + course.title
 							};
-							console.log(calEvent);
+							//console.log(calEvent);
 							$("#calendar").weekCalendar("updateEvent", calEvent);					
 						}
 					}
 					
 					for (var s in course.sections) {
 						var section = course.sections[s];
-						console.log(section);
+						//console.log(section);
 						if (section.onoff == true) {
-							console.log("TRUE");
+							//console.log("TRUE");
 							days = [section.M, section.T, section.W, section.R, section.F];
 							for (var j = 0; j < 5; j++) {
 								if (days[j] == "t") {
@@ -58,7 +60,7 @@ var SEARCH_LIST_FROM_NUM = {};
 										"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
 										"title" : section.subject + " " + section.number + " " + section.title
 									};
-									console.log(calEvent);
+									//console.log(calEvent);
 									$("#calendar").weekCalendar("updateEvent", calEvent);					
 								}
 							}
@@ -76,30 +78,25 @@ var SEARCH_LIST_FROM_NUM = {};
 function addToCart(coursename) {
 
 	var key = coursename.toUpperCase();
+	if(COURSE_LIST[key] != null) return;
+	
 	var keySpaceless = coursename.toUpperCase().replace(/\s+/g,'');
 	COURSE_LIST[key] = SEARCH_RESULT_LIST[key];
-
-	// var addedcoursenotif = document.createElement('div');
-	// addedcoursenotif.className = "addednotif";
-	// addedcoursenotif.innerHTML += 
-	// '<div class="removeClass"></div>' +
-	// '<div class="classTitle">' + coursename.toUpperCase() + '</div>' + 
-	// '<div class="iphoneCheck">' + 
-	// '<input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>'
-
 
 	var addedcoursenotif = document.createElement('div');
 	addedcoursenotif.className = "addedCourseButton";
 	addedcoursenotif.id = keySpaceless;
-	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + 
-									key;
+	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + key;
 
 	var coursesections = document.createElement('div');
 	coursesections.className = "addedCourseSec";
 	var sectionHtml = '';
-	var sectionlength = 5;
-	for (var i = 0; i < sectionlength; i++){
-		sectionHtml += '<div class="courseSection">section ' + i + '</div>';
+
+	// for future
+	// http://www.w3schools.com/tags/tag_select.asp
+	// 
+	for (var i in COURSE_LIST[key]) {
+		sectionHtml += '<div class="courseSection">section ' + COURSE_LIST[key][i].unique_id + '</div>';
 	}
 
 	coursesections.innerHTML = sectionHtml;		
@@ -128,6 +125,9 @@ function addToCart(coursename) {
 		makeCalendar();
 	});	
 
+	$('.courseSection').click(function(){ console.log("tell calendar to turn on " + $(this).text()); });
+	$("#search").val("");
+
 	// $("#searchOutput").append(addedcoursenotif);
 	// $(':checkbox').iphoneStyle();
 	
@@ -144,21 +144,35 @@ var sidebar = false;
 
 $(document).ready(function() {
 
-	$("#back").click(function() {
-		if (!sidebar) {
-			$("#container").css("margin-left", "80%");
-			sidebar = true;
-		}
-		else {
-			$("#container").css("margin-left", "0");
-			sidebar = false;
-		}
-	});	
+	// $("#back").click(function() {
+	// 	if (!sidebar) {
+	// 		$("#container").css("margin-left", "80%");
+	// 		sidebar = true;
+	// 	}
+	// 	else {
+	// 		$("#container").css("margin-left", "0");
+	// 		sidebar = false;
+	// 	}
+	// });	
 
-	var data; $.getJSON('courses', function(resp) { data = resp; });
+	$("#calendar").addClass("hide");
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { $("#loadDiv").css("height", "280px"); }
+	else { $("#loadDiv").css("height", "428px"); }
+	$("#loadDiv").removeClass("hide");	
+
+	$.getJSON('courses', function(resp) { 
+		data = resp;
+		$("#loadDiv").addClass("hide"); 
+		$("#calendar").removeClass("hide");
+
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { $("#calendar").css("height", "280px"); }
+	else { $("#calendar").css("height", "428px"); }
+
+
+	});
 
 	// http://www.w3schools.com/html/html_colornames.asp
-	colors = ["Aqua", "Aquamarine", "Beige", "Bisque", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed ", "Indigo ", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
+	colors = ["Aqua", "Aquamarine", "Beige", "Bisque", "BlanchedAlmond", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed ", "Indigo ", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
 
 	// https://github.com/themouette/jquery-week-calendar/wiki/Public-methods
 	// https://github.com/themouette/jquery-week-calendar/wiki/Script-options
@@ -178,18 +192,14 @@ $(document).ready(function() {
 
     	/* if one changes user agent model */
 
-    	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
- 				return 280;
-			}
-			else {
-				return 428;
-			}
+    	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { return 280; }
+			else { return 428; }
 
     	// return 700;
     	// return $(window).height();
     },
     eventRender : function(calEvent, $event) {
-    	console.log($event);
+    	//console.log($event);
       $event.css("backgroundColor", colors[calEvent.colorid]);
       $event.find(".wc-time, .wc-title").css({
          "backgroundColor" : colors[calEvent.colorid],
@@ -198,6 +208,7 @@ $(document).ready(function() {
       });
     }
  	});
+
 
 	var idcount = 0;
 
@@ -213,24 +224,39 @@ $(document).ready(function() {
 
 	function addCourseSelectionTable(classes) {
 		//console.log("adding table");
+		
 		$('.searchResult').remove();
+		
 		for (var i in classes) {
 			var matchingCourse = document.createElement('div');
 			matchingCourse.className = "searchResult";
 			matchingCourse.innerHTML += classes[i][0].subject + ' ' + classes[i][0].number;
 
-			$("#searchInput").append(matchingCourse);
+			$('.searchResultContainer').append(matchingCourse);
+
 			
 			// add class to search result list
 			var key = classes[i][0].subject + ' ' + classes[i][0].number;
 			SEARCH_RESULT_LIST[key] = classes[i];
 		}
+
+		searchWidth = $("#search").css("width");
+		$('.searchResultContainer').css("width", searchWidth);
+
 		// add a class from the search result list to the shopping cart
-		$('.searchResult').click(function(){
+		$('.searchResult').click(function() {
 			addToCart($(this).html());
 			$('.searchResult').remove();
 			makeCalendar();
 		});
+
+		// $('#search').focusout(function() {
+		//   $('.searchResultContainer').hide();
+		// });		
+
+		$('#search').focus(function() {
+		  $('.searchResultContainer').show();
+		});				
 	}
 
 	function containsNumber(input) {
@@ -250,6 +276,7 @@ $(document).ready(function() {
 		    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
 		    	matches = mergeClasses(matches,-1);
 		    	addCourseSelectionTable(matches);
+		    	//console.log(matches);
 		    	SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
 	    	}
 	    	else {
@@ -265,7 +292,7 @@ $(document).ready(function() {
 	    	if (containsNumber(query)) {
 		    	SEARCH_RESULT_LIST = jQuery.extend({}, SEARCH_LIST_FROM_NUM); // reset back to when no number entered
 
-	    		console.log(SEARCH_LIST_FROM_NUM);
+	    		//console.log(SEARCH_LIST_FROM_NUM);
 	    		for (var i in SEARCH_RESULT_LIST) { // repeat search in case there are some numbers
 	    			if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
 	    		}
@@ -285,18 +312,22 @@ $(document).ready(function() {
 
 	
 	
-	$(document).foundation('joyride', 'start');
+	//$(document).foundation('joyride', 'start');
 	
 });
+
+window.onresize = function(event) {
+	searchWidth = $("#search").css("width");
+	$('.searchResultContainer').css("width", searchWidth);	
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var data;
 var handsontable;
 
-function hideGrid() { $("#loadGrid").removeClass("hide"); }
-function unhideGrid() { $("#loadGrid").addClass("hide"); $("#myGrid").removeClass("hide"); }
+function hideDiv() { $("#loadDiv").removeClass("hide"); }
+function unhideDiv() { $("#loadDiv").addClass("hide"); $("#myGrid").removeClass("hide"); }
 
 /* HandsonTable */
 

@@ -14,19 +14,19 @@
 	height: 420px;
 }
 
-#myGrid, #loadGrid {
+#myGrid {
 	height: 340px;
 }
 
-#loadGrid {
+#loadDiv {
 	background-image:url('http://i.imgur.com/9354Whe.gif');
 	background-repeat:no-repeat;
 	background-position:center; 	
 }
 
 .hide {
-	//display:none;
-	visibility:hidden;
+	// display:none;
+	visibility: hidden;
 }
 
 #event_edit_container {
@@ -42,6 +42,7 @@
 
 #searchInput {
 	height: 75px;
+	position: relative;
 }
 
 #searchOutput {
@@ -179,6 +180,38 @@
 footer {
 	z-index: -1;
 }
+
+.searchResultContainer {
+	height: auto;
+	max-height: 200px;
+	overflow: auto;
+	position: absolute;
+	top: 54px;
+	background-color: white;
+	float: left;
+	z-index: 10;
+	//display: none;
+}
+
+
+	// div.combobox	{font-family: Tahoma;font-size: 12px}
+	// div.combobox	{position: relative;zoom: 1}
+	// div.combobox	div.dropdownlist	{display: none;width: 200px;
+	// 	border: solid 1px #000;background-color: #fff;
+	// 	height: 200px;overflow: auto;position: absolute;
+	// 	top: 18px;left: 0px;}
+	// div.combobox	.dropdownlist	a	{display: block;text-decoration: none;
+	// 	color: #000;padding: 1px;height: 1em}
+	// div.combobox	.dropdownlist	a.light	{color: #fff;
+	// 	background-color: #007}
+	// div.combobox	.dropdownlist, input {font-family: Tahoma;font-size: 12px;}
+	// div.combobox	input {float: left;width: 182px;
+	// 	border: solid 1px #ccc;height: 15px}
+	// div.combobox	span	{border: solid 1px #ccc;background: #eee;
+	// 	width: 16px;height: 17px;
+	// 	float: left;text-align: center;border-left: none}
+
+
 
 // grey: #e0e0e0
 // dark purple: rgb(39, 0, 48);
