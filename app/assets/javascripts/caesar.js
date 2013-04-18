@@ -15,16 +15,48 @@ function addToCart(coursename) {
 	var key = coursename.toUpperCase();
 	COURSE_LIST[key] = SEARCH_RESULT_LIST[key];
 
-	var addedcoursenotif = document.createElement('div');
-	addedcoursenotif.className = "addednotif";
-	addedcoursenotif.innerHTML += 
-	'<div class="removeClass"></div>' +
-	'<div class="classTitle">' + coursename.toUpperCase() + '</div>' + 
-	'<div class="iphoneCheck">' + 
-	'<input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>'
+	// var addedcoursenotif = document.createElement('div');
+	// addedcoursenotif.className = "addednotif";
+	// addedcoursenotif.innerHTML += 
+	// '<div class="removeClass"></div>' +
+	// '<div class="classTitle">' + coursename.toUpperCase() + '</div>' + 
+	// '<div class="iphoneCheck">' + 
+	// '<input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>'
 
-	$("#searchOutput").append(addedcoursenotif);
+
+	var addedcoursenotif = document.createElement('div');
+	addedcoursenotif.className = "addedCourseButton";
+	addedcoursenotif.id = (coursename.toUpperCase()).replace(/\s+/g,'');
+	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + 
+									coursename.toUpperCase();
+
+	var coursesections = document.createElement('div');
+	coursesections.className = "addedCourseSec";
+	var sectionHtml = '';
+	var sectionlength = 5;
+	for (var i = 0; i < sectionlength; i++){
+		sectionHtml += '<div class="courseSection">section ' + i + '</div>';
+	}
+
+	coursesections.innerHTML = sectionHtml;		
+
+	$("#addedCourses").append(addedcoursenotif);
+	$("#addedCourses").append(coursesections);
+	
+	// console.log((query.toUpperCase()).replace(/\s+/g,''))
+	$('#' + (coursename.toUpperCase()).replace(/\s+/g,'')).click(function() {
+		if($(this).next().is(':hidden')) {					
+			$(this).next().slideDown('fast');
+		} else {
+			$(this).next().slideUp('fast');}			
+   
+	}); 
+	//Collapse divs on new search
+	$("div.addedCourseSec").hide();
 	$(':checkbox').iphoneStyle();
+
+	// $("#searchOutput").append(addedcoursenotif);
+	// $(':checkbox').iphoneStyle();
 	
 	// todo: add it to calendar here too?
 }
