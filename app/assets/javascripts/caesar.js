@@ -1,24 +1,13 @@
 //= require jquery-ui.min
 //= require fuse.min
+//= require search
 
-function getClass(dept,classNr,termID,jsonArr) {
-    if (classNr.indexOf("-0") === -1) classNr += "-0" // add a "-0" if necessary
-
-    for (var n in jsonArr)
-        if (jsonArr[n].term == termID)
-            if (jsonArr[n].subject == dept && jsonArr[n].number == classNr) return jsonArr[n];
-
-    return null;
-}
-
-function findMatchingClasses(searchQuery,data,keyList) {
-	var options = {
-		keys: keyList,
-		threshold: '0.5'
-	}
-	var f = new Fuse(data,options);
-	return f.search(searchQuery);
-}
+/* GLOBALS */
+// Note: I'm not sure if it's better style to have these as globals, or put everything 
+// (eg. addCourseSelectionTable, addToCart and these two) into $(document).ready
+var CUR_TERM_ID = "4500";
+var COURSE_LIST = new Array();
+/***********/
 
 function addCourseSelectionTable(classes) {
 	console.log("adding table");
@@ -34,86 +23,28 @@ function addCourseSelectionTable(classes) {
 	$('.searchResult').click(function(){
 		addToCart($(this).html());
 		$('.searchResult').remove();
+		makeCalendar();
+		return;
 	});
 }
 
-function addToCart(classname) {
+function addToCart(coursename) {
+
+	var nameparts = coursename.toUpperCase().split(' ');
+	COURSE_LIST.push(nameparts);
+
 	var addedcoursenotif = document.createElement('div');
 	addedcoursenotif.className = "addednotif";
 	addedcoursenotif.innerHTML += 
 	'<div class="removeClass"></div>' +
-	'<div class="classTitle">' + classname.toUpperCase() + '</div>' + 
+	'<div class="classTitle">' + coursename.toUpperCase() + '</div>' + 
 	'<div class="iphoneCheck">' + 
-	'<input type="checkbox" value="' + classname.toUpperCase() + '" /> </div>'
+	'<input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>'
 
 	$("#searchOutput").append(addedcoursenotif);
 	$(':checkbox').iphoneStyle();
 	
 	// todo: add it to calendar here too?
-}
-
-// format a raw array of classes
-// output format: { EECS394-0: [ <class1>, <class2>, … ], … }
-// each class contains a field "sections", which is an array of all sections for that class
-function mergeClasses(classList,maxCount) {
-
-	/* todo: handle deferred sections at the end */
-
-	function findLECforDIS(dis_id,list) {
-		best_match = [-1,null];
-		for (var i in list) {
-			lec_id = list[i].section;
-			if (lec_id < dis_id && lec_id > best_match[0]) {
-				best_match = [lec_id,list[i]];
-			}
-		}
-		return best_match[1];
-	}
-	
-	var merged = {};
-	var deferredSections = [];
-	var count = 0;
-	
-	for (var i in classList) {
-		if (count >= maxCount) {
-			return merged;
-		}
-		curClass = classList[i];
-		// this ID is unique for each class, eg. "EECS 211", and the same for all sections of that class
-		classID = curClass.subject + curClass.number;
-		if (merged[classID] === undefined) {
-			// if curClass is the lecture, add it
-			if (curClass.lecdisc == "LEC") {
-				merged[classID] = new Array();
-                merged[classID].push(curClass);
-                count++;
-			} else { // else, defer processing it for later
-				deferredSections.push(curClass);
-			}
-		} else {
-			if (curClass.lecdisc == "LEC") {
-				merged[classID].push(curClass);
-				count++;
-			} else { //class is not LEC
-				// find LEC with the next-lowest ID (eg. DIS 54 should be assigned to LEC 50, not LEC 40)
-				var lecID = findLECforDIS(curClass.section,merged[classID]);
-				if (lecID !== null) {
-					lecID = lecID.unique_id;
-                	console.log(lecID);
-                	console.log(merged);
-                	for (var n in merged[classID]) {
-                    	if (merged[classID][n].unique_id == lecID) {
-                        	if (merged[classID][n].sections === undefined) {
-                            	merged[classID][n]['sections'] = new Array();
-                        	}
-                        	merged[classID][n].sections.push(curClass);
-                    	}
-                	}
-                }
-			}
-		}
-	}
-	return merged;
 }
 
 function getMonday(d) {
@@ -179,10 +110,6 @@ $(document).ready(function() {
     }
  	});
 
-  var CUR_TERM_ID = "4500";
-
-	var courselist = new Array();
-	var count = 0;
 	var idcount = 0;
 
 	$("input[type=text]").click(function() { $(this).select(); });
@@ -192,7 +119,6 @@ $(document).ready(function() {
 		var query = $('#search').val();
 		var splitquery = query.split(' ');
 		
-		var courses = {};
 		var result = null;
 		
 		if (splitquery.length == 2) {
@@ -203,16 +129,14 @@ $(document).ready(function() {
 		}
 
 		var exists = false;
-		for (var i = 0; i < courselist.length; i++) {
-			if (courselist[i][0] == splitquery[0] && courselist[i][1] == splitquery[1]) {
+		for (var i = 0; i < COURSE_LIST.length; i++) {
+			if (COURSE_LIST[i][0] == splitquery[0] && COURSE_LIST[i][1] == splitquery[1]) {
 				exists = true;
 				break;
 			}
 		}
 
 		if(result != null  && !exists) {
-			courselist[count] = splitquery;
-			count++;
 
 			addToCart(query);
 
@@ -237,9 +161,10 @@ $(document).ready(function() {
 		/* Clear Calendar */
 		$("#calendar").weekCalendar("clear");
 
-		var numberOfCourses = courselist.length;
+		var numberOfCourses = COURSE_LIST.length;
 		for(var i = 0; i < numberOfCourses; i++) {
-			var stringcomps = courselist[i];
+			var stringcomps = COURSE_LIST[i];
+			console.log(COURSE_LIST);
 			var course = getClass(stringcomps[0], stringcomps[1], CUR_TERM_ID, data);
 
 			var year = new Date().getFullYear();
@@ -267,11 +192,29 @@ $(document).ready(function() {
 		}
 	}
 
+	function addCourseSelectionTable(classes) {
+		console.log("adding table");
+		$('.searchResult').remove();
+		for (var i in classes) {
+			var matchingCourse = document.createElement('div');
+			matchingCourse.className = "searchResult";
+			matchingCourse.innerHTML += classes[i][0].subject + ' ' + classes[i][0].number;
+
+			$("#searchInput").append(matchingCourse);
+		}
+		// add a class from the search result list to the shopping cart
+		$('.searchResult').click(function(){
+			addToCart($(this).html());
+			$('.searchResult').remove();
+			makeCalendar();
+		});
+	}
+
 	$("#search").keyup(function(event){
 	    if(event.keyCode == 13){
 	        $("#enterbutton").click();
 	    }
-	    else if (event.keyCode >= 65 && event.keyCode <= 122) {
+	    else if ((event.keyCode >= 65 && event.keyCode <= 122) || event.keyCode == 8) {
 	    	var query = $('#search').val();
 	    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
 	    	matches = mergeClasses(matches,15);
