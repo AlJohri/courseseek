@@ -81,11 +81,6 @@ $(document).ready(function() {
 
 	$("input[type=text]").click(function() { $(this).select(); });
 
-	/* Removes an event from the shopping cart on click */
-	$('.removeClass').click(function(){
-			console.log("hello!");
-	});
-
 
 	$("#enterbutton").click(function() {
 
@@ -109,16 +104,35 @@ $(document).ready(function() {
 			courselist[count] = splitquery;
 			count++;
 
+			/*variables for Removing the Class*/
+			var course_ID = course.unique_id;
+			var courseToRemove;
+
 			var addedcoursenotif = document.createElement('div');
 			addedcoursenotif.className = "addednotif";
 			addedcoursenotif.innerHTML += 
-				'<div class="removeClass"></div>' +
+				'<div class="removeClass"></div>' + 
 				'<div class="classTitle">' + query.toUpperCase() + '</div>' + 
-				'<div class="iphoneCheck">' + 
+				'<div class="iphoneCheck" id="' + course_ID + '">' + 
 				'<input type="checkbox" value="' + query.toUpperCase() + '" /> </div>'
 
 			$("#searchOutput").append(addedcoursenotif);
 			$(':checkbox').iphoneStyle();
+			
+			/* Removes an event from the shopping cart on click */
+			$('.removeClass').click(function(){
+				console.log('Course ID ::: ' + course_ID);
+				for (var i = 0; i < courselist.length; i++) {
+					courseToRemove = getClass(courselist[i][0], courselist[i][1], CUR_TERM_ID, data);
+					if(courseToRemove.unique_id == course_ID){
+						console.log('Course Found ::' + courseToRemove.subject + ' '+ courseToRemove.number);
+						//delete courselist[i];
+						console.log('courselist :: ' + courselist);
+						console.log('index is :: ' + i);
+						//makeCalendar();
+					}
+				}
+			});	
 
 		 	$("#search").val("");
 			
@@ -163,6 +177,7 @@ $(document).ready(function() {
 				}
 			}
 		}
+		//$('#calendar').weekCalendar('scrollToHour', '9'); :: make a starting time default to 9 am
 	}
 
 	$("#search").keyup(function(event){
