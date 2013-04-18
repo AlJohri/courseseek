@@ -21,6 +21,7 @@ group :development do
 	gem 'dotenv'
 end
 
+gem 'bcrypt-ruby'
 gem 'foreman'
 gem 'delayed_job_active_record'
 gem 'daemons'

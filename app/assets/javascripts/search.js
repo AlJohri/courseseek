@@ -9,12 +9,11 @@ function getClass(dept,classNr,termID,jsonArr) {
 }
 
 function findMatchingClasses(searchQuery,data,keyList) {
-	var options = {
-		keys: keyList,
-		threshold: '0.5'
-	}
+
+	var options = { keys: keyList, threshold: '0' }
 	var f = new Fuse(data,options);
 	return f.search(searchQuery);
+
 }
 
 // format a raw array of classes
@@ -40,16 +39,18 @@ function mergeClasses(classList,maxCount) {
 	var count = 0;
 	
 	for (var i in classList) {
-		if (count >= maxCount) {
+		if (maxCount!= -1 && count >= maxCount) {
 			return merged;
 		}
 		curClass = classList[i];
+		curClass['onoff'] = false;
 		// this ID is unique for each class, eg. "EECS 211", and the same for all sections of that class
 		classID = curClass.subject + curClass.number;
 		if (merged[classID] === undefined) {
 			// if curClass is the lecture, add it
 			if (curClass.lecdisc == "LEC") {
 				merged[classID] = new Array();
+				curClass.onoff = true;
                 merged[classID].push(curClass);
                 count++;
 			} else { // else, defer processing it for later
@@ -64,12 +65,15 @@ function mergeClasses(classList,maxCount) {
 				var lecID = findLECforDIS(curClass.section,merged[classID]);
 				if (lecID !== null) {
 					lecID = lecID.unique_id;
-                	console.log(lecID);
-                	console.log(merged);
+                	//console.log(lecID);
+                	//console.log(merged);
                 	for (var n in merged[classID]) {
                     	if (merged[classID][n].unique_id == lecID) {
                         	if (merged[classID][n].sections === undefined) {
                             	merged[classID][n]['sections'] = new Array();
+                            	curClass.onoff = true;
+                            	console.log("ONOFF = TRUE");
+                            	// todo: why isn't this section showing up when we makeCalendar???
                         	}
                         	merged[classID][n].sections.push(curClass);
                     	}
