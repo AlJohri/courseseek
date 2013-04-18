@@ -9,25 +9,6 @@ var CUR_TERM_ID = "4500";
 var COURSE_LIST = new Array();
 /***********/
 
-function addCourseSelectionTable(classes) {
-	console.log("adding table");
-	$('.searchResult').remove();
-	for (var i in classes) {
-		var matchingCourse = document.createElement('div');
-		matchingCourse.className = "searchResult";
-		matchingCourse.innerHTML += classes[i][0].subject + ' ' + classes[i][0].number;
-
-		$("#searchInput").append(matchingCourse);
-	}
-	// add a class from the search result list to the shopping cart
-	$('.searchResult').click(function(){
-		addToCart($(this).html());
-		$('.searchResult').remove();
-		makeCalendar();
-		return;
-	});
-}
-
 function addToCart(coursename) {
 
 	var nameparts = coursename.toUpperCase().split(' ');
