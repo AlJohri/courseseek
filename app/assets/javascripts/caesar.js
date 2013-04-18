@@ -76,69 +76,71 @@ var SEARCH_LIST_FROM_NUM = {};
 function addToCart(coursename) {
 
 	var key = coursename.toUpperCase();
-	var keySpaceless = coursename.toUpperCase().replace(/\s+/g,'');
-	COURSE_LIST[key] = SEARCH_RESULT_LIST[key];
+	if( COURSE_LIST[key] == null){
+		var keySpaceless = coursename.toUpperCase().replace(/\s+/g,'');
+		COURSE_LIST[key] = SEARCH_RESULT_LIST[key];
 
-	// var addedcoursenotif = document.createElement('div');
-	// addedcoursenotif.className = "addednotif";
-	// addedcoursenotif.innerHTML += 
-	// '<div class="removeClass"></div>' +
-	// '<div class="classTitle">' + coursename.toUpperCase() + '</div>' + 
-	// '<div class="iphoneCheck">' + 
-	// '<input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>'
-
-
-	var addedcoursenotif = document.createElement('div');
-	addedcoursenotif.className = "addedCourseButton";
-	addedcoursenotif.id = keySpaceless;
-	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + 
-									key + 
-									'<div class="iphoneCheck"><input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>';
-
-	var coursesections = document.createElement('div');
-	coursesections.className = "addedCourseSec";
-	// var sectionHtml = '';
-	// var sectionlength = 5;
-	// for (var i = 0; i < sectionlength; i++){
-	// 	sectionHtml += '<div class="courseSection">section ' + i + '</div>';
-	// }
-
-	coursesections.innerHTML += '<div class="LEC">LEC:' +
-								'<form><select id="LEClist">'+
- 								'<option></option><option>Section 1</option></select></form></div>' +
-								'<div class="DIS">DIS: </div>' +
-								'<form><select id="DISlist">'+
- 								'<option></option><option>Section 1</option></select></form></div>';		
+		// var addedcoursenotif = document.createElement('div');
+		// addedcoursenotif.className = "addednotif";
+		// addedcoursenotif.innerHTML += 
+		// '<div class="removeClass"></div>' +
+		// '<div class="classTitle">' + coursename.toUpperCase() + '</div>' + 
+		// '<div class="iphoneCheck">' + 
+		// '<input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>'
 
 
-	$("#addedCourses").append(addedcoursenotif);
-	$("#addedCourses").append(coursesections);
-	
-	// console.log((query.toUpperCase()).replace(/\s+/g,''))
-	$('#' + keySpaceless).click(function() {
-		if($(this).next().is(':hidden')) {					
-			$(this).next().slideDown('fast');
-		} else {
-			$(this).next().slideUp('fast');}			
-   
-	});
+		var addedcoursenotif = document.createElement('div');
+		addedcoursenotif.className = "addedCourseButton";
+		addedcoursenotif.id = keySpaceless;
+		addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + 
+										key + 
+										'<div class="iphoneCheck"><input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>';
 
-	//Collapse divs on new search
-	$("div.addedCourseSec").hide();
-	// $(':checkbox').iphoneStyle();
+		var coursesections = document.createElement('div');
+		coursesections.className = "addedCourseSec";
+		// var sectionHtml = '';
+		// var sectionlength = 5;
+		// for (var i = 0; i < sectionlength; i++){
+		// 	sectionHtml += '<div class="courseSection">section ' + i + '</div>';
+		// }
 
-	//Remove Class functionality
-	$('.removeClass').click(function(){
-		delete COURSE_LIST[this.parentNode.id.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2')];
-		$('#' + this.parentNode.id).next().remove();
-		$('#' + this.parentNode.id).remove();
-		makeCalendar();
-	});	
+		coursesections.innerHTML += '<div class="LEC">LEC:' +
+									'<form><select id="LEClist">'+
+	 								'<option></option><option>Section 1</option></select></form></div>' +
+									'<div class="DIS">DIS: </div>' +
+									'<form><select id="DISlist">'+
+	 								'<option></option><option>Section 1</option></select></form></div>';		
 
-	// $("#searchOutput").append(addedcoursenotif);
-	// $(':checkbox').iphoneStyle();
-	
-	// todo: add it to calendar here too?
+
+		$("#addedCourses").append(addedcoursenotif);
+		$("#addedCourses").append(coursesections);
+		
+		// console.log((query.toUpperCase()).replace(/\s+/g,''))
+		$('#' + keySpaceless).click(function() {
+			if($(this).next().is(':hidden')) {					
+				$(this).next().slideDown('fast');
+			} else {
+				$(this).next().slideUp('fast');}			
+	   
+		});
+
+		//Collapse divs on new search
+		$("div.addedCourseSec").hide();
+		// $(':checkbox').iphoneStyle();
+
+		//Remove Class functionality
+		$('.removeClass').click(function(){
+			delete COURSE_LIST[this.parentNode.id.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2')];
+			$('#' + this.parentNode.id).next().remove();
+			$('#' + this.parentNode.id).remove();
+			makeCalendar();
+		});	
+
+		// $("#searchOutput").append(addedcoursenotif);
+		// $(':checkbox').iphoneStyle();
+		
+		// todo: add it to calendar here too?
+	}
 }
 
 function getMonday(d) {
