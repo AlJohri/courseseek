@@ -149,7 +149,13 @@ $(document).ready(function() {
 		$("#calendar").weekCalendar("clear");
 
 		var colorCounter = 0;
+		
+		var year = new Date().getFullYear();
+		var month = new Date().getMonth();
+		var day = getMonday(new Date()).getDate();
+					
 		for (var k in COURSE_LIST) {
+<<<<<<< HEAD
 			var course = COURSE_LIST[k][0]; //just use first course for now
 			
 			var year = new Date().getFullYear();
@@ -170,6 +176,52 @@ $(document).ready(function() {
 					};
 					// console.log(calEvent);
 					$("#calendar").weekCalendar("updateEvent", calEvent);					
+=======
+			for (var c in COURSE_LIST[k]) {
+				course = COURSE_LIST[k][c];
+				if (course.onoff == true) {
+					
+					var days = [course.M, course.T, course.W, course.R, course.F];
+		
+					/* Create Events */
+					for (var j = 0; j < 5; j++) {
+						if (days[j] == "t") {
+							var calEvent = { 
+								"unique_id" : course.unique_id,
+								"colorid" : colorCounter,
+								"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
+								"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
+								"title" : course.subject + " " + course.number + " " + course.title
+							};
+							console.log(calEvent);
+							$("#calendar").weekCalendar("updateEvent", calEvent);					
+						}
+					}
+					
+					for (var s in course.sections) {
+						var section = course.sections[s];
+						console.log(section);
+						if (section.onoff == true) {
+							console.log("TRUE");
+							days = [section.M, section.T, section.W, section.R, section.F];
+							for (var j = 0; j < 5; j++) {
+								if (days[j] == "t") {
+									var calEvent = { 
+										"unique_id" : course.unique_id,
+										"colorid" : colorCounter,
+										"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
+										"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
+										"title" : section.subject + " " + section.number + " " + section.title
+									};
+									console.log(calEvent);
+									$("#calendar").weekCalendar("updateEvent", calEvent);					
+								}
+							}
+							//break;
+						}
+					}
+					//break;
+>>>>>>> implemented "onoff" field, makeCalendar now draws only those classes and sections where onoff=true
 				}
 			}
 			colorCounter++;

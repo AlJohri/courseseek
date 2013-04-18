@@ -43,12 +43,14 @@ function mergeClasses(classList,maxCount) {
 			return merged;
 		}
 		curClass = classList[i];
+		curClass['onoff'] = false;
 		// this ID is unique for each class, eg. "EECS 211", and the same for all sections of that class
 		classID = curClass.subject + ' ' + curClass.number;
 		if (merged[classID] === undefined) {
 			// if curClass is the lecture, add it
 			if (curClass.lecdisc == "LEC") {
 				merged[classID] = new Array();
+				curClass.onoff = true;
                 merged[classID].push(curClass);
                 count++;
 			} else { // else, defer processing it for later
@@ -69,6 +71,9 @@ function mergeClasses(classList,maxCount) {
                     	if (merged[classID][n].unique_id == lecID) {
                         	if (merged[classID][n].sections === undefined) {
                             	merged[classID][n]['sections'] = new Array();
+                            	curClass.onoff = true;
+                            	console.log("ONOFF = TRUE");
+                            	// todo: why isn't this section showing up when we makeCalendar???
                         	}
                         	merged[classID][n].sections.push(curClass);
                     	}
