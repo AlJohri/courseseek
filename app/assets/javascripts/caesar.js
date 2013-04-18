@@ -190,6 +190,7 @@ $(document).ready(function() {
 				}
 			}
 		}
+		//$('#calendar').weekCalendar('scrollToHour', '9'); :: make a starting time default to 9 am
 	}
 
 	function addCourseSelectionTable(classes) {
