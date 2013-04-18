@@ -10,39 +10,67 @@ var COURSE_LIST = {};
 var SEARCH_RESULT_LIST = {};
 /***********/
 
-function makeCalendar() {
+	function makeCalendar() {
 
 		/* Clear Calendar */
 		$("#calendar").weekCalendar("clear");
-
 		var colorCounter = 0;
+		
+		var year = new Date().getFullYear();
+		var month = new Date().getMonth();
+		var day = getMonday(new Date()).getDate();
+					
 		for (var k in COURSE_LIST) {
-			var course = COURSE_LIST[k][0]; //just use first course for now
-			
-			var year = new Date().getFullYear();
-      		var month = new Date().getMonth();
-      		var day = getMonday(new Date()).getDate();
-      		
-      		var days = [course.M, course.T, course.W, course.R, course.F];
-
-			/* Create Events */
-			for (var j = 0; j < 5; j++) {
-				if (days[j] == "t") {
-					var calEvent = { 
-						"unique_id" : course.unique_id,
-						"colorid" : colorCounter,
-						"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
-						"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
-						"title" : course.subject + " " + course.number + " " + course.title
-					};
-					console.log(calEvent);
-					$("#calendar").weekCalendar("updateEvent", calEvent);					
+			for (var c in COURSE_LIST[k]) {
+				course = COURSE_LIST[k][c];
+				if (course.onoff == true) {
+					
+					var days = [course.M, course.T, course.W, course.R, course.F];
+		
+					/* Create Events */
+					for (var j = 0; j < 5; j++) {
+						if (days[j] == "t") {
+							var calEvent = { 
+								"unique_id" : course.unique_id,
+								"colorid" : colorCounter,
+								"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
+								"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
+								"title" : course.subject + " " + course.number + " " + course.title
+							};
+							console.log(calEvent);
+							$("#calendar").weekCalendar("updateEvent", calEvent);					
+						}
+					}
+					
+					for (var s in course.sections) {
+						var section = course.sections[s];
+						console.log(section);
+						if (section.onoff == true) {
+							console.log("TRUE");
+							days = [section.M, section.T, section.W, section.R, section.F];
+							for (var j = 0; j < 5; j++) {
+								if (days[j] == "t") {
+									var calEvent = { 
+										"unique_id" : course.unique_id,
+										"colorid" : colorCounter,
+										"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
+										"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
+										"title" : section.subject + " " + section.number + " " + section.title
+									};
+									console.log(calEvent);
+									$("#calendar").weekCalendar("updateEvent", calEvent);					
+								}
+							}
+							break;
+						}
+					}
+					break;
 				}
 			}
 			colorCounter++;
 		}
 		//$('#calendar').weekCalendar('scrollToHour', '9'); :: make a starting time default to 9 am
-}
+	}
 
 function addToCart(coursename) {
 
@@ -94,6 +122,7 @@ function addToCart(coursename) {
 	//Remove Class functionality
 	$('.removeClass').click(function(){
 		delete COURSE_LIST[this.parentNode.id.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2')];
+		$('#' + this.parentNode.id).next().remove();
 		$('#' + this.parentNode.id).remove();
 		makeCalendar();
 	});	
@@ -181,71 +210,6 @@ $(document).ready(function() {
 	});
 
 
-	/* Removes an event from the shopping cart on click */
-	$('.removeClass').click(function(){
-			console.log("hello!");
-	});
-
-
-
-		var colorCounter = 0;
-		
-		var year = new Date().getFullYear();
-		var month = new Date().getMonth();
-		var day = getMonday(new Date()).getDate();
-					
-		for (var k in COURSE_LIST) {
-			for (var c in COURSE_LIST[k]) {
-				course = COURSE_LIST[k][c];
-				if (course.onoff == true) {
-					
-					var days = [course.M, course.T, course.W, course.R, course.F];
-		
-					/* Create Events */
-					for (var j = 0; j < 5; j++) {
-						if (days[j] == "t") {
-							var calEvent = { 
-								"unique_id" : course.unique_id,
-								"colorid" : colorCounter,
-								"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
-								"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
-								"title" : course.subject + " " + course.number + " " + course.title
-							};
-							console.log(calEvent);
-							$("#calendar").weekCalendar("updateEvent", calEvent);					
-						}
-					}
-					
-					for (var s in course.sections) {
-						var section = course.sections[s];
-						console.log(section);
-						if (section.onoff == true) {
-							console.log("TRUE");
-							days = [section.M, section.T, section.W, section.R, section.F];
-							for (var j = 0; j < 5; j++) {
-								if (days[j] == "t") {
-									var calEvent = { 
-										"unique_id" : course.unique_id,
-										"colorid" : colorCounter,
-										"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
-										"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
-										"title" : section.subject + " " + section.number + " " + section.title
-									};
-									console.log(calEvent);
-									$("#calendar").weekCalendar("updateEvent", calEvent);					
-								}
-							}
-							break;
-						}
-					}
-					break;
-				}
-			}
-			colorCounter++;
-		}
-		//$('#calendar').weekCalendar('scrollToHour', '9'); :: make a starting time default to 9 am
-	}
-
 	function addCourseSelectionTable(classes) {
 		//console.log("adding table");
 		$('.searchResult').remove();
@@ -273,7 +237,7 @@ $(document).ready(function() {
 		if (matches != null) {
 		    return true;
 		}
-	}	
+	}
 
 	$("#search").keyup(function(event){
 	    if(event.keyCode == 13){
