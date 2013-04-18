@@ -33,17 +33,28 @@ function addToCart(coursename) {
 	var nameparts = coursename.toUpperCase().split(' ');
 	COURSE_LIST.push(nameparts);
 
+
 	var addedcoursenotif = document.createElement('div');
 	addedcoursenotif.className = "addednotif";
+	addedcoursenotif.id = course_ID;
 	addedcoursenotif.innerHTML += 
 	'<div class="removeClass"></div>' +
 	'<div class="classTitle">' + coursename.toUpperCase() + '</div>' + 
 	'<div class="iphoneCheck">' + 
 	'<input type="checkbox" value="' + coursename.toUpperCase() + '" /> </div>'
 
+
+
 	$("#searchOutput").append(addedcoursenotif);
 	$(':checkbox').iphoneStyle();
 	
+
+	$('.removeClass').click(function(){
+		console.log('hello');
+		console.log($(this).closest('div').attr('id'));
+
+		});	
+
 	// todo: add it to calendar here too?
 }
 

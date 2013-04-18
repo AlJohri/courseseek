@@ -45,7 +45,7 @@ function mergeClasses(classList,maxCount) {
 		}
 		curClass = classList[i];
 		// this ID is unique for each class, eg. "EECS 211", and the same for all sections of that class
-		classID = curClass.subject + curClass.number;
+		classID = curClass.subject + ' ' + curClass.number;
 		if (merged[classID] === undefined) {
 			// if curClass is the lecture, add it
 			if (curClass.lecdisc == "LEC") {
