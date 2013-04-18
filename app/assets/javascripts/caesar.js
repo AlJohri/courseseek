@@ -8,6 +8,7 @@
 var CUR_TERM_ID = "4500";
 var COURSE_LIST = {};
 var SEARCH_RESULT_LIST = {};
+var SEARCH_LIST_FROM_NUM = {};
 /***********/
 
 	function makeCalendar() {
@@ -239,25 +240,50 @@ $(document).ready(function() {
 		}
 	}
 
-	$("#search").keyup(function(event){
+	$("#search").keyup(function(event) {
 	    if(event.keyCode == 13){
 	        $("#enterbutton").click();
 	    }
-	    else if ((event.keyCode >= 48 && event.keyCode <= 122) || event.keyCode == 8) {
+	    else if ((event.keyCode >= 48 && event.keyCode <= 122)) {
 	    	var query = $('#search').val();
 	    	if (!containsNumber(query)) {
 		    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
 		    	matches = mergeClasses(matches,-1);
 		    	addCourseSelectionTable(matches);
+		    	SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
 	    	}
 	    	else {
 	    		for (var i in SEARCH_RESULT_LIST) {
 	    			if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
 	    		}
-	    		console.log(SEARCH_RESULT_LIST);
+	    		addCourseSelectionTable(SEARCH_RESULT_LIST);
 	    	}
 	    }
+	    else if (event.keyCode == 8) { // backspace
+				var query = $('#search').val();
+
+	    	if (containsNumber(query)) {
+		    	SEARCH_RESULT_LIST = jQuery.extend({}, SEARCH_LIST_FROM_NUM); // reset back to when no number entered
+
+	    		console.log(SEARCH_LIST_FROM_NUM);
+	    		for (var i in SEARCH_RESULT_LIST) { // repeat search in case there are some numbers
+	    			if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
+	    		}
+					addCourseSelectionTable(SEARCH_RESULT_LIST);
+	    	}
+	    	else {
+		    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
+		    	matches = mergeClasses(matches,-1);
+		    	addCourseSelectionTable(matches);
+		    	SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
+	    	}
+
+	    }
 	});	
+
+
+
+	
 	
 	$(document).foundation('joyride', 'start');
 	
