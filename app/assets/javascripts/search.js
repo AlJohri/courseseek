@@ -1,16 +1,6 @@
-function getClass(dept,classNr,termID,jsonArr) {
-    if (classNr.indexOf("-0") === -1) classNr += "-0" // add a "-0" if necessary
-
-    for (var n in jsonArr)
-        if (jsonArr[n].term == termID)
-            if (jsonArr[n].subject == dept && jsonArr[n].number == classNr) return jsonArr[n];
-
-    return null;
-}
-
 function findMatchingClasses(searchQuery,data,keyList) {
 
-	var options = { keys: keyList, threshold: '0' }
+	var options = { keys: keyList, threshold: '0.25' }
 	var f = new Fuse(data,options);
 	return f.search(searchQuery);
 
@@ -20,6 +10,8 @@ function findMatchingClasses(searchQuery,data,keyList) {
 // output format: { EECS394-0: [ <class1>, <class2>, … ], … }
 // each class contains a field "sections", which is an array of all sections for that class
 function mergeClasses(classList,maxCount) {
+
+	console.log(classList);
 
 	/* todo: handle deferred sections at the end */
 

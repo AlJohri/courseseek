@@ -15,12 +15,7 @@
 //= require foundation
 //= require_tree .
 
-// require jquery.handsontable.full
-
-
-
 $(document).ready(function() { 
-
 	$(':checkbox').iphoneStyle(); 
 	$(document).foundation();
 });
