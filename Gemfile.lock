@@ -158,7 +158,7 @@ GEM
       unf_ext
     unf_ext (0.0.5)
     webrobots (0.0.13)
-    zurb-foundation (4.0.9)
+    zurb-foundation (4.1.2)
       sass (>= 3.2.0)
 
 PLATFORMS
@@ -187,4 +187,4 @@ DEPENDENCIES
   simple_form (>= 2.0.4)
   thin (>= 1.5.0)
   uglifier (>= 1.0.3)
-  zurb-foundation (~> 4.0.0)
+  zurb-foundation (= 4.1.2)
