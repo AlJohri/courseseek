@@ -32,6 +32,14 @@ function mergeClasses(classList,maxCount) {
 		course.sections.push(section);
 		return course;
 	}
+	function checkIfClassExistsAlready(classList,course) {
+		for (var n in classList) {
+			if (course.unique_id == classList[n].unique_id) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	var merged = {};
 	var deferredSections = [];
@@ -57,8 +65,10 @@ function mergeClasses(classList,maxCount) {
 			}
 		} else {
 			if (curClass.lecdisc == "LEC") {
-				merged[classID].push(curClass);
-				count++;
+				if (!checkIfClassExistsAlready(merged[classID],curClass)) {
+					merged[classID].push(curClass);
+					count++;
+				}
 			} else { //class is not LEC
 				// find LEC with the next-lowest ID (eg. DIS 54 should be assigned to LEC 50, not LEC 40)
 				var lecID = findLECforDIS(curClass.section,merged[classID]);
