@@ -47,16 +47,13 @@
 
 #searchOutput {
 	width: 100%;
-	height: 350px;
+	height: 375px;
 	overflow: auto;
 	float: left;
 	padding-top: 10px;
 }
 
-#search {
-	float: left;
-	width: 75%;
-}
+#search {}
 
 #addedCourses {
 	width: 90%;
@@ -92,8 +89,9 @@
 
 
 #enterbutton {
-	float: right;
-	width: 22%;
+	/*float: right;
+	width: 22%;*/
+	display: none;
 }
 
 #ribbon {
@@ -149,6 +147,8 @@
 
 }
 
+.panel{border-color: #dddddd}
+
 .removeClass {
 	float: left;
 	width: 10%;
@@ -160,24 +160,24 @@
 	background-position: right center;
 	background-size: contain;
 }
-
+/*
 // .whiteboard {
-	// background-image: url('http://www.teacherfiles.com/clipart/xbackgrounds/lined_paper_light.jpg');
-	// background-repeat: no-repeat;
-	// background-size: 1000px 500px;
+	background-image: url('http://www.teacherfiles.com/clipart/xbackgrounds/lined_paper_light.jpg');
+	background-repeat: no-repeat;
+	background-size: 1000px 500px;
 
-	// border-style: solid;
-	// border-width: 5px;
-	// border-color: #520063;
-	// padding-top: 19px;
-	// z-index: 2;
-// }
+	 border-style: solid;
+	 border-width: 5px;
+	 border-color: #520063;
+	 padding-top: 19px;
+	 z-index: 2;
+ }
 
-// #container {
-// 	background-image: url('http://www.teacherfiles.com/clipart/xbackgrounds/lined_paper_light.jpg');
-// 	background-repeat: repeat-both;
-// 	//background-size: 100% auto;
-// }
+ #container {
+ 	background-image: url('http://www.teacherfiles.com/clipart/xbackgrounds/lined_paper_light.jpg');
+ 	background-repeat: repeat-both;
+ 	background-size: 100% auto;
+ }*/
 
 footer {
 	z-index: -1;
@@ -185,38 +185,67 @@ footer {
 
 .searchResultContainer {
 	height: auto;
-	max-height: 200px;
+	max-height: 300px;
 	overflow: auto;
 	position: absolute;
 	top: 54px;
 	background-color: white;
 	float: left;
 	z-index: 10;
-	//display: none;
+	/*display: none;*/
 }
 
+.row{ max-width: 70em;}
 
-	// div.combobox	{font-family: Tahoma;font-size: 12px}
-	// div.combobox	{position: relative;zoom: 1}
-	// div.combobox	div.dropdownlist	{display: none;width: 200px;
-	// 	border: solid 1px #000;background-color: #fff;
-	// 	height: 200px;overflow: auto;position: absolute;
-	// 	top: 18px;left: 0px;}
-	// div.combobox	.dropdownlist	a	{display: block;text-decoration: none;
-	// 	color: #000;padding: 1px;height: 1em}
-	// div.combobox	.dropdownlist	a.light	{color: #fff;
-	// 	background-color: #007}
-	// div.combobox	.dropdownlist, input {font-family: Tahoma;font-size: 12px;}
-	// div.combobox	input {float: left;width: 182px;
-	// 	border: solid 1px #ccc;height: 15px}
-	// div.combobox	span	{border: solid 1px #ccc;background: #eee;
-	// 	width: 16px;height: 17px;
-	// 	float: left;text-align: center;border-left: none}
+.searchResultContainer .searchResult {
+	border-style: ridge;
+	height: 42px;
+	position: relative;
+	white-space: nowrap;
+	overflow: hidden;
+	/*text-overflow:ellipsis;*/
+	
+}
+
+.searchResultContainer .searchResult:hover{
+	background-color: rgba(82, 0, 99, .25);
+}
+
+.searchResultContainer .searchResult #classSubNum {
+	font-size: 14px;
+	font-weight: bold;
+	top: 1px;
+	position: absolute;
+}
+
+.searchResultContainer .searchResult #classTitle {
+	font-size: 12px;
+	position: absolute;
+	bottom: 1px;
+	text-overflow:ellipsis;
+}
+
+/*
+	 div.combobox	{font-family: Tahoma;font-size: 12px}
+	 div.combobox	{position: relative;zoom: 1}
+	 div.combobox	div.dropdownlist	{display: none;width: 200px;
+	border: solid 1px #000;background-color: #fff;
+	height: 200px;overflow: auto;position: absolute;
+	top: 18px;left: 0px;}
+	div.combobox	.dropdownlist	a	{display: block;text-decoration: none;
+ 	color: #000;padding: 1px;height: 1em}
+	div.combobox	.dropdownlist	a.light	{color: #fff;
+	background-color: #007}
+	div.combobox	.dropdownlist, input {font-family: Tahoma;font-size: 12px;}
+	div.combobox	input {float: left;width: 182px;
+	border: solid 1px #ccc;height: 15px}
+	div.combobox	span	{border: solid 1px #ccc;background: #eee;
+	width: 16px;height: 17px;
+	float: left;text-align: center;border-left: none}
 
 
 
-// grey: #e0e0e0
-// dark purple: rgb(39, 0, 48);
-// #333
-
-// light purple rgb(143, 42, 165);
+grey: #e0e0e0
+dark purple: rgb(39, 0, 48);
+#333
+light purple rgb(143, 42, 165); */

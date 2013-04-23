@@ -236,7 +236,8 @@ $(document).ready(function() {
 	
 	$("#enterbutton").click(function() {
 		if ($('#search').val() != '') {
-			addToCart(SEARCH_RESULT_LIST[$('.searchResult').html()]);
+
+			addToCart(SEARCH_RESULT_LIST[$('.searchResult').children('#classSubNum').text()][0].subject + ' ' + SEARCH_RESULT_LIST[$('.searchResult').children('#classSubNum').text()][0].number);
 			makeCalendar();
 		}
 	});
@@ -250,7 +251,8 @@ $(document).ready(function() {
 		for (var i in classes) {
 			var matchingCourse = document.createElement('div');
 			matchingCourse.className = "searchResult";
-			matchingCourse.innerHTML += classes[i][0].subject + ' ' + classes[i][0].number;
+			matchingCourse.innerHTML += '<div id="classSubNum">' + classes[i][0].subject + ' ' + classes[i][0].number + '</div>' +
+										'<div id="classTitle">' + classes[i][0].title + '</div>';
 
 			$('.searchResultContainer').append(matchingCourse);
 
@@ -265,7 +267,7 @@ $(document).ready(function() {
 
 		// add a class from the search result list to the shopping cart
 		$('.searchResult').click(function() {
-			addToCart($(this).html());
+			addToCart($(this).children("#classSubNum").text());
 			$('.searchResult').remove();
 			makeCalendar();
 		});
@@ -284,6 +286,26 @@ $(document).ready(function() {
 		if (matches != null) {
 		    return true;
 		}
+	}
+
+	function createSearchDropDown(){
+			var query = $('#search').val();
+
+	    	if (containsNumber(query)) {
+		    	SEARCH_RESULT_LIST = jQuery.extend({}, SEARCH_LIST_FROM_NUM); // reset back to when no number entered
+
+	    		//console.log(SEARCH_LIST_FROM_NUM);
+	    		for (var i in SEARCH_RESULT_LIST) { // repeat search in case there are some numbers
+	    			if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
+	    		}
+					addCourseSelectionTable(SEARCH_RESULT_LIST);
+	    	}
+	    	else {
+		    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
+		    	matches = mergeClasses(matches,-1);
+		    	addCourseSelectionTable(matches);
+		    	SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
+	    	}
 	}
 
 	$("#search").keyup(function(event) {
@@ -307,26 +329,26 @@ $(document).ready(function() {
 	    	}
 	    }
 	    else if (event.keyCode == 8) { // backspace
-				var query = $('#search').val();
-
-	    	if (containsNumber(query)) {
-		    	SEARCH_RESULT_LIST = jQuery.extend({}, SEARCH_LIST_FROM_NUM); // reset back to when no number entered
-
-	    		//console.log(SEARCH_LIST_FROM_NUM);
-	    		for (var i in SEARCH_RESULT_LIST) { // repeat search in case there are some numbers
-	    			if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
-	    		}
-					addCourseSelectionTable(SEARCH_RESULT_LIST);
-	    	}
-	    	else {
-		    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
-		    	matches = mergeClasses(matches,-1);
-		    	addCourseSelectionTable(matches);
-		    	SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
-	    	}
+	    		createSearchDropDown();
 
 	    }
 	});	
+
+var keepFocus = false;
+
+function hideSearchResult(){
+	if(!keepFocus) { $('.searchResult').remove();}
+}
+
+	$('#search').focus(function(){
+		createSearchDropDown();
+	});
+
+	$('#search').blur(function(){
+		keepFocus = false;
+//		window.setTimeout(hideSearchResult, 150);}).focus(function(){
+//			keepFocus = true;
+		});
 
 
 
