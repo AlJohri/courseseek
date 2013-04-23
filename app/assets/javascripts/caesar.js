@@ -47,6 +47,7 @@ function makeCalendar() {
 						//console.log(calEvent);
 						$("#calendar").weekCalendar("updateEvent", calEvent);					
 					}
+<<<<<<< HEAD
 				}
 				
 				for (var s in course.sections) {
@@ -66,6 +67,27 @@ function makeCalendar() {
 								};
 								//console.log(calEvent);
 								$("#calendar").weekCalendar("updateEvent", calEvent);					
+=======
+					
+					for (var s in course.sections) {
+						var section = course.sections[s];
+						//console.log(section);
+						if (section.onoff == true) {
+							//console.log("TRUE");
+							days = [section.M, section.T, section.W, section.R, section.F];
+							for (var j = 0; j < 5; j++) {
+								if (days[j] == "t") {
+									var calEvent = { 
+										"unique_id" : section.unique_id,
+										"colorid" : colorCounter,
+										"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
+										"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
+										"title" : section.subject + " " + section.number + " " + section.title
+									};
+									//console.log(calEvent);
+									$("#calendar").weekCalendar("updateEvent", calEvent);					
+								}
+>>>>>>> c30d6d496f0a899524634efcb29a6e736e1b0b1e
 							}
 						}
 						break;
