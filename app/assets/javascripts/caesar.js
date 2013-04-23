@@ -126,10 +126,10 @@ function addToCart(coursename) {
 
 	//Populate drop down with lecture sections
 	sectionHtml += '<div class="LEC">LEC: '+
-					'<form><select id="LEClist">';
+					'<form><select id="SECTION-'+keySpaceless+'">';
 
 	for (var i in COURSE_LIST[key]) {
-		sectionHtml += '<option>'+ createSectionString(COURSE_LIST[key][i]) + '</option>';
+		sectionHtml += '<option value="' + COURSE_LIST[key][i].unique_id + '">' + createSectionString(COURSE_LIST[key][i]) + '</option>';
 		// if (i == 0){
 		// 	newHtml = sectionHtml + '</select></form></div>' + '<div class="DIS">DIS: ' + '<form><select id="DISlist">';
 		// 	for (var j in COURSELIST[key][i].sections){
@@ -178,6 +178,10 @@ function addToCart(coursename) {
 
 	$('.courseSection').click(function(){ console.log("tell calendar to turn on " + $(this).text()); });
 	$("#search").val("");
+
+	$('#SECTION-'+keySpaceless).change( function() {
+		console.log("LECTURE changed to " + $(this).val());
+	});
 
 	// $("#searchOutput").append(addedcoursenotif);
 	// $(':checkbox').iphoneStyle();
