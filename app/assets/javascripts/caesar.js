@@ -101,7 +101,7 @@ function getDateStringFromCourse(course){
 }
 
 function createSectionString(course){
-	return getDateStringFromCourse(course) + ' ' + course.start + "-" + course.end;
+	return course.unique_id + ' ' + getDateStringFromCourse(course) + ' ' + course.start + "-" + course.end;
 }
 
 function addToCart(coursename) {
@@ -133,7 +133,7 @@ function addToCart(coursename) {
 
 	//Populate drop down with lecture sections
 	sectionHtml += '<div class="LEC">LEC: '+
-					'<form><select id="SECTION-'+keySpaceless+'">';
+					'<form><select id="LECTURE-'+keySpaceless+'">';
 
 	for (var i in COURSE_LIST[key]) {
 		sectionHtml += '<option value="' + COURSE_LIST[key][i].unique_id + '">' + createSectionString(COURSE_LIST[key][i]) + '</option>';
@@ -186,13 +186,14 @@ function addToCart(coursename) {
 	$('.courseSection').click(function(){ console.log("tell calendar to turn on " + $(this).text()); });
 	$("#search").val("");
 	
-	
-	$('#SECTION-'+keySpaceless).change( function() {
-		console.log("LECTURE changed to " + $(this).val());
-	});
+	var previousLecID;
+	$('#LECTURE-'+keySpaceless).focus( function() {
+		previousLecID = $(this).val(); }).
+	change( function() {
+		console.log("LECTURE changed to " + $(this).val() + ' from ' + previousLecID);
+		// Change what lecture shows with code here
+		previousLecID = $(this).val();
 
-	$('#SECTION-'+keySpaceless).change( function() {
-		console.log("LECTURE changed to " + $(this).val());
 	});
 
 	// $("#searchOutput").append(addedcoursenotif);
