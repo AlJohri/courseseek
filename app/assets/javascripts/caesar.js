@@ -82,21 +82,11 @@ function makeCalendar() {
 
 function getDateStringFromCourse(course){
 	var datestring = '';
-	if(course.M=='t'){
-		datestring += 'M'
-	}
-	if(course.T=='t'){
-		datestring += 'Tu'
-	}
-	if(course.W=='t'){
-		datestring += 'W'
-	}
-	if(course.R=='t'){
-		datestring += 'Th'
-	}
-	if(course.F=='t'){
-		datestring += 'F'
-	}
+	if(course.M=='t'){ datestring += 'M' }
+	if(course.T=='t'){ datestring += 'Tu' }
+	if(course.W=='t'){ datestring += 'W' }
+	if(course.R=='t'){ datestring += 'Th' }
+	if(course.F=='t'){ datestring += 'F' }
 	return datestring;
 }
 

@@ -16,9 +16,10 @@ group :development do
 	gem "quiet_assets", ">= 1.0.1"
 	gem "better_errors", ">= 0.3.2"
 	gem "binding_of_caller", ">= 0.6.8"
-	gem 'dotenv'
+	# gem 'dotenv'
 end
 
+gem 'dotenv'
 gem 'bcrypt-ruby'
 gem 'foreman'
 gem 'delayed_job_active_record'

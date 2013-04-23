@@ -13,14 +13,15 @@ class CourseJob
 		login_form.set_fields(:userid => username) #ARGV[0]
 		login_form.set_fields(:pwd => password) #ARGV[1]
 		login_form.action = 'https://ses.ent.northwestern.edu/psp/caesar/?cmd=?languageCd=ENG'
+		pp login_form
 		page = @agent.submit(login_form, login_form.buttons.first)
 		@authenticated = true
 	end
 	
 	def scrape_courses()
-		if (@authenticated != true)
-			authenticate
-		end
+		# if (@authenticated != true)
+		# 	authenticate
+		# end
 		authenticate
 
 		error_counter = 0
