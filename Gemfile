@@ -9,9 +9,7 @@ group :assets do
   gem 'jquery-ui-rails'
   #gem 'jquery_mobile_rails'
   #gem 'compass-rails', ">= 1.0.3"
-  #gem 'zurb-foundation', "= 3.2.5"
   gem 'zurb-foundation', '= 4.1.2'
-  #gem "zurb-foundation", :git => "git@github.com:zurb/foundation.git"
 end
 
 group :development do
