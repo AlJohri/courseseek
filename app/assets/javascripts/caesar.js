@@ -53,10 +53,10 @@ var SEARCH_LIST_FROM_NUM = {};
 							for (var j = 0; j < 5; j++) {
 								if (days[j] == "t") {
 									var calEvent = { 
-										"unique_id" : course.unique_id,
+										"unique_id" : section.unique_id,
 										"colorid" : colorCounter,
-										"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
-										"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
+										"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
+										"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
 										"title" : section.subject + " " + section.number + " " + section.title
 									};
 									//console.log(calEvent);

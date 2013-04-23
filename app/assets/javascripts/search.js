@@ -74,5 +74,26 @@ function mergeClasses(classList,maxCount) {
 			}
 		}
 	}
+	for (var i in deferredSections) {
+		var sec = deferredSections[i];
+		var classID = sec.subject + sec.number;
+		var lecID = findLECforDIS(sec.section,merged[classID]);
+		if (lecID !== null) {
+			lecID = lecID.unique_id;
+			for (var n in merged[classID]) {
+            	if (merged[classID][n].unique_id == lecID) {
+            		if (merged[classID][n].sections === undefined) {
+                    	merged[classID][n]['sections'] = new Array();
+                    	sec.onoff = true;
+                    	console.log("ONOFF = TRUE");
+                    }
+            		merged[classID][n].sections.push(sec);
+            		break;
+            	}
+            }
+		}
+	}
+	console.log("deferred sections: ");
+	console.log(deferredSections);
 	return merged;
 }
