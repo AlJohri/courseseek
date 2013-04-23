@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  force_ssl
+  #force_ssl
 
   def call_rake(task, options={})
   	options[:rails_env] ||= Rails.env
