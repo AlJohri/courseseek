@@ -31,12 +31,13 @@ function makeCalendar() {
 		for (var c in COURSE_LIST[k]) {
 			course = COURSE_LIST[k][c];
 			if (course.onoff == true) {
-				
+				console.log(course);
 				var days = [course.M, course.T, course.W, course.R, course.F];
 	
 				/* Create Events */
 				for (var j = 0; j < 5; j++) {
 					if (days[j] == "t") {
+						console.log("day " + j + " == true");
 						var calEvent = { 
 							"unique_id" : course.unique_id,
 							"colorid" : colorCounter,
@@ -45,30 +46,31 @@ function makeCalendar() {
 							"title" : course.subject + " " + course.number + " " + course.title
 						};
 						//console.log(calEvent);
-						$("#calendar").weekCalendar("updateEvent", calEvent);					
+						$("#calendar").weekCalendar("updateEvent", calEvent);
+						console.log("sent updateEvent to calendar");				
 					}
-					for (var s in course.sections) {
-						var section = course.sections[s];
-						//console.log(section);
-						if (section.onoff == true) {
-							//console.log("TRUE");
-							days = [section.M, section.T, section.W, section.R, section.F];
-							for (var j = 0; j < 5; j++) {
-								if (days[j] == "t") {
-									var calEvent = { 
-										"unique_id" : section.unique_id,
-										"colorid" : colorCounter,
-										"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
-										"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
-										"title" : section.subject + " " + section.number + " " + section.title
-									};
-									//console.log(calEvent);
-									$("#calendar").weekCalendar("updateEvent", calEvent);					
-								}
+				}
+				for (var s in course.sections) {
+					var section = course.sections[s];
+					//console.log(section);
+					if (section.onoff == true) {
+						//console.log("TRUE");
+						var _days = [section.M, section.T, section.W, section.R, section.F];
+						for (var i = 0; i < 5; i++) {
+							if (_days[i] == "t") {
+								var calEvent = { 
+									"unique_id" : section.unique_id,
+									"colorid" : colorCounter,
+									"start" : new Date(year + '-' + (month+1) + '-' + (day + i) + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
+									"end" : new Date(year + '-' + (month+1) + '-' + (day + i) + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
+									"title" : section.subject + " " + section.number + " " + section.title
+								};
+								//console.log(calEvent);
+								$("#calendar").weekCalendar("updateEvent", calEvent);					
 							}
 						}
-						break;
 					}
+					break;
 				}
 				break;
 			}
@@ -110,6 +112,11 @@ function addToCart(coursename) {
 	
 	var keySpaceless = coursename.toUpperCase().replace(/\s+/g,'');
 	COURSE_LIST[key] = SEARCH_RESULT_LIST[key];
+	COURSE_LIST[key][0].onoff = true;
+	if(COURSE_LIST[key][0].sections != undefined){
+		COURSE_LIST[key][0].sections[0].onoff = true;
+	}
+	
 
 	var addedcoursenotif = document.createElement('div');
 	addedcoursenotif.className = "addedCourseButton";
