@@ -283,8 +283,13 @@ $(document).ready(function() {
 	$("input[type=text]").click(function() { $(this).select(); });
 	
 	$("#enterbutton").click(function() {
-		if ($('#search').val() != '') {
-			addToCart(SEARCH_RESULT_LIST[$('.searchResult').html()]);
+		//adds to cart when user hits enter (must add section after course #)
+		//return -1 if the course entered is not in the list, otherwise return 0; 
+		var check=Object.keys(SEARCH_RESULT_LIST).indexOf($('#search').val().toUpperCase());
+		console.log(check);
+		if ($('#search').val() != '' &&  check != -1){
+			// addToCart(SEARCH_RESULT_LIST[$('.searchResult').html()]);
+			addToCart($('#search').val());
 			makeCalendar();
 		}
 	});
