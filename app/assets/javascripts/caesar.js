@@ -94,9 +94,30 @@ function addToCart(coursename) {
 	// for future
 	// http://www.w3schools.com/tags/tag_select.asp
 	// 
+
+	//Populate drop down with lecture sections
+	sectionHtml += '<div class="LEC">LEC: '+
+					'<form><select id="LEClist">';
+
 	for (var i in COURSE_LIST[key]) {
-		sectionHtml += '<div class="courseSection">section ' + COURSE_LIST[key][i].unique_id + '</div>';
+
+		sectionHtml += '<option>'+ COURSE_LIST[key][i].subject + ' ' + COURSE_LIST[key][i].number + '-' + COURSE_LIST[key][i].section + ' ' + COURSE_LIST[key][i].lecdisc + '</option>';
 	}
+
+	sectionHtml += '</select></form></div>';
+
+	//Populate drop down with discussion sections
+
+
+	sectionHtml += '<div class="DIS">DIS: '+
+					'<form><select id="DISlist">';
+
+	for (var i in COURSE_LIST[key]) {
+		sectionHtml += '<option>section ' + COURSE_LIST[key][i].unique_id + '</option>';
+	}
+
+	sectionHtml += '</select></form></div>';
+
 
 	coursesections.innerHTML = sectionHtml;		
 
