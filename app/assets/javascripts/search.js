@@ -11,10 +11,6 @@ function findMatchingClasses(searchQuery,data,keyList) {
 // each class contains a field "sections", which is an array of all sections for that class
 function mergeClasses(classList,maxCount) {
 
-	console.log(classList);
-
-	/* todo: handle deferred sections at the end */
-
 	function findLECforDIS(dis_id,list) {
 		best_match = [-1,null];
 		for (var i in list) {
@@ -24,6 +20,17 @@ function mergeClasses(classList,maxCount) {
 			}
 		}
 		return best_match[1];
+	}
+	function addSection(course,section) {
+		var key = section.subject + section.number;
+		for (var i in course.sections) {
+			curSec = course.sections[i];
+			if (curSec.unique_id == section.unique_id) {
+				return course;
+			}
+		}
+		course.sections.push(section);
+		return course;
 	}
 	
 	var merged = {};
@@ -64,10 +71,10 @@ function mergeClasses(classList,maxCount) {
                         	if (merged[classID][n].sections === undefined) {
                             	merged[classID][n]['sections'] = new Array();
                             	curClass.onoff = true;
-                            	console.log("ONOFF = TRUE");
+                            	//console.log("ONOFF = TRUE");
                             	// todo: why isn't this section showing up when we makeCalendar???
                         	}
-                        	merged[classID][n].sections.push(curClass);
+                        	merged[classID][n] = addSection(merged[classID][n],curClass);
                     	}
                 	}
                 }
@@ -85,15 +92,13 @@ function mergeClasses(classList,maxCount) {
             		if (merged[classID][n].sections === undefined) {
                     	merged[classID][n]['sections'] = new Array();
                     	sec.onoff = true;
-                    	console.log("ONOFF = TRUE");
+                    	//console.log("ONOFF = TRUE");
                     }
-            		merged[classID][n].sections.push(sec);
+            		merged[classID][n] = addSection(merged[classID][n],sec);
             		break;
             	}
             }
 		}
 	}
-	console.log("deferred sections: ");
-	console.log(deferredSections);
 	return merged;
 }
