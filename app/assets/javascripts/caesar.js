@@ -191,6 +191,10 @@ function addToCart(coursename) {
 		console.log("LECTURE changed to " + $(this).val());
 	});
 
+	$('#SECTION-'+keySpaceless).change( function() {
+		console.log("LECTURE changed to " + $(this).val());
+	});
+
 	// $("#searchOutput").append(addedcoursenotif);
 	// $(':checkbox').iphoneStyle();
 	
