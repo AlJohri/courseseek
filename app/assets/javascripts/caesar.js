@@ -185,7 +185,8 @@ function addToCart(coursename) {
 
 	$('.courseSection').click(function(){ console.log("tell calendar to turn on " + $(this).text()); });
 	$("#search").val("");
-
+	
+	
 	$('#SECTION-'+keySpaceless).change( function() {
 		console.log("LECTURE changed to " + $(this).val());
 	});
