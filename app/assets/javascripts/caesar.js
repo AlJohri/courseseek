@@ -12,70 +12,100 @@ var COURSE_LIST = {};
 var SEARCH_RESULT_LIST = {};
 var SEARCH_LIST_FROM_NUM = {};
 
-	function makeCalendar() {
 
-		/* Clear Calendar */
-		$("#calendar").weekCalendar("clear");
-		var colorCounter = 0;
-		
-		var year = new Date().getFullYear();
-		var month = new Date().getMonth();
-		var day = getMonday(new Date()).getDate();
-					
-		for (var k in COURSE_LIST) {
-			for (var c in COURSE_LIST[k]) {
-				course = COURSE_LIST[k][c];
-				if (course.onoff == true) {
-					
-					var days = [course.M, course.T, course.W, course.R, course.F];
-		
-					/* Create Events */
-					for (var j = 0; j < 5; j++) {
-						if (days[j] == "t") {
-							var calEvent = { 
-								"unique_id" : course.unique_id,
-								"colorid" : colorCounter,
-								"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
-								"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
-								"title" : course.subject + " " + course.number + " " + course.title
-							};
-							//console.log(calEvent);
-							$("#calendar").weekCalendar("updateEvent", calEvent);					
-						}
+function changeSection() {
+
+}
+
+function makeCalendar() {
+
+	/* Clear Calendar */
+	$("#calendar").weekCalendar("clear");
+	var colorCounter = 0;
+	
+	var year = new Date().getFullYear();
+	var month = new Date().getMonth();
+	var day = getMonday(new Date()).getDate();
+				
+	for (var k in COURSE_LIST) {
+		for (var c in COURSE_LIST[k]) {
+			course = COURSE_LIST[k][c];
+			if (course.onoff == true) {
+				
+				var days = [course.M, course.T, course.W, course.R, course.F];
+	
+				/* Create Events */
+				for (var j = 0; j < 5; j++) {
+					if (days[j] == "t") {
+						var calEvent = { 
+							"unique_id" : course.unique_id,
+							"colorid" : colorCounter,
+							"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
+							"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
+							"title" : course.subject + " " + course.number + " " + course.title
+						};
+						//console.log(calEvent);
+						$("#calendar").weekCalendar("updateEvent", calEvent);					
 					}
-					
-					for (var s in course.sections) {
-						var section = course.sections[s];
-						//console.log(section);
-						if (section.onoff == true) {
-							//console.log("TRUE");
-							days = [section.M, section.T, section.W, section.R, section.F];
-							for (var j = 0; j < 5; j++) {
-								if (days[j] == "t") {
-									var calEvent = { 
-										"unique_id" : course.unique_id,
-										"colorid" : colorCounter,
-										"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
-										"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
-										"title" : section.subject + " " + section.number + " " + section.title
-									};
-									//console.log(calEvent);
-									$("#calendar").weekCalendar("updateEvent", calEvent);					
-								}
-							}
-							break;
-						}
-					}
-					break;
 				}
+				
+				for (var s in course.sections) {
+					var section = course.sections[s];
+					//console.log(section);
+					if (section.onoff == true) {
+						//console.log("TRUE");
+						days = [section.M, section.T, section.W, section.R, section.F];
+						for (var j = 0; j < 5; j++) {
+							if (days[j] == "t") {
+								var calEvent = { 
+									"unique_id" : course.unique_id,
+									"colorid" : colorCounter,
+									"start" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
+									"end" : new Date(year + '-' + (month+1) + '-' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
+									"title" : section.subject + " " + section.number + " " + section.title
+								};
+								//console.log(calEvent);
+								$("#calendar").weekCalendar("updateEvent", calEvent);					
+							}
+						}
+						break;
+					}
+				}
+				break;
 			}
-			colorCounter++;
 		}
-		//$('#calendar').weekCalendar('scrollToHour', '9'); :: make a starting time default to 9 am
+		colorCounter++;
 	}
+	//$('#calendar').weekCalendar('scrollToHour', '9'); :: make a starting time default to 9 am
+}
+
+function getDateStringFromCourse(course){
+	var datestring = '';
+	if(course.M=='t'){
+		datestring += 'M'
+	}
+	if(course.T=='t'){
+		datestring += 'Tu'
+	}
+	if(course.W=='t'){
+		datestring += 'W'
+	}
+	if(course.R=='t'){
+		datestring += 'Th'
+	}
+	if(course.F=='t'){
+		datestring += 'F'
+	}
+	return datestring;
+}
+
+function createSectionString(course){
+	return getDateStringFromCourse(course) + ' ' + course.start + "-" + course.end;
+}
 
 function addToCart(coursename) {
 
+	// Course gets added to COURSE_LIST
 	var key = coursename.toUpperCase();
 	if(COURSE_LIST[key] != null) return;
 	
@@ -100,25 +130,27 @@ function addToCart(coursename) {
 					'<form><select id="LEClist">';
 
 	for (var i in COURSE_LIST[key]) {
-
-		sectionHtml += '<option>'+ COURSE_LIST[key][i].subject + ' ' + COURSE_LIST[key][i].number + '-' + COURSE_LIST[key][i].section + ' ' + COURSE_LIST[key][i].lecdisc + '</option>';
+		sectionHtml += '<option>'+ createSectionString(COURSE_LIST[key][i]) + '</option>';
+		// if (i == 0){
+		// 	newHtml = sectionHtml + '</select></form></div>' + '<div class="DIS">DIS: ' + '<form><select id="DISlist">';
+		// 	for (var j in COURSELIST[key][i].sections){
+		// 		sectionHtml += '<option>section ' + COURSE_LIST[key][i].sections[j] + '</option>';
+		// 	}
+		// }
 	}
 
 	sectionHtml += '</select></form></div>';
 
 	//Populate drop down with discussion sections
-
-
-	sectionHtml += '<div class="DIS">DIS: '+
+	sectionHtml += '<div class="DIS">SECTION: '+
 					'<form><select id="DISlist">';
 
-	for (var i in COURSE_LIST[key]) {
-		sectionHtml += '<option>section ' + COURSE_LIST[key][i].unique_id + '</option>';
+	for (var j in COURSE_LIST[key][0].sections) {
+		sectionHtml += '<option> ' + createSectionString(COURSE_LIST[key][0].sections[j]) + '</option>';
 	}
 
+
 	sectionHtml += '</select></form></div>';
-
-
 	coursesections.innerHTML = sectionHtml;		
 
 	$("#addedCourses").append(addedcoursenotif);
