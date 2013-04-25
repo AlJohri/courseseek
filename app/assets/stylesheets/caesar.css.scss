@@ -59,7 +59,6 @@ body {
 #searchInput {
 	height: 75px;
 	position: relative;
-
 }
 
 .search {  
@@ -129,7 +128,6 @@ body {
 	font-size: 12px;
 	margin-bottom: 2px;
 	line-height: 14px;
-
 }
 
 .courseSection {
@@ -142,8 +140,8 @@ body {
 
 
 #enterbutton {
-	/*float: right;
-	width: 22%;*/
+	// float: right;
+	// width: 22%;
 	display: none;
 }
 
@@ -154,9 +152,9 @@ body {
 	margin-bottom: 10px;
 }
 
-.wc-scrollable-grid {
-	height: 420px;
-}
+// .wc-scrollable-grid {
+// 	height: 420px;
+// }
 
 #back {
 	height: 100%;
@@ -198,6 +196,7 @@ body {
 
 .carsonWrapper {
 	overflow: auto;
+	overflow-x: hidden;
 	border: 1px ridge rgba(82,0,99,.5);
 	border-radius: 4px;
 }
@@ -219,24 +218,6 @@ body {
 	background-position: right center;
 	background-size: contain;
 }
-/*
-// .whiteboard {
-	background-image: url('http://www.teacherfiles.com/clipart/xbackgrounds/lined_paper_light.jpg');
-	background-repeat: no-repeat;
-	background-size: 1000px 500px;
-
-	 border-style: solid;
-	 border-width: 5px;
-	 border-color: #520063;
-	 padding-top: 19px;
-	 z-index: 2;
- }
-
- #container {
- 	background-image: url('http://www.teacherfiles.com/clipart/xbackgrounds/lined_paper_light.jpg');
- 	background-repeat: repeat-both;
- 	background-size: 100% auto;
- }*/
 
 footer {
 	z-index: -1;
@@ -255,7 +236,9 @@ footer {
 	/*display: none;*/
 }
 
-.row{ max-width: 70em;}
+.row { 
+	max-width: 70em;
+}
 
 .searchResultContainer .searchResult {
 	border: 1px solid black;
@@ -283,7 +266,7 @@ footer {
 	
 }
 
-.searchResultContainer .searchResult:hover{
+.searchResultContainer .searchResult:hover {
 	background-color: rgba(82, 0, 99, .25);
 }
 
@@ -298,7 +281,7 @@ footer {
 	font-size: 12px;
 	position: absolute;
 	bottom: 1px;
-	text-overflow:ellipsis;
+	text-overflow: ellipsis;
 }
 
 table tr th, table tr td {

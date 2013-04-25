@@ -235,16 +235,12 @@ var sidebar = false;
 $(document).ready(function() {
 
 	$("#calendar").addClass("hide");
-	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { $("#loadDiv").css("height", "280px"); }
-	else { $("#loadDiv").css("height", "428px"); }
 	$("#loadDiv").removeClass("hide");	
 
 	$.getJSON('courses', function(resp) { 
 		data = resp;
 		$("#loadDiv").addClass("hide"); 
 		$("#calendar").removeClass("hide");
-		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { $("#calendar").css("height", "280px"); }
-		else { $("#calendar").css("height", "428px"); }
 	});
 
 	// http://www.w3schools.com/html/html_colornames.asp
@@ -264,16 +260,7 @@ $(document).ready(function() {
     businessHours : { start: 6, end: 22, limitDisplay: true },
     daysToShow : 5,
     textSize : 10, 
-    height : function($calendar) { 
-
-    	/* if one changes user agent model */
-
-    	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { return 280; }
-			else { return 428; }
-
-    	// return 700;
-    	// return $(window).height();
-    },
+    height : function($calendar) { return 450; },
     eventRender : function(calEvent, $event) {
     	//console.log($event);
       $event.css("backgroundColor", colors[calEvent.colorid]);
