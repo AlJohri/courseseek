@@ -108,6 +108,9 @@ function addToCart(coursename) {
 	}
 	
 
+	var carsonWrapper = document.createElement('div');
+	carsonWrapper.className = "carsonWrapper";
+
 	var addedcoursenotif = document.createElement('div');
 	addedcoursenotif.className = "addedCourseButton";
 	addedcoursenotif.id = keySpaceless;
@@ -150,8 +153,11 @@ function addToCart(coursename) {
 	sectionHtml += '</select></form></div>';
 	coursesections.innerHTML = sectionHtml;		
 
-	$("#addedCourses").append(addedcoursenotif);
-	$("#addedCourses").append(coursesections);
+
+	$(carsonWrapper).append(addedcoursenotif);
+	$(carsonWrapper).append(coursesections);
+
+	$("#addedCourses").append(carsonWrapper);
 	
 	// console.log((query.toUpperCase()).replace(/\s+/g,''))
 	$('#' + keySpaceless).click(function() {
