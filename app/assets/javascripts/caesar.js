@@ -125,14 +125,15 @@ function addToCart(coursename) {
 
 	var coursesections = document.createElement('div');
 	coursesections.className = "addedCourseSec";
-	var sectionHtml = '';
+	var sectionHtml = '<div class="dropTitle">' + '<b> Title: </b> <br>' + COURSE_LIST[key][0].title +'</div>' + 
+					  '<div class="dropInst">' + '<b> Instructor: </b> <br>' + COURSE_LIST[key][0].instructor + '</div>';
 
 	// for future
 	// http://www.w3schools.com/tags/tag_select.asp
 	// 
 
 	//Populate drop down with lecture sections
-	sectionHtml += '<div class="LEC">LEC: '+
+	sectionHtml += '<div class="LEC"><b>LEC:</b> '+
 					'<form><select id="LECTURE-'+keySpaceless+'">';
 
 	for (var i in COURSE_LIST[key]) {
@@ -148,7 +149,7 @@ function addToCart(coursename) {
 	sectionHtml += '</select></form></div>';
 
 	//Populate drop down with discussion sections
-	sectionHtml += '<div class="DIS">SECTION: '+
+	sectionHtml += '<div class="DIS"><b>SECTION:</b> '+
 					'<form><select id="DISlist">';
 
 	for (var j in COURSE_LIST[key][0].sections) {

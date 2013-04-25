@@ -59,6 +59,8 @@
 	width: 90%;
 	margin: 10px 10px;
 	}
+
+
  
 .addedCourseButton {	
 	width: 100%;
@@ -69,6 +71,7 @@
 	line-height: 27px; 
 	margin-top: 10px;
 	text-transform:uppercase;
+	border-bottom: 1px ridge rgba(82,0,99,.5)
 	}
 	
 .addedCourseSec {	
@@ -77,7 +80,26 @@
 	margin: 5px 0px 0px 0px;
 	padding-left: 10px;
 	font-size: 10px;
+	line-height: 10px;
 	}
+
+.addedCourseSec form {
+	margin: 1px;
+}
+
+.addedCourseSec .dropTitle {
+	font-size: 12px;
+	margin-bottom: 2px;
+	line-height: 14px;
+
+}
+
+.addedCourseSec .dropInst {
+	font-size: 12px;
+	margin-bottom: 2px;
+	line-height: 14px;
+
+}
 
 .courseSection {
 	width: 100%;
