@@ -81,7 +81,7 @@ function makeCalendar() {
 }
 
 function getDateStringFromCourse(course){
-	var datestring = '';
+	var datestring = "";
 	if(course.M=='t'){ datestring += 'Mo' }
 	if(course.T=='t'){ datestring += 'Tu' }
 	if(course.W=='t'){ datestring += 'We' }
@@ -91,7 +91,7 @@ function getDateStringFromCourse(course){
 }
 
 function createSectionString(course){
-	return getDateStringFromCourse(course) + ' ' + course.start + "-" + course.end;
+	return course.unique_id + " " + getDateStringFromCourse(course) + ' ' + course.start + "-" + course.end;
 }
 
 function addToCart(coursename) {
@@ -207,7 +207,12 @@ function addToCart(coursename) {
 				$(sectionDropdown).empty();
 				var newInnerHTML = "";
 				for(var j in COURSE_LIST[lectureName][i].sections){
-					newInnerHTML += "<option value='" + COURSE_LIST[lectureName][i].sections[j].unique_id + "'>" + createSectionString(COURSE_LIST[lectureName][0].sections[j]) + "</option>";
+					newInnerHTML += "<option value='" + COURSE_LIST[lectureName][i].sections[j].unique_id + "'>" + createSectionString(COURSE_LIST[lectureName][i].sections[j]) + "</option>";
+					// Also default the first discussion of that lecture to be on, others to be off
+					if(j==0){
+						COURSE_LIST[lectureName][i].sections[j]['onoff'] = true;
+					}
+					else COURSE_LIST[lectureName][i].sections[j]['onoff'] = false;
 				}
 				$(sectionDropdown).append(newInnerHTML);
 			}
@@ -222,6 +227,32 @@ function addToCart(coursename) {
 		previousLecID = newLecture;
 		console.log("ID: " + this.id);
 	});
+	
+	var previousSecID;
+	$('#SEC-' + keySpaceless).focus( function() {
+		previousSecID = $(this).val(); }).
+	change( function() {
+		console.log("Section changed to " + $(this).val() + " from " + previousSecID);
+		var newSecID = $(this).val();
+		var newSection = $(this).val()
+		var lectureName = this.id.substr(4);
+		lectureName = lectureName.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2');
+		console.log(lectureName);
+		for (var i in COURSE_LIST[lectureName]){
+			if(COURSE_LIST[lectureName][i].onoff == true){
+				for(var j in COURSE_LIST[lectureName][i].sections){
+					if (COURSE_LIST[lectureName][i].sections[j].unique_id == newSecID){
+						COURSE_LIST[lectureName][i].sections[j]['onoff'] = true;
+					}else COURSE_LIST[lectureName][i].sections[j]['onoff'] = false;
+				}
+			}
+		}
+		makeCalendar();
+		previousSecID = newSecID;
+
+	});
+
+	
 
 	// $("#searchOutput").append(addedcoursenotif);
 	// $(':checkbox').iphoneStyle();
