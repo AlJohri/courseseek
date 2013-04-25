@@ -82,16 +82,16 @@ function makeCalendar() {
 
 function getDateStringFromCourse(course){
 	var datestring = '';
-	if(course.M=='t'){ datestring += 'M' }
+	if(course.M=='t'){ datestring += 'Mo' }
 	if(course.T=='t'){ datestring += 'Tu' }
-	if(course.W=='t'){ datestring += 'W' }
+	if(course.W=='t'){ datestring += 'We' }
 	if(course.R=='t'){ datestring += 'Th' }
-	if(course.F=='t'){ datestring += 'F' }
+	if(course.F=='t'){ datestring += 'Fr' }
 	return datestring;
 }
 
 function createSectionString(course){
-	return course.unique_id + ' ' + getDateStringFromCourse(course) + ' ' + course.start + "-" + course.end;
+	return getDateStringFromCourse(course) + ' ' + course.start + "-" + course.end;
 }
 
 function addToCart(coursename) {
@@ -124,7 +124,7 @@ function addToCart(coursename) {
 
 	//Populate drop down with lecture sections
 	sectionHtml += '<div class="LEC"><b>LEC:</b> '+
-					'<form><select id="LECTURE-'+keySpaceless+'">';
+					'<form><select id="LEC-'+keySpaceless+'">';
 
 	for (var i in COURSE_LIST[key]) {
 		sectionHtml += '<option value="' + COURSE_LIST[key][i].unique_id + '">' + createSectionString(COURSE_LIST[key][i]) + '</option>';
@@ -178,12 +178,37 @@ function addToCart(coursename) {
 	$("#search").val("");
 	
 	var previousLecID;
-	$('#LECTURE-'+keySpaceless).focus( function() {
+	$('#LEC-' + keySpaceless).focus( function() {
 		previousLecID = $(this).val(); }).
 	change( function() {
 		console.log("LECTURE changed to " + $(this).val() + ' from ' + previousLecID);
 		// Change what lecture shows with code here
-		previousLecID = $(this).val();
+		var newLecture = $(this).val()
+		var lectureName = this.id.substr(4);
+		lectureName = lectureName.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2');
+		for (var i in COURSE_LIST[lectureName]){
+			if (COURSE_LIST[lectureName][i].unique_id == newLecture){
+				COURSE_LIST[lectureName][i]["onoff"] = true;
+				for (var j in COURSE_LIST[lectureName][i].sections){
+					if(j==0){
+						COURSE_LIST[lectureName][i].sections[j].onoff = true;
+					}
+					else COURSE_LIST[lectureName][i].sections[j].onoff = false;
+				}
+			}
+			if (COURSE_LIST[lectureName][i].unique_id == previousLecID){
+				COURSE_LIST[lectureName][i]['onoff'] = false;
+				for (var j in COURSE_LIST[lectureName][i].sections){
+					COURSE_LIST[lectureName][i].sections[j].onoff = false;
+				}
+			}
+		}
+
+		makeCalendar();
+
+		previousLecID = newLecture;
+		console.log("ID: " + this.id)
+
 
 	});
 
