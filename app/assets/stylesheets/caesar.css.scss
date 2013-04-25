@@ -211,7 +211,8 @@ footer {
 	overflow: auto;
 	position: absolute;
 	top: 54px;
-	background-color: white;
+	/*background-color: #f1f0ff;*/
+	box-shadow: 2px 2px 4px 3px #bbbbbb;
 	float: left;
 	z-index: 10;
 	/*display: none;*/
@@ -220,11 +221,27 @@ footer {
 .row{ max-width: 70em;}
 
 .searchResultContainer .searchResult {
-	border-style: ridge;
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-bottom: 2px;
+	margin-left: 1px;
+	margin-right: 1px;
 	height: 42px;
 	position: relative;
 	white-space: nowrap;
 	overflow: hidden;
+
+/*
+	background-image:linear-gradient(top, rgba(82, 00, 99, .11) 0%, rgba(30, 30, 30, .7) 95%);
+    background-image:-webkit-linear-gradient(top, rgba(82, 00, 99, .11) 0%, rgba(30, 30, 30, .7) 95%);
+    background-image:-moz-linear-gradient(top, rgba(82, 00, 99, .11) 0%, rgba(30, 30, 30, .7) 95%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, rgba(82, 00, 99, .11)),
+        color-stop(0.95, rgba(30, 30, 30, .7))
+    );
 	/*text-overflow:ellipsis;*/
 	
 }
