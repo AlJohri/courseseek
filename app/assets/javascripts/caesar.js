@@ -69,8 +69,8 @@ function makeCalendar() {
 								$("#calendar").weekCalendar("updateEvent", calEvent);					
 							}
 						}
+						break;
 					}
-					break;
 				}
 				break;
 			}
