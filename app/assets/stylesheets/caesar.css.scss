@@ -99,9 +99,10 @@ body {
 	font-weight: bold;
 	height: 30px;
 	line-height: 27px; 
-	margin-top: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
 	text-transform:uppercase;
-	border-bottom: 1px ridge rgba(82,0,99,.5)
 	}
 	
 .addedCourseSec {	
@@ -197,6 +198,8 @@ body {
 
 .carsonWrapper {
 	overflow: auto;
+	border: 1px ridge rgba(82,0,99,.5);
+	border-radius: 4px;
 }
 
 .panel{
