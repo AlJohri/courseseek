@@ -82,21 +82,11 @@ function makeCalendar() {
 
 function getDateStringFromCourse(course){
 	var datestring = '';
-	if(course.M=='t'){
-		datestring += 'M'
-	}
-	if(course.T=='t'){
-		datestring += 'Tu'
-	}
-	if(course.W=='t'){
-		datestring += 'W'
-	}
-	if(course.R=='t'){
-		datestring += 'Th'
-	}
-	if(course.F=='t'){
-		datestring += 'F'
-	}
+	if(course.M=='t'){ datestring += 'M' }
+	if(course.T=='t'){ datestring += 'Tu' }
+	if(course.W=='t'){ datestring += 'W' }
+	if(course.R=='t'){ datestring += 'Th' }
+	if(course.F=='t'){ datestring += 'F' }
 	return datestring;
 }
 
@@ -213,17 +203,6 @@ var sidebar = false;
 
 $(document).ready(function() {
 
-	// $("#back").click(function() {
-	// 	if (!sidebar) {
-	// 		$("#container").css("margin-left", "80%");
-	// 		sidebar = true;
-	// 	}
-	// 	else {
-	// 		$("#container").css("margin-left", "0");
-	// 		sidebar = false;
-	// 	}
-	// });	
-
 	$("#calendar").addClass("hide");
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { $("#loadDiv").css("height", "280px"); }
 	else { $("#loadDiv").css("height", "428px"); }
@@ -233,11 +212,8 @@ $(document).ready(function() {
 		data = resp;
 		$("#loadDiv").addClass("hide"); 
 		$("#calendar").removeClass("hide");
-
-	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { $("#calendar").css("height", "280px"); }
-	else { $("#calendar").css("height", "428px"); }
-
-
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { $("#calendar").css("height", "280px"); }
+		else { $("#calendar").css("height", "428px"); }
 	});
 
 	// http://www.w3schools.com/html/html_colornames.asp
@@ -387,11 +363,11 @@ $(document).ready(function() {
 	    }
 	});	
 
-var keepFocus = false;
+	var keepFocus = false;
 
-function hideSearchResult(){
-	if(!keepFocus) { $('.searchResult').remove();}
-}
+	function hideSearchResult(){
+		if(!keepFocus) { $('.searchResult').remove();}
+	}
 
 	$('#search').focus(function(){
 		createSearchDropDown();
@@ -399,15 +375,17 @@ function hideSearchResult(){
 
 	$('#search').blur(function(){
 		keepFocus = false;
-//		window.setTimeout(hideSearchResult, 150);}).focus(function(){
-//			keepFocus = true;
-		});
+	//		window.setTimeout(hideSearchResult, 150);}).focus(function(){
+	//			keepFocus = true;
+	});
 
-
-
-	
-	
-	$(document).foundation('joyride', 'start');
+	if (getCookie("joyride") == "ridden") {
+		console.log("already rode the joyride");
+	}
+	else {
+		console.log("riding the joyride woohoo");
+		$(document).foundation('joyride', 'start');
+	}
 	
 });
 

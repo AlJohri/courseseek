@@ -9,7 +9,12 @@ Coursica::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  # heroku config:add I_AM_HEROKU=yes
+  if ENV['I_AM_HEROKU'] == true
+    config.serve_static_assets = false
+  else
+    config.serve_static_assets = true
+  end
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
