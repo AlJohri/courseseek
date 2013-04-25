@@ -177,6 +177,7 @@ function addToCart(coursename) {
 		delete COURSE_LIST[this.parentNode.id.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2')];
 		$('#' + this.parentNode.id).next().remove();
 		$('#' + this.parentNode.id).remove();
+		$('.' + this.parentNode.parentNode.className).remove();
 		makeCalendar();
 	});	
 
