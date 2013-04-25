@@ -670,7 +670,7 @@ $joyride-screenfill: rgba(0,0,0,0.5);
 //
 
 // We use these to control the background and border styles
-$panel-bg: $secondary-color; //darken(#fff, 5%);
+$panel-bg: white; //darken(#fff, 5%);
 $panel-border-style: solid;
 $panel-border-size: 1px;
 
@@ -968,7 +968,7 @@ $panel-font-color-alt: #fff;
 // 
 
 // Background color for the top bar
-$topbar-bg: $primary-color; //#111;
+$topbar-bg: #111;
 
 // Height and margin
 $topbar-height: 45px;
