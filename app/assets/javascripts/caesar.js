@@ -91,7 +91,7 @@ function getDateStringFromCourse(course){
 }
 
 function createSectionString(course){
-	return course.unique_id + " " + getDateStringFromCourse(course) + ' ' + course.start + "-" + course.end;
+	return getDateStringFromCourse(course) + ' ' + course.start + "-" + course.end;
 }
 
 function addToCart(coursename) {
