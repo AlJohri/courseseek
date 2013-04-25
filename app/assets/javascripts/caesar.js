@@ -81,7 +81,7 @@ function makeCalendar() {
 }
 
 function getDateStringFromCourse(course){
-	var datestring = '';
+	var datestring = "";
 	if(course.M=='t'){ datestring += 'Mo' }
 	if(course.T=='t'){ datestring += 'Tu' }
 	if(course.W=='t'){ datestring += 'We' }
@@ -143,10 +143,10 @@ function addToCart(coursename) {
 
 	//Populate drop down with discussion sections
 	sectionHtml += '<div class="DIS"><b>SECTION:</b> '+
-					'<form><select id="DISlist">';
+					'<form><select id="SEC-' + keySpaceless + '">';
 
 	for (var j in COURSE_LIST[key][0].sections) {
-		sectionHtml += '<option> ' + createSectionString(COURSE_LIST[key][0].sections[j]) + '</option>';
+		sectionHtml += '<option value="' + COURSE_LIST[key][0].sections[j].unique_id + '"> ' + createSectionString(COURSE_LIST[key][0].sections[j]) + '</option>';
 	}
 
 
@@ -191,6 +191,7 @@ function addToCart(coursename) {
 		// Change what lecture shows with code here
 		var newLecture = $(this).val()
 		var lectureName = this.id.substr(4);
+		var sectionDropdownDivName = "SEC-" + lectureName;
 		lectureName = lectureName.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2');
 		for (var i in COURSE_LIST[lectureName]){
 			if (COURSE_LIST[lectureName][i].unique_id == newLecture){
@@ -201,6 +202,19 @@ function addToCart(coursename) {
 					}
 					else COURSE_LIST[lectureName][i].sections[j].onoff = false;
 				}
+				// Make new lecture's discussions show in discussion dropdown
+				var sectionDropdown = $('#' + sectionDropdownDivName);
+				$(sectionDropdown).empty();
+				var newInnerHTML = "";
+				for(var j in COURSE_LIST[lectureName][i].sections){
+					newInnerHTML += "<option value='" + COURSE_LIST[lectureName][i].sections[j].unique_id + "'>" + createSectionString(COURSE_LIST[lectureName][i].sections[j]) + "</option>";
+					// Also default the first discussion of that lecture to be on, others to be off
+					if(j==0){
+						COURSE_LIST[lectureName][i].sections[j]['onoff'] = true;
+					}
+					else COURSE_LIST[lectureName][i].sections[j]['onoff'] = false;
+				}
+				$(sectionDropdown).append(newInnerHTML);
 			}
 			if (COURSE_LIST[lectureName][i].unique_id == previousLecID){
 				COURSE_LIST[lectureName][i]['onoff'] = false;
@@ -209,14 +223,36 @@ function addToCart(coursename) {
 				}
 			}
 		}
-
 		makeCalendar();
-
 		previousLecID = newLecture;
-		console.log("ID: " + this.id)
-
+		console.log("ID: " + this.id);
+	});
+	
+	var previousSecID;
+	$('#SEC-' + keySpaceless).focus( function() {
+		previousSecID = $(this).val(); }).
+	change( function() {
+		console.log("Section changed to " + $(this).val() + " from " + previousSecID);
+		var newSecID = $(this).val();
+		var newSection = $(this).val()
+		var lectureName = this.id.substr(4);
+		lectureName = lectureName.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2');
+		console.log(lectureName);
+		for (var i in COURSE_LIST[lectureName]){
+			if(COURSE_LIST[lectureName][i].onoff == true){
+				for(var j in COURSE_LIST[lectureName][i].sections){
+					if (COURSE_LIST[lectureName][i].sections[j].unique_id == newSecID){
+						COURSE_LIST[lectureName][i].sections[j]['onoff'] = true;
+					}else COURSE_LIST[lectureName][i].sections[j]['onoff'] = false;
+				}
+			}
+		}
+		makeCalendar();
+		previousSecID = newSecID;
 
 	});
+
+	
 
 	// $("#searchOutput").append(addedcoursenotif);
 	// $(':checkbox').iphoneStyle();
