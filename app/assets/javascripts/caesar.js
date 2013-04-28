@@ -330,9 +330,14 @@ $(document).ready(function() {
     height : function($calendar) { 
 
     	winHeight = $(window).height() - 171;
-    	maxHeight = 668;
+    	maxHeight = 672;
 
-    	return winHeight < maxHeight ? winHeight : maxHeight;
+    	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    		return maxHeight;
+    	}
+    	else {
+    		return winHeight < maxHeight ? winHeight : maxHeight;
+    	}
 
     },
     eventRender : function(calEvent, $event) {
@@ -492,13 +497,20 @@ window.onresize = function(event) {
 	$('.searchResultContainer').css("width", searchWidth);	
 
   winHeight = $(window).height() - 171;
-	maxHeight = 668;
+	maxHeight = 672;
 
 	// this is inefficient
 
 	$("#calendar").weekCalendar({
     height : function($calendar) { 
-    	return winHeight < maxHeight ? winHeight : maxHeight;
+
+    	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    		return maxHeight;
+    	}
+    	else {
+    		return winHeight < maxHeight ? winHeight : maxHeight;
+    	}
+
     },
 	});
 
