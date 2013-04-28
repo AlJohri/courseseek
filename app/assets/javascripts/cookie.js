@@ -1,3 +1,4 @@
+
 if (typeof String.prototype.trimLeft !== "function") {
     String.prototype.trimLeft = function() {
         return this.replace(/^\s+/, "");
@@ -16,6 +17,7 @@ if (typeof Array.prototype.map !== "function") {
         return a;
     };
 }
+
 function getCookies() {
     var c = document.cookie, v = 0, cookies = {};
     if (document.cookie.match(/^\s*\$Version=(?:"1"|1);\s*(.*)/)) {
@@ -40,6 +42,15 @@ function getCookies() {
     }
     return cookies;
 }
+
 function getCookie(name) {
     return getCookies()[name];
+}
+
+function setCookie(c_name,value,exdays)
+{
+  var exdate=new Date();
+  exdate.setDate(exdate.getDate() + exdays);
+  var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+  document.cookie=c_name + "=" + c_value;
 }

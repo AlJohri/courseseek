@@ -21,6 +21,25 @@ body {
   // position: relative;
 }
 
+#splashScreen {
+	display: none;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;	
+}
+
+#splash {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#calltoaction{
+	margin: 0 auto;
+	width: 152px;
+}
+
 .logo {
 	height: 30px;
 	padding-top: 10px;
@@ -161,6 +180,8 @@ body {
 }
 
 #container {
+	//visibility: hidden;
+	display: none;
 	-webkit-transition: 0.3s margin ease-in-out; 
 	-moz-transition: 0.3s margin ease-in-out; 
 	-o-transition: 0.3s margin ease-in-out; 
@@ -287,6 +308,11 @@ footer {
 table tr th, table tr td {
 	font-size: 1em;
 }
+
+.orbit-slide-number, .orbit-timer {
+	display: none;
+}
+
 
 /*
 	 div.combobox	{font-family: Tahoma;font-size: 12px}

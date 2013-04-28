@@ -6,6 +6,7 @@
 // Note: I'm not sure if it's better style to have these as globals, or put everything 
 // (eg. addCourseSelectionTable, addToCart and these two) into $(document).ready
 
+var fuse;
 var data;
 var CUR_TERM_ID = "4500";
 var COURSE_LIST = {};
@@ -271,11 +272,42 @@ var sidebar = false;
 
 $(document).ready(function() {
 
+	if (getCookie("splash") == "seen") {
+		console.log("already seen splash screen");
+		$('#container').show();		
+	}
+	else {
+		$('#splashScreen').show();
+		console.log("seeing the splash screen woohoo");
+		//$(document).foundation('joyride', 'start');
+	}
+
+
+	$("#calltoaction").click(function() {
+		//$("#splashScreen").fadeOut('slow',function(){
+  	// $("#splash").animate({'top': '-=250px'},'slow');
+
+	  $('#splashScreen').fadeOut('slow', function() {
+	    $("#container").fadeIn('slow');
+	    setCookie("splash", "seen", 7 * 365);
+
+	  });
+
+
+  	//fadeIn(1500).
+	});
+
 	$("#calendar").addClass("hide");
 	$("#loadDiv").removeClass("hide");	
 
 	$.getJSON('courses', function(resp) { 
 		data = resp;
+
+
+		var options = { keys: ['number','overview','subject','title'], threshold: '0.25' }
+		fuse = new Fuse(data,options);
+
+
 		$("#loadDiv").addClass("hide"); 
 		$("#calendar").removeClass("hide");
 	});
@@ -358,7 +390,7 @@ $(document).ready(function() {
 
 		// $('#search').focusout(function() {
 		//   $('.searchResultContainer').hide();
-		// });		
+		// });
 
 		$('#search').focus(function() {
 		  $('.searchResultContainer').show();
@@ -374,7 +406,6 @@ $(document).ready(function() {
 
 	function createSearchDropDown(){
 			var query = $('#search').val();
-
 	    	if (containsNumber(query)) {
 		    	SEARCH_RESULT_LIST = jQuery.extend({}, SEARCH_LIST_FROM_NUM); // reset back to when no number entered
 
@@ -385,37 +416,44 @@ $(document).ready(function() {
 					addCourseSelectionTable(SEARCH_RESULT_LIST);
 	    	}
 	    	else {
-		    	var matches = findMatchingClasses(query,data,['number','overview','subject','title']);
+		    	var matches = findMatchingClasses(query);
 		    	matches = mergeClasses(matches,-1);
 		    	addCourseSelectionTable(matches);
 		    	SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
 	    	}
 	}
 
-	$("#search").keyup(function(event) {
-	    if(event.keyCode == 13){
-	        $("#enterbutton").click();
-	    }
-	    else if ((event.keyCode >= 48 && event.keyCode <= 122)) {
-	    	var query = $('#search').val();
-	    	if (!containsNumber(query)) {
-		    	var matches = findMatchingClasses(query,data,['number','subject','title']); //overview
-		    	matches = mergeClasses(matches,-1);
-		    	addCourseSelectionTable(matches);
-		    	//console.log(matches);
-		    	SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
-	    	}
-	    	else {
-	    		for (var i in SEARCH_RESULT_LIST) {
-	    			if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
-	    		}
-	    		addCourseSelectionTable(SEARCH_RESULT_LIST);
-	    	}
-	    }
-	    else if (event.keyCode == 8) { // backspace
-	    		createSearchDropDown();
+	var typingTimer;
+	var doneTypingInterval = 200;
 
-	    }
+	$("#search").keyup(function(event) {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(
+      function() {
+
+		    if(event.keyCode == 13) { $("#enterbutton").click(); }
+		    else if ((event.keyCode >= 48 && event.keyCode <= 122)) {
+		    	var query = $('#search').val();
+		    	if (!containsNumber(query)) {
+			    	var matches = findMatchingClasses(query); //overview
+			    	matches = mergeClasses(matches,-1);
+			    	addCourseSelectionTable(matches);
+			    	//console.log(matches);
+			    	SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
+		    	}
+		    	else {
+		    		for (var i in SEARCH_RESULT_LIST) {
+		    			if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
+		    		}
+		    		addCourseSelectionTable(SEARCH_RESULT_LIST);
+		    	}
+		    }
+		    else if (event.keyCode == 8) { // backspace
+		    		createSearchDropDown();
+		    }
+     },
+    doneTypingInterval
+   );
 	});	
 
 	var keepFocus = false;
@@ -439,7 +477,7 @@ $(document).ready(function() {
 	}
 	else {
 		console.log("riding the joyride woohoo");
-		$(document).foundation('joyride', 'start');
+		//$(document).foundation('joyride', 'start');
 	}
 	
 });

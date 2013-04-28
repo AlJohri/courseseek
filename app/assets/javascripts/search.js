@@ -1,8 +1,6 @@
-function findMatchingClasses(searchQuery,data,keyList) {
+function findMatchingClasses(searchQuery) {
 
-	var options = { keys: keyList, threshold: '0.25' }
-	var f = new Fuse(data,options);
-	return f.search(searchQuery);
+	return fuse.search(searchQuery);
 
 }
 
