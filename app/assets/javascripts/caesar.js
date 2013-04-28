@@ -14,9 +14,7 @@ var SEARCH_RESULT_LIST = {};
 var SEARCH_LIST_FROM_NUM = {};
 
 
-function changeSection() {
-
-}
+function changeSection() {}
 
 function makeCalendar() {
 
@@ -329,7 +327,14 @@ $(document).ready(function() {
     businessHours : { start: 6, end: 22, limitDisplay: true },
     daysToShow : 5,
     textSize : 10, 
-    height : function($calendar) { return 450; },
+    height : function($calendar) { 
+
+    	winHeight = $(window).height() - 171;
+    	maxHeight = 668;
+
+    	return winHeight < maxHeight ? winHeight : maxHeight;
+
+    },
     eventRender : function(calEvent, $event) {
     	//console.log($event);
       $event.css("backgroundColor", colors[calEvent.colorid]);
@@ -485,6 +490,20 @@ $(document).ready(function() {
 window.onresize = function(event) {
 	searchWidth = $("#search").css("width");
 	$('.searchResultContainer').css("width", searchWidth);	
+
+  winHeight = $(window).height() - 171;
+	maxHeight = 668;
+
+	// this is inefficient
+
+	$("#calendar").weekCalendar({
+    height : function($calendar) { 
+    	return winHeight < maxHeight ? winHeight : maxHeight;
+    },
+	});
+
+	makeCalendar();
+
 }
 
 

@@ -45,14 +45,6 @@ body {
 	padding-top: 10px;
 }
 
-.top, .bottom {
-	height: 420px;
-}
-
-#myGrid {
-	height: 340px;
-}
-
 #loadDiv {
 	background-image:url('http://i.imgur.com/9354Whe.gif');
 	background-repeat:no-repeat;
@@ -95,7 +87,7 @@ body {
 
 #searchOutput {
 	width: 100%;
-	height: 375px;
+	// height: 375px;
 	overflow: auto;
 	float: left;
 	padding-top: 10px;
@@ -106,10 +98,8 @@ body {
 #addedCourses {
 	width: 90%;
 	margin: 10px 10px;
-	}
+}
 
-
- 
 .addedCourseButton {	
 	width: 100%;
 	float: left;
@@ -258,7 +248,9 @@ footer {
 }
 
 .row { 
-	max-width: 70em;
+	// width: 100% !important; 
+	max-width: none !important;
+	// max-width: 70em;
 }
 
 .searchResultContainer .searchResult {
