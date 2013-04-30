@@ -152,7 +152,7 @@ function addToCart(coursename) {
 	var addedcoursenotif = document.createElement('div');
 	addedcoursenotif.className = "addedCourseButton";
 	addedcoursenotif.id = keySpaceless;
-	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + key;
+	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + key + '<div class="classArrow" id="' + keyspaceless + 'arrow"></div>';
 
 	var coursesections = document.createElement('div');
 	coursesections.className = "addedCourseSec";

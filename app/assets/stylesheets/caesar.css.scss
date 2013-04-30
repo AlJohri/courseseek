@@ -237,6 +237,18 @@ body {
 	background-size: contain;
 }
 
+.classArrow {
+	float: right;
+	width: 10%;
+	height: 100%;
+	margin-right: 10px;
+	background-image: url(downarrow.png);
+	z-index: 1;
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-size: contain;
+}
+
 footer {
 	z-index: -1;
 }
