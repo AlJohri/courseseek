@@ -241,7 +241,7 @@ footer {
 	overflow: auto;
 	position: absolute;
 	top: 54px;
-	background-color: rgba(0,0,0,0);
+	background-color: #fff;
 	box-shadow: 1px 1px 7px 1px #ccc;
 	float: left;
 	z-index: 10;
@@ -255,7 +255,7 @@ footer {
 }
 
 .searchResultContainer .searchResult {
-	border: 1px solid black;
+	padding: 5px;
 	border-radius: 3px;
 	margin-bottom: 2px;
 	margin-left: 1px;
