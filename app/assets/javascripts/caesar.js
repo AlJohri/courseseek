@@ -36,14 +36,7 @@ function makeCalendar() {
 				/* Create Events */
 				for (var j = 0; j < 5; j++) {
 					if (days[j] == "t") {
-<<<<<<< HEAD
-						// console.log("day " + j + " == true");
-						var calEvent = { 
-							"unique_id" : course.unique_id,
-							"colorid" : colorCounter,
-							"start" : new Date(year + '/' + (month+1) + '/' + (day + j) + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
-							"end" : new Date(year + '/' + (month+1) + '/' + (day + j) + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
-=======
+
 						console.log("day " + j + " == true");
 						var _month = month+1;
 						var _day = day + j;
@@ -56,16 +49,11 @@ function makeCalendar() {
 							"colorid" : colorCounter,
 							"start" : new Date(year + '-' + _month + '-' + _day + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
 							"end" : new Date(year + '-' + _month + '-' + _day + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
->>>>>>> fixed date overflow bug in makeCalendar
 							"title" : course.subject + " " + course.number + " " + course.title
 						};
 						console.log(calEvent);
 						$("#calendar").weekCalendar("updateEvent", calEvent);
-<<<<<<< HEAD
-						// console.log("sent updateEvent to calendar");				
-=======
-						console.log("sent updateEvent to calendar");			
->>>>>>> fixed date overflow bug in makeCalendar
+						// console.log("sent updateEvent to calendar");
 					}
 				}
 
@@ -86,13 +74,8 @@ function makeCalendar() {
 								var calEvent = { 
 									"unique_id" : section.unique_id,
 									"colorid" : colorCounter,
-<<<<<<< HEAD
-									"start" : new Date(year + '/' + (month+1) + '/' + (day + i) + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
-									"end" : new Date(year + '/' + (month+1) + '/' + (day + i) + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
-=======
 									"start" : new Date(year + '-' + _month + '-' + _day + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
 									"end" : new Date(year + '-' + _month + '-' + _day + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
->>>>>>> fixed date overflow bug in makeCalendar
 									"title" : section.subject + " " + section.number + " " + section.title
 								};
 								console.log(calEvent);
