@@ -562,12 +562,41 @@ window.onresize = function(event) {
 
 $("#toCalendar").click(function(){
 	if (CALENDAR_VISIBLE == false) {
-		$("#shoppingCart").removeClass("show-for-small small-12").addClass("hide-for-small");
-		$("#calendar").removeClass("hide-for-small").addClass("show-for-small small-12");
+		// $("#shoppingCart").
+		$("#shoppingCart").css("display","none");
+		$("#calendar").removeClass("hide-for-small");//.addClass("wc-scrollable-grid");
+
+
+
+    	winHeight = $(window).height();
+    	maxHeight = 672;
+
+		$("#calendar").weekCalendar({
+	    height : function($calendar) { 
+
+	    	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+	    		return (winHeight - 140);
+	    	}
+	    	else {
+	    		return (winHeight - 171) < maxHeight ? (winHeight - 171) : maxHeight;
+	    	}
+
+	    },
+		});
+
+		$(this).val("Back to Courses");
+		makeCalendar();
+		
+
+		// $("div.large-8.columns").css("display","show");
 		CALENDAR_VISIBLE = true;
-	} else {
-		$("#calendar").removeClass("show-for-small small-12").addClass("hide-for-small");
-		$("#shoppingCart").removeClass("hide-for-small").addClass("show-for-small");
+	} 
+	else {
+		$("#shoppingCart").css("display","inline");
+		$("#calendar").addClass("hide-for-small");
+		$(this).val("Go To Calendar");
+		//$("#calendar").removeClass("show-for-small small-12").addClass("hide-for-small");
+		//$("#shoppingCart").removeClass("hide-for-small").addClass("show-for-small");
 		CALENDAR_VISIBLE = false;
 	}
 
