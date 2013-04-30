@@ -120,11 +120,12 @@ function addToCart(coursename) {
 	for (var k_it in COURSE_LIST) {
 		for (var i in COURSE_LIST[k_it]) {
 			var cur = COURSE_LIST[k_it][i];
-			if (cur.onoff == true) {
-				var existingTimeSlotBegin = new Date(2013 + '-' + 01 + '-' + 01 + ' ' + cur.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + cur.start.match(/(\d+:\d+)(\w+)/)[2]);
-				var existingTimeSlotEnd = new Date(2013 + '-' + 01 + '-' + 01 + ' ' + cur.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + cur.end.match(/(\d+:\d+)(\w+)/)[2]);
-				var newTimeSlotBegin = new Date(2013 + '-' + 01 + '-' + 01 + ' ' + SEARCH_RESULT_LIST[key][0].start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + SEARCH_RESULT_LIST[key][0].start.match(/(\d+:\d+)(\w+)/)[2]);
-				var newTimeSlotEnd = new Date(2013 + '-' + 01 + '-' + 01 + ' ' + SEARCH_RESULT_LIST[key][0].end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + SEARCH_RESULT_LIST[key][0].end.match(/(\d+:\d+)(\w+)/)[2]);
+			console.log(cur);
+			if (cur.onoff == true && cur.start != "TBA" && cur.end != "TBA") {
+				var existingTimeSlotBegin = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + cur.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + cur.start.match(/(\d+:\d+)(\w+)/)[2]);
+				var existingTimeSlotEnd = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + cur.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + cur.end.match(/(\d+:\d+)(\w+)/)[2]);
+				var newTimeSlotBegin = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + SEARCH_RESULT_LIST[key][0].start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + SEARCH_RESULT_LIST[key][0].start.match(/(\d+:\d+)(\w+)/)[2]);
+				var newTimeSlotEnd = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + SEARCH_RESULT_LIST[key][0].end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + SEARCH_RESULT_LIST[key][0].end.match(/(\d+:\d+)(\w+)/)[2]);
 				if (existingTimeSlotEnd <= newTimeSlotBegin || existingTimeSlotBegin >= newTimeSlotEnd) {
 					continue;
 				} else {
@@ -153,7 +154,7 @@ function addToCart(coursename) {
 	var addedcoursenotif = document.createElement('div');
 	addedcoursenotif.className = "addedCourseButton";
 	addedcoursenotif.id = keySpaceless;
-	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + key + '<div class="classArrow" id="' + keyspaceless + 'arrow"></div>';
+	addedcoursenotif.innerHTML += '<div class="removeClass"></div>' + key + '<div class="classArrow" id="' + keySpaceless + 'arrow"></div>';
 
 	var coursesections = document.createElement('div');
 	coursesections.className = "addedCourseSec";
