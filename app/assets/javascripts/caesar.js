@@ -114,6 +114,31 @@ function addToCart(coursename) {
 	if(COURSE_LIST[key] != null) return;
 	
 	var keySpaceless = coursename.toUpperCase().replace(/\s+/g,'');
+
+	// BEGIN conflict resolution (uncomment from here to END if this breaks something)
+	for (var k_it in COURSE_LIST) {
+		for (var i in COURSE_LIST[k_it]) {
+			var cur = COURSE_LIST[k_it][i];
+			if (cur.onoff == true) {
+				var existingTimeSlotBegin = new Date(2013 + '-' + 01 + '-' + 01 + ' ' + cur.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + cur.start.match(/(\d+:\d+)(\w+)/)[2]);
+				var existingTimeSlotEnd = new Date(2013 + '-' + 01 + '-' + 01 + ' ' + cur.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + cur.end.match(/(\d+:\d+)(\w+)/)[2]);
+				var newTimeSlotBegin = new Date(2013 + '-' + 01 + '-' + 01 + ' ' + SEARCH_RESULT_LIST[key][0].start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + SEARCH_RESULT_LIST[key][0].start.match(/(\d+:\d+)(\w+)/)[2]);
+				var newTimeSlotEnd = new Date(2013 + '-' + 01 + '-' + 01 + ' ' + SEARCH_RESULT_LIST[key][0].end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + SEARCH_RESULT_LIST[key][0].end.match(/(\d+:\d+)(\w+)/)[2]);
+				if (existingTimeSlotEnd <= newTimeSlotBegin || existingTimeSlotBegin >= newTimeSlotEnd) {
+					continue;
+				} else {
+					var choice = confirm("This class conflicts with your shopping cart. Add anyway?");
+					if (choice) {
+						break;
+					} else {
+						return;
+					}
+				}
+			}
+		}
+	}
+	// END conflict resolution
+	
 	COURSE_LIST[key] = SEARCH_RESULT_LIST[key];
 	COURSE_LIST[key][0].onoff = true;
 	if(COURSE_LIST[key][0].sections != undefined){
