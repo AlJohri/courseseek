@@ -538,7 +538,7 @@ window.onresize = function(event) {
   winHeight = $(window).height();
 	maxHeight = 672;
 
-	$("#searchOutput").css("height", winHeight - 200);
+	$("#searchOutput").css("height", winHeight - 220);
 
 	// this is inefficient
 	$("#calendar").weekCalendar({

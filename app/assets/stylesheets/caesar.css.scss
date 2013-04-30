@@ -92,6 +92,7 @@ body {
 	overflow: auto;
 	float: left;
 	padding-top: 10px;
+	margin-bottom: 12px;
 }
 
 #search {}
@@ -309,6 +310,9 @@ table tr th, table tr td {
 	display: none;
 }
 
+#toCalendar {
+	height: 30px;
+}
 
 /*
 	 div.combobox	{font-family: Tahoma;font-size: 12px}
