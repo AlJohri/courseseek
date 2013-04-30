@@ -323,9 +323,9 @@ var sidebar = false;
 
 $(document).ready(function() {
 
-	if (true == false){//getCookie("splash") == "seen") {
+	if (getCookie("splash") == "seen") { //  {
 		console.log("already seen splash screen");
-		$('#container').show();		
+		$('#container').show();
 	}
 	else {
 		$('#splashScreen').show();
@@ -335,9 +335,6 @@ $(document).ready(function() {
 
 
 	$("#calltoaction").click(function() {
-		//$("#splashScreen").fadeOut('slow',function(){
-  	// $("#splash").animate({'top': '-=250px'},'slow');
-
 	  $('#splashScreen').fadeOut('slow', function() {
 	    $("#container").fadeIn('slow');
 	    setCookie("splash", "seen", 7 * 365);
@@ -346,17 +343,17 @@ $(document).ready(function() {
 	//fadeIn(1500).
 	});
 
-	$("#splashLogo").click(function() {
-		//$("#splashScreen").fadeOut('slow',function(){
-  	// $("#splash").animate({'top': '-=250px'},'slow');
+	// $("#splashLogo").click(function() {
+	// 	//$("#splashScreen").fadeOut('slow',function(){
+ //  	// $("#splash").animate({'top': '-=250px'},'slow');
 
-	  $('#splashScreen').fadeOut('slow', function() {
-	    $("#container").fadeIn('slow');
-	    setCookie("splash", "seen", 7 * 365);
+	//   $('#splashScreen').fadeOut('slow', function() {
+	//     $("#container").fadeIn('slow');
+	//     setCookie("splash", "seen", 7 * 365);
 
-	  });
-	//fadeIn(1500).
-	});
+	//   });
+	// //fadeIn(1500).
+	// });
 
 	$("#calendar").addClass("hide");
 	$("#loadDiv").removeClass("hide");	
