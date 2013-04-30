@@ -344,7 +344,7 @@
          });
 
          $calendarContainer.find(".wc-time-slot").height(options.timeslotHeight-1); // account for border
-
+         
          $calendarContainer.find(".wc-time-header-cell").css({
             height :  (options.timeslotHeight * options.timeslotsPerHour) - 1,
             padding: 5
