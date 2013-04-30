@@ -6,19 +6,20 @@
 //"foundation/components/panels"
 
 body {
-  background: #becfb4; /* Old browsers */
-  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2JlY2ZiNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiZWNmYjQiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxNjVweCIgc3RvcC1jb2xvcj0iI2JlY2ZiNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=); /* IE9 */
-  background-image: -webkit-linear-gradient(bottom, #becfb4 165px, #ffffff 50%, #becfb4 100%); /* Chrome10+,Safari5.1+ */
-  background-image:    -moz-linear-gradient(bottom, #becfb4 165px, #ffffff 50%, #becfb4 100%); /* FF3.6+ */
-  background-image:     -ms-linear-gradient(bottom, #becfb4 165px, #ffffff 50%, #becfb4 100%); /* IE10+ */
-  background-image:      -o-linear-gradient(bottom, #becfb4 165px,#ffffff 50%,#becfb4 100%); /* Opera 11.10+ */
-  background-image:        -webkit-gradient(linear, left bottom, left top, from(#becfb4), color-stop(.5,#ffffff), to(#becfb4)); /* Chrome,Safari4+ */
-  background-image:         linear-gradient(bottom, #becfb4 165px,#ffffff 50%,#becfb4 100%); /* W3C */
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  // background: #becfb4; /* Old browsers */
+  // background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2JlY2ZiNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiZWNmYjQiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxNjVweCIgc3RvcC1jb2xvcj0iI2JlY2ZiNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=); /* IE9 */
+  // background-image: -webkit-linear-gradient(bottom, #becfb4 165px, #ffffff 50%, #becfb4 100%); /* Chrome10+,Safari5.1+ */
+  // background-image:    -moz-linear-gradient(bottom, #becfb4 165px, #ffffff 50%, #becfb4 100%); /* FF3.6+ */
+  // background-image:     -ms-linear-gradient(bottom, #becfb4 165px, #ffffff 50%, #becfb4 100%); /* IE10+ */
+  // background-image:      -o-linear-gradient(bottom, #becfb4 165px,#ffffff 50%,#becfb4 100%); /* Opera 11.10+ */
+  // background-image:        -webkit-gradient(linear, left bottom, left top, from(#becfb4), color-stop(.5,#ffffff), to(#becfb4)); /* Chrome,Safari4+ */
+  // background-image:         linear-gradient(bottom, #becfb4 165px,#ffffff 50%,#becfb4 100%); /* W3C */
+  // background-attachment: fixed;
+  // background-repeat: no-repeat;
   // font-size: 14px;
   // line-height: 20px;
   // position: relative;
+  background-image: url(ricepaper2color.png);
 }
 
 #splashScreen {
@@ -189,13 +190,13 @@ body {
 
 .search {  
 	background: #ffffff; /* Old browsers */
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlNWU1ZTUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); /* IE9 */
-  background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
-  background:    -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
-  background:     -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
-  background:      -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
-  background:        -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
-  background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
+  // background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlNWU1ZTUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); /* IE9 */
+  // background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+  // background:    -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+  // background:     -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+  // background:      -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+  // background:        -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+  // background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
   -webkit-border-radius: 4px;
           border-radius: 4px;
  }
@@ -206,6 +207,7 @@ body {
 	overflow: auto;
 	float: left;
 	padding-top: 10px;
+	margin-bottom: 12px;
 }
 
 #search {}
@@ -323,14 +325,11 @@ body {
 .carsonWrapper {
 	overflow: auto;
 	overflow-x: hidden;
-	border: 1px ridge rgba(82,0,99,.5);
 	border-radius: 4px;
 }
 
 .panel{
 	border-color: #dddddd;
-	box-shadow: 1px 1px 6px #AAA;
-	-webkit-box-shadow: 1px 1px 6px #AAA;
 }
 
 .removeClass {
@@ -339,6 +338,18 @@ body {
 	height: 100%;
 	margin-right: 5px;
 	background-image: url(removeClass.png);
+	z-index: 1;
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-size: contain;
+}
+
+.classArrow {
+	float: right;
+	width: 10%;
+	height: 100%;
+	margin-right: 10px;
+	background-image: url(downarrow.png);
 	z-index: 1;
 	background-repeat: no-repeat;
 	background-position: right center;
@@ -355,8 +366,7 @@ footer {
 	overflow: auto;
 	position: absolute;
 	top: 54px;
-	background-color: #f1f0ff;
-	box-shadow: 1px 1px 7px 1px #ccc;
+	background-color: #fff;
 	float: left;
 	z-index: 10;
 	/*display: none;*/
@@ -369,11 +379,11 @@ footer {
 }
 
 .searchResultContainer .searchResult {
-	border: 1px solid black;
 	border-radius: 3px;
 	margin-bottom: 2px;
 	margin-left: 1px;
 	margin-right: 1px;
+	background-color: #f1f0ff;
 	height: 42px;
 	position: relative;
 	white-space: nowrap;
@@ -395,7 +405,7 @@ footer {
 }
 
 .searchResultContainer .searchResult:hover {
-	background-color: rgba(82, 0, 99, .25);
+	background-color: rgba(203, 255, 198, .7);
 }
 
 .searchResultContainer .searchResult #classSubNum {
@@ -403,6 +413,7 @@ footer {
 	font-weight: bold;
 	top: 1px;
 	position: absolute;
+	padding: 4px;
 }
 
 .searchResultContainer .searchResult #classTitle {
@@ -410,6 +421,7 @@ footer {
 	position: absolute;
 	bottom: 1px;
 	text-overflow: ellipsis;
+	padding: 4px
 }
 
 table tr th, table tr td {
@@ -420,7 +432,13 @@ table tr th, table tr td {
 	display: none;
 }
 
+#toCalendar {
+	height: 30px;
+}
 
+#calendar {
+	margin-bottom: 12px;
+}
 /*
 	 div.combobox	{font-family: Tahoma;font-size: 12px}
 	 div.combobox	{position: relative;zoom: 1}
