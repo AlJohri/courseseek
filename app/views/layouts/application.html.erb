@@ -8,11 +8,17 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Coursica" %>">
   	<meta charset="utf-8" />
 
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
   	<!-- Uncomment to make IE8 render like IE7 -->
   	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
 
   	<!-- Set the viewport width to device width for mobile -->
-  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+
+<meta name="viewport" content="width=device-width" />
 
     <title><%= content_for?(:title) ? yield(:title) : "Coursica" %></title>
 
@@ -59,7 +65,11 @@
               <!-- Left Nav Section -->
               <ul class="left">
                 <li class="divider"></li>
+<<<<<<< HEAD
                 <li><a href="#" data-reveal-id="aboutModal">About</a></li>
+=======
+                <li class=""><a href="#" data-reveal-id="aboutModal">About</a></li>
+>>>>>>> b798569e22b5838d52760f394e8796743da5409e
                 <li class="divider"></li>
                 <li><a href="#" data-reveal-id="contactModal">Contact</a></li>
             </ul>
