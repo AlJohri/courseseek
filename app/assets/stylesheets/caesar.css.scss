@@ -19,6 +19,7 @@ body {
   // font-size: 14px;
   // line-height: 20px;
   // position: relative;
+  background-image: url(ricepaper2color.png);
 }
 
 #splashScreen {
@@ -240,7 +241,7 @@ footer {
 	overflow: auto;
 	position: absolute;
 	top: 54px;
-	background-color: #f1f0ff;
+	background-color: rgba(0,0,0,0);
 	box-shadow: 1px 1px 7px 1px #ccc;
 	float: left;
 	z-index: 10;
@@ -259,6 +260,7 @@ footer {
 	margin-bottom: 2px;
 	margin-left: 1px;
 	margin-right: 1px;
+	background-color: #f1f0ff;
 	height: 42px;
 	position: relative;
 	white-space: nowrap;
@@ -280,7 +282,7 @@ footer {
 }
 
 .searchResultContainer .searchResult:hover {
-	background-color: rgba(82, 0, 99, .25);
+	background-color: rgba(203, 255, 198, .7);
 }
 
 .searchResultContainer .searchResult #classSubNum {
@@ -288,6 +290,7 @@ footer {
 	font-weight: bold;
 	top: 1px;
 	position: absolute;
+	padding: 4px;
 }
 
 .searchResultContainer .searchResult #classTitle {
@@ -295,6 +298,7 @@ footer {
 	position: absolute;
 	bottom: 1px;
 	text-overflow: ellipsis;
+	padding: 4px
 }
 
 table tr th, table tr td {
