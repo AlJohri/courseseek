@@ -212,6 +212,7 @@ function addToCart(coursename) {
 
 	//Collapse divs on new search
 	$("div.addedCourseSec").hide();
+	$(".classArrow").css("background-image", "url(assets/downarrow.png)")
 	$(':checkbox').iphoneStyle();
 
 	//Remove Class functionality
