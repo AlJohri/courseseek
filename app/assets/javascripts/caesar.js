@@ -12,6 +12,7 @@ var CUR_TERM_ID = "4500";
 var COURSE_LIST = {};
 var SEARCH_RESULT_LIST = {};
 var SEARCH_LIST_FROM_NUM = {};
+var CALENDAR_VISIBLE = false;
 
 
 function changeSection() {}
@@ -558,6 +559,18 @@ window.onresize = function(event) {
 
 }
 
+$("#toCalendar").click(function(){
+	if (CALENDAR_VISIBLE == false) {
+		$("#shoppingCart").removeClass("show-for-small small-12").addClass("hide-for-small");
+		$("#calendar").removeClass("hide-for-small").addClass("show-for-small small-12");
+		CALENDAR_VISIBLE = true;
+	} else {
+		$("#calendar").removeClass("show-for-small small-12").addClass("hide-for-small");
+		$("#shoppingCart").removeClass("hide-for-small").addClass("show-for-small");
+		CALENDAR_VISIBLE = false;
+	}
+
+});
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
