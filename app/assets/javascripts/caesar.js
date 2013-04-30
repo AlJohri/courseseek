@@ -203,9 +203,11 @@ function addToCart(coursename) {
 	$('#' + keySpaceless).click(function() {
 		if($(this).next().is(':hidden')) {					
 			$(this).next().slideDown('fast');
+			$($('#' + keySpaceless).children()[1]).css("background-image", "url(assets/uparrow.png)")
 		} else {
-			$(this).next().slideUp('fast');}			
-   
+			$(this).next().slideUp('fast');
+			$($('#' + keySpaceless).children()[1]).css("background-image", "url(assets/downarrow.png)")
+   		}
 	});
 
 	//Collapse divs on new search
@@ -220,6 +222,15 @@ function addToCart(coursename) {
 		$('#' + this.parentNode.id).remove();
 		makeCalendar();
 	});	
+
+	// $('.classArrow').click(function() {
+ //               if ($(this).css("background-image") == "url(downarrow.png)") {
+ //                       $(this).css("background-image", "url(uparrow.png)")
+ //               }
+ //               else {
+ //                       $(this).css("background-image", "url(downarrow.png)")                        
+ //               }
+ //       });
 
 	$('.courseSection').click(function(){ console.log("tell calendar to turn on " + $(this).text()); });
 	$("#search").val("");
