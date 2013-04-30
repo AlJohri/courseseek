@@ -497,19 +497,20 @@ window.onresize = function(event) {
 	searchWidth = $("#search").css("width");
 	$('.searchResultContainer').css("width", searchWidth);	
 
-  winHeight = $(window).height() - 171;
+  winHeight = $(window).height();
 	maxHeight = 672;
 
-	// this is inefficient
+	$("#searchOutput").css("height", winHeight - 200);
 
+	// this is inefficient
 	$("#calendar").weekCalendar({
     height : function($calendar) { 
 
     	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-    		return maxHeight;
+    		// return maxHeight;
     	}
     	else {
-    		return winHeight < maxHeight ? winHeight : maxHeight;
+    		return (winHeight - 171) < maxHeight ? (winHeight - 171) : maxHeight;
     	}
 
     },
