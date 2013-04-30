@@ -48,8 +48,8 @@ function makeCalendar() {
 						var calEvent = { 
 							"unique_id" : course.unique_id,
 							"colorid" : colorCounter,
-							"start" : new Date(year + '-' + _month + '-' + _day + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
-							"end" : new Date(year + '-' + _month + '-' + _day + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
+							"start" : new Date(year + '/' + _month + '/' + _day + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
+							"end" : new Date(year + '/' + _month + '/' + _day + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
 							"title" : course.subject + " " + course.number + " " + course.title
 						};
 						console.log(calEvent);
@@ -75,8 +75,8 @@ function makeCalendar() {
 								var calEvent = { 
 									"unique_id" : section.unique_id,
 									"colorid" : colorCounter,
-									"start" : new Date(year + '-' + _month + '-' + _day + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
-									"end" : new Date(year + '-' + _month + '-' + _day + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
+									"start" : new Date(year + '/' + _month + '/' + _day + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
+									"end" : new Date(year + '/' + _month + '/' + _day + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
 									"title" : section.subject + " " + section.number + " " + section.title
 								};
 								console.log(calEvent);
