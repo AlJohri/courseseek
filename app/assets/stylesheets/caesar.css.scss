@@ -22,6 +22,21 @@ body {
   background-image: url(ricepaper2color.png);
 }
 
+
+#calltoaction {
+	position: relative;
+	top: 10%;
+	//bottom: 70%;
+	//bottom: 5%;
+	//left: 44%;
+	width: 152px;
+	margin: 0 auto;
+}
+
+#calltoactionButton {
+	border-radius: 3px;
+}
+
 #splashScreen {
 	display: none;
 	height: 800px;
@@ -31,130 +46,144 @@ body {
 	left: 0;	
 }
 
-#splashScreen #splash {
+#splash {
 	position: absolute;
 	margin: 0 auto;
 	width: 100%;
 	height: 100%;
-	background-image:url('splashTexture.png');
-	background-repeat:no-repeat;
-	background-position:center; 
+	// background-image:url('splashTexture.png');
+	// background-repeat:no-repeat;
+	// background-position:center; 
 }
 
-#splashScreen #splash #splashLogo {
+#splashLogo {
 	position: absolute;
-	top: 0%;
+	top: 0px;
 	width: 35%;
-	height: 22%;
 	left: 32.5%;
 }
 
-#splashScreen #splash #splashContainer{
+// #powtoon {
+// 	position: absolute;
+// 	top: 240px;
+// 	width: 640px;
+// 	left: 32.5%;
+// }
 
-    width: 50%;
-    height: 60%;
-    left: 25%;
+.the_container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; 
+    height: 0; 
+    overflow: hidden;
+}
+
+.the_container iframe,
+.the_container object,
+.the_container embed {
     position: absolute;
-    top: 25%;
-
+    top: 20%;
+    // left: 20%;
+    width: 100%;
+    height: 80%;
 }
 
-#splashScreen #splash #splashContainer #splashPointIntro{
-	font-size: 20px;
-	color: #F2F2F2;
-	line-height: 30px;
-}
+// #splashScreen #splash #splashContainer{
 
-#splashScreen #splash #splashContainer #splashPointOne {
-	position: relative;
-	height: 20%;
+//     width: 50%;
+//     height: 60%;
+//     left: 25%;
+//     position: absolute;
+//     top: 25%;
 
-}
+// }
 
-#splashScreen #splash #splashContainer #splashPointOne #splashPic1 {
-    width: 40%;
-    float: right;
-    position: relative;
-    height: 90%;
-    top: 5%;
-    border-radius: 3px;
-}
+// #splashScreen #splash #splashContainer #splashPointIntro{
+// 	font-size: 20px;
+// 	color: #F2F2F2;
+// 	line-height: 30px;
+// }
 
-#splashScreen #splash #splashContainer #splashPointTwo{
-	position: relative;
-	height: 32%;
-	border-top: 1px dashed whitesmoke;
-}
+// #splashScreen #splash #splashContainer #splashPointOne {
+// 	position: relative;
+// 	height: 20%;
 
-#splashScreen #splash #splashContainer #splashPointTwo #splashPic2 {
-    width: 35%;
-    float: right;
-    position: relative;
-    //height: 90%;
-    top: 5%;
-    border-radius: 3px;
-}
+// }
 
-#splashScreen #splash #splashContainer #splashPointThree{
-	position: relative;
-	top: 2%;
-	height: 30%;
-	border-top: 1px dashed whitesmoke;
-}
+// #splashScreen #splash #splashContainer #splashPointOne #splashPic1 {
+//     width: 40%;
+//     float: right;
+//     position: relative;
+//     height: 90%;
+//     top: 5%;
+//     border-radius: 3px;
+// }
 
-#splashScreen #splash #splashContainer #splashPointThree #splashPic3{
-    width: 38%;
-    float: right;
-    position: relative;
-    top: 5%;
-    border-radius: 3px;
+// #splashScreen #splash #splashContainer #splashPointTwo{
+// 	position: relative;
+// 	height: 32%;
+// 	border-top: 1px dashed whitesmoke;
+// }
 
-}
+// #splashScreen #splash #splashContainer #splashPointTwo #splashPic2 {
+//     width: 35%;
+//     float: right;
+//     position: relative;
+//     //height: 90%;
+//     top: 5%;
+//     border-radius: 3px;
+// }
 
-#splashScreen #splash #splashContainer #splashPointOne #splashOne{
-	position: absolute;
-	width: 45px;
-	height: 45px;
-	left: 3%;
-	top: 30%;
-}
-#splashScreen #splash #splashContainer #splashPointTwo #splashTwo{
-	position: absolute;
-	width: 45px;
-	height: 45px;
-	left: 3%;
-	top: 30%;
-}
+// #splashScreen #splash #splashContainer #splashPointThree{
+// 	position: relative;
+// 	top: 2%;
+// 	height: 30%;
+// 	border-top: 1px dashed whitesmoke;
+// }
 
-#splashScreen #splash #splashContainer #splashPointThree #splashThree{
-	position: absolute;
-	width: 45px;
-	height: 45px;
-	left: 3%;
-	top: 30%;
-}
+// #splashScreen #splash #splashContainer #splashPointThree #splashPic3{
+//     width: 38%;
+//     float: right;
+//     position: relative;
+//     top: 5%;
+//     border-radius: 3px;
 
-.splashText{
-	color: #F2F2F2;
-	font-size: 24px;
- 	display: inline-block;
- 	vertical-align: middle;
- 	line-height: normal;
- 	position: relative;
- 	left: 12%;
- 	top: 38%;
+// }
 
-}
+// #splashScreen #splash #splashContainer #splashPointOne #splashOne{
+// 	position: absolute;
+// 	width: 45px;
+// 	height: 45px;
+// 	left: 3%;
+// 	top: 30%;
+// }
+// #splashScreen #splash #splashContainer #splashPointTwo #splashTwo{
+// 	position: absolute;
+// 	width: 45px;
+// 	height: 45px;
+// 	left: 3%;
+// 	top: 30%;
+// }
 
-#calltoaction{
-	position: absolute;
-	bottom: 5%;
-	left: 44%;
-	margin: 0 auto;
-}
-#calltoaction #calltoactionButton {
-	border-radius: 3px;
-}
+// #splashScreen #splash #splashContainer #splashPointThree #splashThree{
+// 	position: absolute;
+// 	width: 45px;
+// 	height: 45px;
+// 	left: 3%;
+// 	top: 30%;
+// }
+
+// .splashText{
+// 	color: #F2F2F2;
+// 	font-size: 24px;
+//  	display: inline-block;
+//  	vertical-align: middle;
+//  	line-height: normal;
+//  	position: relative;
+//  	left: 12%;
+//  	top: 38%;
+
+// }
 
 .logo {
 	height: 30px;
