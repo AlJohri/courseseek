@@ -21,8 +21,13 @@ body {
 	width: 100%;
 }
 
+
 #splashexplain {
-	text-align: center;
+	width: 100%;
+	padding-left: 20%;
+	padding-right: 20%;
+	padding-top: 8px;
+	color: rgb(94, 99, 120);
 }
 
 
@@ -30,6 +35,7 @@ body {
 	text-align: center;
 	font-size: 24px;
 	margin: 0 auto;
+	margin-top: 15px;
 }
 
 #calltoactionButton {
@@ -298,13 +304,13 @@ table tr th, table tr td {
 	font-size: 80px;
 	color: rgba(94, 99, 120, 0.80);
 	text-shadow: 1px 4px 6px #def, 0 0 0 #000, 1px 4px 6px #def;
-	margin-top: 10%;
+	padding-top: 6%;
 
 }
 
 #splashdivider {
 	position: relative;
-	height: 1px;
+	height: 2px;
 	margin-top: 18px;
 	width: 30%;
 	left: 35%;
