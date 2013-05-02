@@ -323,8 +323,7 @@ var sidebar = false;
 
 $(document).ready(function() {
 
-	//if (getCookie("splash") == "seen") { //  {
-	if(true==false){
+	if (getCookie("splash") == "seen") {
 		console.log("already seen splash screen");
 		$('#container').show();
 	}
