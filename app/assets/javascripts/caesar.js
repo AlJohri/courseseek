@@ -26,7 +26,7 @@ function makeCalendar() {
 	var year = new Date().getFullYear();
 	var month = new Date().getMonth();
 	var day = getMonday(new Date()).getDate();
-				
+
 	for (var k in COURSE_LIST) {
 		for (var c in COURSE_LIST[k]) {
 			course = COURSE_LIST[k][c];
@@ -39,7 +39,7 @@ function makeCalendar() {
 					if (days[j] == "t") {
 
 						console.log("day " + j + " == true");
-						var _month = month+1;
+						var _month = month;
 						var _day = day + j;
 						if (_day > 30) {
 							_day -= 30;
@@ -65,7 +65,7 @@ function makeCalendar() {
 						// console.log("TRUE");
 						var _days = [section.M, section.T, section.W, section.R, section.F];
 						for (var i = 0; i < 5; i++) {
-							_month = month+1;
+							_month = month;
 							_day = day + i;
 							if (_day > 30) {
 								_day -= 30;
@@ -560,14 +560,14 @@ window.onresize = function(event) {
   winHeight = $(window).height();
 	maxHeight = 672;
 
-	$("#searchOutput").css("height", winHeight - 220);
+	$("#searchOutput").css("height", winHeight - 248);
 
 	// this is inefficient
 	$("#calendar").weekCalendar({
     height : function($calendar) { 
 
     	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-    		// return maxHeight;
+    		return maxHeight;
     	}
     	else {
     		return (winHeight - 171) < maxHeight ? (winHeight - 171) : maxHeight;
