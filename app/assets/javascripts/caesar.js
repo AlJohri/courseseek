@@ -323,8 +323,7 @@ var sidebar = false;
 
 $(document).ready(function() {
 
-	//if (getCookie("splash") == "seen") { //  {
-	if(true==false){
+	if (getCookie("splash") == "seen") {
 		console.log("already seen splash screen");
 		$('#container').show();
 	}
@@ -339,9 +338,7 @@ $(document).ready(function() {
 	  $('#splashScreen').fadeOut('slow', function() {
 	    $("#container").fadeIn('slow');
 	    setCookie("splash", "seen", 7 * 365);
-
 	  });
-	//fadeIn(1500).
 	});
 
 	// $("#splashLogo").click(function() {
