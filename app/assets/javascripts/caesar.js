@@ -538,7 +538,7 @@ $(document).ready(function() {
 	
 });
 
-var cssObj1, cssObj2;
+var cssObj1, cssObj2, cssObj3;
 
 window.onresize = function(event) {
 	searchWidth = $("#search").css("width");
@@ -558,11 +558,19 @@ window.onresize = function(event) {
 				'width' : '100%',
 				'left' : '0%'
 			};
+			cssObj3 = {
+				'width' : '46%',
+				'left' : '27%'
+			}
 
     		$('#splashexplain').css(cssObj1);
     		$('#splashexplain2').css(cssObj2);
     		$('#splashtitle').css("font-size", 60);
     		$('#calltoaction').css('font-size', 20);
+    		$('#splashdivider').css(cssObj3);
+
+    		$('.video-wrap').css("display", 'None');
+    		$('.splashdivider2').css("display", 'none');
    	} else {
    			cssObj1 = {
 				'padding-left' : '20%',
@@ -572,10 +580,17 @@ window.onresize = function(event) {
 				'width' : '60%',
 				'left' : '22%'
 			};
+			cssObj3 = {
+				'width' : '16%',
+				'left' : '42%'
+			}
+			
    			$('#splashexplain').css(cssObj1);
     		$('#splashexplain2').css(cssObj2);
    			$('#splashtitle').css("font-size", 80);
    			$('#calltoaction').css('font-size', 24);
+   			$('.video-wrap').css("display", 'block');
+    		$('.splashdivider2').css("display", 'block');
    	}
 
 	// this is inefficient

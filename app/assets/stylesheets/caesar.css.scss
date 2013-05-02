@@ -25,6 +25,14 @@ body {
 	// background-position:center; 
 }
 
+.video-wrap {
+	padding-top: 21.25% !important;
+	width: 32% !important;
+	position: relative;
+	left: 33.5%;
+	border-radius: 3px;
+}
+
 
 #splashexplain {
 	width: 100%;
@@ -34,10 +42,15 @@ body {
 	padding-top: 8px;
 	color: rgb(94, 99, 120);
 }
+
+#splashexplain p {
+	margin-bottom: 12px;
+}
+
 #splashexplain2 {
 	width: 60%;
 	position: relative;
-	left: 22%;
+	left: 23%;
 }
 
 
@@ -315,7 +328,7 @@ table tr th, table tr td {
 	font-size: 80px;
 	color: rgba(94, 99, 120, 0.80);
 	text-shadow: 1px 4px 6px #def, 0 0 0 #000, 1px 4px 6px #def;
-	padding-top: 6%;
+	padding-top: 3%;
 
 }
 
@@ -323,8 +336,8 @@ table tr th, table tr td {
 	position: relative;
 	height: 2px;
 	margin-top: 18px;
-	width: 30%;
-	left: 35%;
+	width: 16%;
+	left: 42%;
 	right: 35%;
 	background-color: rgba(94, 99, 120, 0.80);
 }
