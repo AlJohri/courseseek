@@ -82,7 +82,7 @@ body {
 
 #splashScreen #splash #splashContainer #splashPointTwo{
 	position: relative;
-	height: 32%;
+	height: 20%;
 	border-top: 1px dashed whitesmoke;
 }
 
@@ -97,8 +97,8 @@ body {
 
 #splashScreen #splash #splashContainer #splashPointThree{
 	position: relative;
-	top: 2%;
-	height: 30%;
+	//top: 2%;
+	height: 20%;
 	border-top: 1px dashed whitesmoke;
 }
 
@@ -148,8 +148,9 @@ body {
 
 #calltoaction{
 	position: absolute;
-	bottom: 5%;
-	left: 44%;
+	bottom: 20%;
+	left: 39%;
+	font-size: 24px;
 	margin: 0 auto;
 }
 #calltoaction #calltoactionButton {
