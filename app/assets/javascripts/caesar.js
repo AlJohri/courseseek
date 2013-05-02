@@ -567,7 +567,7 @@ window.onresize = function(event) {
     		$('#splashexplain2').css(cssObj2);
     		$('#splashtitle').css("font-size", 60);
     		$('#calltoaction').css('font-size', 20);
-    		$('#splashdivider').css(cssObj3);
+    		$('.splashdivider').css(cssObj3);
 
     		$('.video-wrap').css("display", 'None');
     		$('.splashdivider2').css("display", 'none');
@@ -584,10 +584,11 @@ window.onresize = function(event) {
 				'width' : '16%',
 				'left' : '42%'
 			}
-			
+
    			$('#splashexplain').css(cssObj1);
     		$('#splashexplain2').css(cssObj2);
    			$('#splashtitle').css("font-size", 80);
+   			$('.splashdivider').css(cssObj3);
    			$('#calltoaction').css('font-size', 24);
    			$('.video-wrap').css("display", 'block');
     		$('.splashdivider2').css("display", 'block');
