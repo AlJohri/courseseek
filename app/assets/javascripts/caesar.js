@@ -146,7 +146,6 @@ function addToCart(coursename) {
 	if(COURSE_LIST[key][0].sections != undefined){
 		COURSE_LIST[key][0].sections[0].onoff = true;
 	}
-	
 
 	var carsonWrapper = document.createElement('div');
 	carsonWrapper.className = "carsonWrapper";
@@ -189,7 +188,6 @@ function addToCart(coursename) {
 		sectionHtml += '<option value="' + COURSE_LIST[key][0].sections[j].unique_id + '"> ' + createSectionString(COURSE_LIST[key][0].sections[j]) + '</option>';
 	}
 
-
 	sectionHtml += '</select></form></div>';
 	coursesections.innerHTML = sectionHtml;		
 
@@ -210,21 +208,21 @@ function addToCart(coursename) {
    		}
 	});
 
-	//Collapse divs on new search
+	// Collapse divs on new search
 	$("div.addedCourseSec").hide();
 	$(".classArrow").css("background-image", "url(assets/downarrow.png)")
 	$(':checkbox').iphoneStyle();
 
-	//Remove Class functionality
+	// Remove Class functionality
 	$('.removeClass').click(function(){
 		delete COURSE_LIST[this.parentNode.id.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2')];
 		$(this).parent().parent().remove();
 		$('#' + this.parentNode.id).next().remove();
 		$('#' + this.parentNode.id).remove();
 		makeCalendar();
-	});	
+	});
 
-	// $('.classArrow').click(function() {
+ // $('.classArrow').click(function() {
  //               if ($(this).css("background-image") == "url(downarrow.png)") {
  //                       $(this).css("background-image", "url(uparrow.png)")
  //               }
@@ -341,28 +339,14 @@ $(document).ready(function() {
 	  });
 	});
 
-	// $("#splashLogo").click(function() {
-	// 	//$("#splashScreen").fadeOut('slow',function(){
- //  	// $("#splash").animate({'top': '-=250px'},'slow');
-
-	//   $('#splashScreen').fadeOut('slow', function() {
-	//     $("#container").fadeIn('slow');
-	//     setCookie("splash", "seen", 7 * 365);
-
-	//   });
-	// //fadeIn(1500).
-	// });
-
 	$("#calendar").addClass("hide");
 	$("#loadDiv").removeClass("hide");	
 
 	$.getJSON('courses', function(resp) { 
 		data = resp;
 
-
 		var options = { keys: ['number','overview','subject','title'], threshold: '0.25' }
 		fuse = new Fuse(data,options);
-
 
 		$("#loadDiv").addClass("hide"); 
 		$("#calendar").removeClass("hide");
@@ -409,17 +393,16 @@ $(document).ready(function() {
     }
  	});
 
-
 	var idcount = 0;
 
 	$("input[type=text]").click(function() { $(this).select(); });
-	
+
 	$("#enterbutton").click(function() {
 		//adds to cart when user hits enter (must add section after course #)
 		//return -1 if the course entered is not in the list, otherwise return 0; 
 		var check=Object.keys(SEARCH_RESULT_LIST).indexOf($('#search').val().toUpperCase());
 		console.log(check);
-		if ($('#search').val() != '' &&  check != -1){
+		if ($('#search').val() != '' &&  check != -1) {
 			// addToCart(SEARCH_RESULT_LIST[$('.searchResult').html()]);
 			addToCart(SEARCH_RESULT_LIST[$('.searchResult').children('#classSubNum').text()][0].subject + ' ' + SEARCH_RESULT_LIST[$('.searchResult').children('#classSubNum').text()][0].number);
 			makeCalendar();
@@ -572,13 +555,6 @@ window.onresize = function(event) {
 
     },
 	});
-
-	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-		//$('.the_container embed').css
-		//$('#splashLogo').css
-		//$('#calltoaction').css
-    }
-
 
 	makeCalendar();
 
