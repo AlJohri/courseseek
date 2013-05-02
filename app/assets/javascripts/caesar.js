@@ -240,12 +240,17 @@ function addToCart(coursename) {
 	change( function() {
 		console.log("LECTURE changed to " + $(this).val() + ' from ' + previousLecID);
 		// Change what lecture shows with code here
-		var newLecture = $(this).val()
+		var newLecture = $(this).val();
 		var lectureName = this.id.substr(4);
 		var sectionDropdownDivName = "SEC-" + lectureName;
 		lectureName = lectureName.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2');
 		for (var i in COURSE_LIST[lectureName]){
 			if (COURSE_LIST[lectureName][i].unique_id == newLecture){
+				var newProfName = COURSE_LIST[lectureName][i].instructor;
+				console.log("NEW PROF NAME: " + newProfName);
+				var instructorDiv = $("#LEC-" + keySpaceless).parent().parent().prev();
+				instructorDiv.html("<b> Instructor </b> <br>" + newProfName);
+
 				COURSE_LIST[lectureName][i]["onoff"] = true;
 				for (var j in COURSE_LIST[lectureName][i].sections){
 					if(j==0){
