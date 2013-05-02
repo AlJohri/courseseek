@@ -166,7 +166,7 @@ function addToCart(coursename) {
 	// 
 
 	//Populate drop down with lecture sections
-	sectionHtml += '<div class="LEC"><b>LEC:</b> '+
+	sectionHtml += '<div class="LEC"><b>LECTURE:</b> '+
 					'<form><select id="LEC-'+keySpaceless+'">';
 
 	for (var i in COURSE_LIST[key]) {
@@ -182,7 +182,7 @@ function addToCart(coursename) {
 	sectionHtml += '</select></form></div>';
 
 	//Populate drop down with discussion sections
-	sectionHtml += '<div class="DIS"><b>SECTION:</b> '+
+	sectionHtml += '<div class="DIS"><b>DISCUSSION/LAB:</b> '+
 					'<form><select id="SEC-' + keySpaceless + '">';
 
 	for (var j in COURSE_LIST[key][0].sections) {
