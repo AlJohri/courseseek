@@ -533,6 +533,8 @@ $(document).ready(function() {
 	
 });
 
+var cssObj1, cssObj2;
+
 window.onresize = function(event) {
 	searchWidth = $("#search").css("width");
 	$('.searchResultContainer').css("width", searchWidth);	
@@ -541,6 +543,35 @@ window.onresize = function(event) {
 	maxHeight = 672;
 
 	$("#searchOutput").css("height", winHeight - 248);
+
+	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			cssObj1 = {
+				'padding-left' : '10%',
+				'padding-right' : '10%'
+			};
+			cssObj2 = {
+				'width' : '100%',
+				'left' : '0%'
+			};
+
+    		$('#splashexplain').css(cssObj1);
+    		$('#splashexplain2').css(cssObj2);
+    		$('#splashtitle').css("font-size", 60);
+    		$('#calltoaction').css('font-size', 20);
+   	} else {
+   			cssObj1 = {
+				'padding-left' : '20%',
+				'padding-right' : '20%'
+			};
+			cssObj2 = {
+				'width' : '60%',
+				'left' : '22%'
+			};
+   			$('#splashexplain').css(cssObj1);
+    		$('#splashexplain2').css(cssObj2);
+   			$('#splashtitle').css("font-size", 80);
+   			$('#calltoaction').css('font-size', 24);
+   	}
 
 	// this is inefficient
 	$("#calendar").weekCalendar({
