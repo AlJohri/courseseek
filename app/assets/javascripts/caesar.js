@@ -576,6 +576,13 @@ window.onresize = function(event) {
     },
 	});
 
+	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+		//$('.the_container embed').css
+		//$('#splashLogo').css
+		//$('#calltoaction').css
+    }
+
+
 	makeCalendar();
 
 }
