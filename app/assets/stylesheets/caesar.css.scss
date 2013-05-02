@@ -285,3 +285,33 @@ table tr th, table tr td {
 #calendar {
 	margin-bottom: 12px;
 }
+
+
+#splashtitle {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:bold;
+	letter-spacing: -1px;
+	text-align: center;
+	line-height: 55px;
+	font-size: 80px;
+	color: rgba(94, 99, 120, 0.80);
+	text-shadow: 1px 4px 6px #def, 0 0 0 #000, 1px 4px 6px #def;
+	margin-top: 10%;
+
+}
+
+#splashdivider {
+	position: relative;
+	height: 1px;
+	margin-top: 18px;
+	width: 30%;
+	left: 35%;
+	right: 35%;
+	background-color: rgba(94, 99, 120, 0.80);
+}
+
+
+
+
+
+
