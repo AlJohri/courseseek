@@ -9,3 +9,5 @@ Coursica::Application.routes.draw do
   resources :sessions
   match ':controller(/:action(/:id(.:format)))'
 end
+
+# https://github.com/rails/rails/issues/10091#issuecomment-15917805

@@ -3,8 +3,6 @@
 //= require search
 
 /* GLOBALS */
-// Note: I'm not sure if it's better style to have these as globals, or put everything 
-// (eg. addCourseSelectionTable, addToCart and these two) into $(document).ready
 
 var fuse;
 var data;
@@ -14,7 +12,6 @@ var SEARCH_RESULT_LIST = {};
 var SEARCH_LIST_FROM_NUM = {};
 var CALENDAR_VISIBLE = false;
 
-
 function changeSection() {}
 
 function makeCalendar() {
@@ -23,9 +20,8 @@ function makeCalendar() {
 	$("#calendar").weekCalendar("clear");
 	var colorCounter = 0;
 	
-	var year = new Date().getFullYear();
-	var month = new Date().getMonth();
-	var day = getMonday(new Date()).getDate();
+	var monday = moment(getMonday(new Date()));
+	var monday2 = moment().startOf('year');
 
 	for (var k in COURSE_LIST) {
 		for (var c in COURSE_LIST[k]) {
@@ -38,18 +34,19 @@ function makeCalendar() {
 				for (var j = 0; j < 5; j++) {
 					if (days[j] == "t") {
 
-						console.log("day " + j + " == true");
-						var _month = month;
-						var _day = day + j;
-						if (_day > 30) {
-							_day -= 30;
-							_month += 1;
-						}
+						var start_time = moment(course.start, "h:mmA");
+						var start = moment(monday).add('days', j).hours(start_time.hours()).minutes(start_time.minutes()).seconds(start_time.seconds());
+
+						var end_time = moment(course.end, "h:mmA");
+						var end = moment(monday).add('days', j).hours(end_time.hours()).minutes(end_time.minutes()).seconds(end_time.seconds());						
+
 						var calEvent = { 
 							"unique_id" : course.unique_id,
 							"colorid" : colorCounter,
-							"start" : new Date(year + '/' + _month + '/' + _day + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
-							"end" : new Date(year + '/' + _month + '/' + _day + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
+							"start" : start.toDate(),
+							"end" : end.toDate(),
+							// "start" : new Date(year + '/' + _month + '/' + day + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
+							// "end" : new Date(year + '/' + _month + '/' + day + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
 							"title" : course.subject + " " + course.number + " " + course.title
 						};
 						console.log(calEvent);
@@ -65,18 +62,21 @@ function makeCalendar() {
 						// console.log("TRUE");
 						var _days = [section.M, section.T, section.W, section.R, section.F];
 						for (var i = 0; i < 5; i++) {
-							_month = month;
-							_day = day + i;
-							if (_day > 30) {
-								_day -= 30;
-								_month += 1;
-							}
+
+							var start_time = moment(course.start, "h:mmA");
+							var start = moment(monday).add('days', j).hours(start_time.hours()).minutes(start_time.minutes()).seconds(start_time.seconds());
+
+							var end_time = moment(course.end, "h:mmA");
+							var end = moment(monday).add('days', j).hours(end_time.hours()).minutes(end_time.minutes()).seconds(end_time.seconds());						
+
 							if (_days[i] == "t") {
 								var calEvent = { 
 									"unique_id" : section.unique_id,
 									"colorid" : colorCounter,
-									"start" : new Date(year + '/' + _month + '/' + _day + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
-									"end" : new Date(year + '/' + _month + '/' + _day + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
+									"start" : start.toDate(),
+									"end" : end.toDate(),									
+									// "start" : new Date(year + '/' + _month + '/' + day + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
+									// "end" : new Date(year + '/' + _month + '/' + day + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
 									"title" : section.subject + " " + section.number + " " + section.title
 								};
 								console.log(calEvent);
@@ -160,11 +160,6 @@ function addToCart(coursename) {
 	var sectionHtml = '<div class="dropTitle">' + '<b> Title: </b> <br>' + COURSE_LIST[key][0].title +'</div>' + 
 					  '<div class="dropInst">' + '<b> Instructor: </b> <br>' + COURSE_LIST[key][0].instructor + '</div>';
 
-	// for future
-	// http://www.w3schools.com/tags/tag_select.asp
-	// 
-
-	//Populate drop down with lecture sections
 	sectionHtml += '<div class="LEC"><b>LECTURE:</b> '+
 					'<form><select id="LEC-'+keySpaceless+'">';
 
@@ -221,15 +216,6 @@ function addToCart(coursename) {
 		$('#' + this.parentNode.id).remove();
 		makeCalendar();
 	});
-
- // $('.classArrow').click(function() {
- //               if ($(this).css("background-image") == "url(downarrow.png)") {
- //                       $(this).css("background-image", "url(uparrow.png)")
- //               }
- //               else {
- //                       $(this).css("background-image", "url(downarrow.png)")                        
- //               }
- //       });
 
 	$('.courseSection').click(function(){ console.log("tell calendar to turn on " + $(this).text()); });
 	$("#search").val("");
@@ -308,12 +294,6 @@ function addToCart(coursename) {
 
 	});
 
-	
-
-	// $("#searchOutput").append(addedcoursenotif);
-	// $(':checkbox').iphoneStyle();
-	
-	// todo: add it to calendar here too?
 }
 
 function getMonday(d) {
