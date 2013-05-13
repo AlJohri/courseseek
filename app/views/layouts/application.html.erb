@@ -5,7 +5,7 @@
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "CourseSeek" %>">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "courseseek" %>">
   	<meta charset="utf-8" />
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -20,7 +20,7 @@
 
 <meta name="viewport" content="width=device-width" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "CourseSeek" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "courseseek" %></title>
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -42,13 +42,15 @@
 
     <div id="splashScreen">
 
-      <div id="splashtitle">CourseSeek</div>
+      <div id="splashtitle"><span style="color:blue;">course</span><span style="color:red;">seek</span></div>
+
+      <div id="alphatag">alpha</div>
       
       <div id="splashdivider" class="splashdivider"></div>
 
       <div id="splashexplain">
         <div id="splashexplain2">
-        <p>CourseSeek is a simple alternative to the painful task of making your schedule on CAESAR, just follow these steps.</p>
+        <p>Courseseek is a simple alternative to the painful task of making your schedule on CAESAR, just follow these steps.</p>
 
         <p>1. Search for a class by anything about it.</p>
 
@@ -62,7 +64,7 @@
       <div id="splashdivider" class='splashdivier splashdivider2' style="margin-top: 12px;"></div>
       <div id="calltoaction">
         <a id="calltoactionButton" class="button" href="#">
-          Take me to CourseSeek!
+          Take me to courseseek!
         </a>
       </div>
      
@@ -100,7 +102,7 @@
                 <ul class="title-area">
                   <li class="name">
                     <h1>
-                      <a href="#">Coursica</a>
+                      <a href="#"><span style="color:blue;">course</span><span style="color:red;">seek</span></a>
                     </h1>
                   </li>
                   <li class="toggle-topbar menu-icon">
