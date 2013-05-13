@@ -538,7 +538,7 @@ $(document).ready(function() {
 	
 });
 
-var cssObj1, cssObj2, cssObj3;
+var cssObj1, cssObj2, cssObj3, cssObj4;
 
 window.onresize = function(event) {
 	searchWidth = $("#search").css("width");
@@ -548,6 +548,8 @@ window.onresize = function(event) {
 	maxHeight = 672;
 
 	$("#searchOutput").css("height", winHeight - 248);
+
+	var isIpad = /iPad/i.test(navigator.userAgent);
 
 	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
 			cssObj1 = {
@@ -561,7 +563,12 @@ window.onresize = function(event) {
 			cssObj3 = {
 				'width' : '46%',
 				'left' : '27%'
-			}
+			};
+			cssObj4 = {
+				'width' : '90%',
+				'left' : '5%',
+				'padding-top' : '60%'
+			};
 
     		$('#splashexplain').css(cssObj1);
     		$('#splashexplain2').css(cssObj2);
@@ -569,8 +576,11 @@ window.onresize = function(event) {
     		$('#calltoaction').css('font-size', 20);
     		$('.splashdivider').css(cssObj3);
 
-    		$('.video-wrap').css("display", 'None');
-    		$('.splashdivider2').css("display", 'none');
+    		if(!isIpad) {
+    			console.log('moo');
+    			$('.video-wrap').css(cssObj4);
+			}
+    		$('.splashdivider2').css(cssObj3);
    	} else {
    			cssObj1 = {
 				'padding-left' : '20%',
@@ -584,14 +594,19 @@ window.onresize = function(event) {
 				'width' : '16%',
 				'left' : '42%'
 			}
+			cssObj4 = {
+				'width' : '32%',
+				'left' : '33.5%',
+				'padding-top' : '21.25%'
+			};
 
    			$('#splashexplain').css(cssObj1);
     		$('#splashexplain2').css(cssObj2);
    			$('#splashtitle').css("font-size", 80);
    			$('.splashdivider').css(cssObj3);
    			$('#calltoaction').css('font-size', 24);
-   			$('.video-wrap').css("display", 'block');
-    		$('.splashdivider2').css("display", 'block');
+   			$('.video-wrap').css(cssObj4);
+    		$('.splashdivider2').css(cssObj3);
    	}
 
 	// this is inefficient
