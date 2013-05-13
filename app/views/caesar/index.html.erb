@@ -103,6 +103,17 @@
      <a class="close-reveal-modal">&#215;</a>
 </div>
 
+<div id="feedbackModal" class="reveal-modal">
+    <h1> Feedback </h1>
+    <%= form_tag("/submit_feedback", :method => "get") do %>
+      <h6> Select feedback type </h6>
+      <%= select_tag(:fbtype, options_for_select([["Report Bug"],["Suggestion"]])) %>
+      <h6> What would you like to tell us? </h6>
+      <%= text_area_tag(:feedback, "What would you like to tell us?") %>
+      <%= submit_tag("Submit") %>
+    <% end %>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
 <!-- End Modals -->
 
 <!-- Joyride -->

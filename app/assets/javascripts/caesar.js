@@ -6,7 +6,7 @@
 
 var fuse;
 var data;
-var CUR_TERM_ID = "4500";
+var CUR_TERM_ID = "4510";
 var COURSE_LIST = {};
 var SEARCH_RESULT_LIST = {};
 var SEARCH_LIST_FROM_NUM = {};
@@ -117,7 +117,11 @@ function addToCart(coursename) {
 	
 	var keySpaceless = coursename.toUpperCase().replace(/\s+/g,'');
 
-	// BEGIN conflict resolution (uncomment from here to END if this breaks something)
+	// BEGIN conflict resolution
+	var newCourse = SEARCH_RESULT_LIST[key][0];
+	var newTimeSlotBegin = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + newCourse.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + newCourse.start.match(/(\d+:\d+)(\w+)/)[2]);
+	var newTimeSlotEnd = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + newCourse.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + newCourse.end.match(/(\d+:\d+)(\w+)/)[2]);
+	
 	for (var k_it in COURSE_LIST) {
 		for (var i in COURSE_LIST[k_it]) {
 			var cur = COURSE_LIST[k_it][i];
@@ -125,9 +129,14 @@ function addToCart(coursename) {
 			if (cur.onoff == true && cur.start != "TBA" && cur.end != "TBA") {
 				var existingTimeSlotBegin = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + cur.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + cur.start.match(/(\d+:\d+)(\w+)/)[2]);
 				var existingTimeSlotEnd = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + cur.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + cur.end.match(/(\d+:\d+)(\w+)/)[2]);
-				var newTimeSlotBegin = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + SEARCH_RESULT_LIST[key][0].start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + SEARCH_RESULT_LIST[key][0].start.match(/(\d+:\d+)(\w+)/)[2]);
-				var newTimeSlotEnd = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + SEARCH_RESULT_LIST[key][0].end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + SEARCH_RESULT_LIST[key][0].end.match(/(\d+:\d+)(\w+)/)[2]);
-				if (existingTimeSlotEnd <= newTimeSlotBegin || existingTimeSlotBegin >= newTimeSlotEnd) {
+				if (existingTimeSlotEnd <= newTimeSlotBegin || existingTimeSlotBegin >= newTimeSlotEnd || (function(){
+					if ((newCourse.M != "t" || cur.M != "t") && 
+						(newCourse.T != "t" || cur.T != "t") &&
+						(newCourse.W != "t" || cur.W != "t") &&
+						(newCourse.R != "t" || cur.R != "t") &&
+						(newCourse.F != "t" || cur.F != "t")) return true;
+					else return false;
+				})()) {
 					continue;
 				} else {
 					var choice = confirm("This class conflicts with your shopping cart. Add anyway?");
