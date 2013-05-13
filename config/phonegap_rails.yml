@@ -2,8 +2,8 @@
 ##  General settings
 ##
 phonegap_path:             '~/Development/phonegap-2.7.0'
-api_server:                'http://coursica.herokuapp.com'
+api_server:                'http://courseseek.herokuapp.com'
 
 ##  Android settings
 android:
-   package:                'com.northwestern.courisca'
+   package:                'com.northwestern.courseseek'

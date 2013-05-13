@@ -15,7 +15,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: coursica_development
+  database: courseseek_development
   pool: 5
   username: atul
   password: 
@@ -42,7 +42,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: coursica_test
+  database: courseseek_test
   pool: 5
   username: atul
   password: 
@@ -52,7 +52,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: coursica_production
+  database: courseseek_production
   pool: 5
   username: atul
   password: 
