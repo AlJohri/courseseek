@@ -329,7 +329,21 @@ table tr th, table tr td {
 	color: rgba(94, 99, 120, 0.80);
 	text-shadow: 1px 4px 6px #def, 0 0 0 #000, 1px 4px 6px #def;
 	padding-top: 3%;
+}
 
+#alphatag {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:bold;
+	letter-spacing: -1px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 20px;
+	//color: rgba(94, 99, 120, 0.80);
+	color: black;
+	// text-shadow: 1px 4px 6px #def, 0 0 0 #000, 1px 4px 6px #def;
+	// padding-top: 3%;	
+	padding-left: 390px;
+	padding-top: 6px;
 }
 
 #splashdivider {
