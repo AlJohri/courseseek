@@ -40,7 +40,7 @@ function makeCalendar() {
 						var end_time = moment(course.end, "h:mmA");
 						var end = moment(monday).add('days', j).hours(end_time.hours()).minutes(end_time.minutes()).seconds(end_time.seconds());						
 
-						var calEvent = { 
+						var calEvent = {
 							"unique_id" : course.unique_id,
 							"colorid" : colorCounter,
 							"start" : start.toDate(),
@@ -63,10 +63,10 @@ function makeCalendar() {
 						var _days = [section.M, section.T, section.W, section.R, section.F];
 						for (var i = 0; i < 5; i++) {
 
-							var start_time = moment(course.start, "h:mmA");
+							var start_time = moment(section.end.start, "h:mmA");
 							var start = moment(monday).add('days', j).hours(start_time.hours()).minutes(start_time.minutes()).seconds(start_time.seconds());
 
-							var end_time = moment(course.end, "h:mmA");
+							var end_time = moment(section.end.end, "h:mmA");
 							var end = moment(monday).add('days', j).hours(end_time.hours()).minutes(end_time.minutes()).seconds(end_time.seconds());						
 
 							if (_days[i] == "t") {
