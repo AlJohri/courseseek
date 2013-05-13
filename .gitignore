@@ -81,3 +81,5 @@ pickle-email-*.html
 
 # Ignore environment variables
 .env
+
+*.yml
