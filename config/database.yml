@@ -17,8 +17,8 @@ development:
   encoding: unicode
   database: courseseek_development
   pool: 5
-  username: atul
-  password: 
+  username: coreymcmahon
+  password: f0rtun3!
   template: template0
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -44,8 +44,8 @@ test:
   encoding: unicode
   database: courseseek_test
   pool: 5
-  username: atul
-  password: 
+  username: coreymcmahon
+  password: f0rtun3!
   template: template0
   host: localhost
 
@@ -54,7 +54,7 @@ production:
   encoding: unicode
   database: courseseek_production
   pool: 5
-  username: atul
-  password: 
+  username: coreymcmahon
+  password: f0rtun3!
   template: template0
   host: localhost
