@@ -17,7 +17,7 @@ development:
   encoding: unicode
   database: coursica_development
   pool: 5
-  username: atul
+  username: cp3192
   password: 
   template: template0
 
@@ -44,7 +44,7 @@ test:
   encoding: unicode
   database: coursica_test
   pool: 5
-  username: atul
+  username: cp3192
   password: 
   template: template0
   host: localhost
@@ -54,7 +54,7 @@ production:
   encoding: unicode
   database: coursica_production
   pool: 5
-  username: atul
+  username: cp3192
   password: 
   template: template0
   host: localhost

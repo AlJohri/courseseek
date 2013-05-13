@@ -327,7 +327,7 @@ table tr th, table tr td {
 	line-height: 55px;
 	font-size: 80px;
 	color: rgba(94, 99, 120, 0.80);
-	text-shadow: 1px 4px 6px #def, 0 0 0 #000, 1px 4px 6px #def;
+	text-shadow: 1px 4px 6px #def, 0 0 0 rgba(0,0,0,1), 1px 4px 6px #def;
 	padding-top: 3%;
 }
 
@@ -338,7 +338,7 @@ table tr th, table tr td {
 	text-align: center;
 	line-height: 20px;
 	font-size: 20px;
-	//color: rgba(94, 99, 120, 0.80);
+	//color: rgba(94, 99, 120, 0.65);
 	color: black;
 	// text-shadow: 1px 4px 6px #def, 0 0 0 #000, 1px 4px 6px #def;
 	// padding-top: 3%;	
