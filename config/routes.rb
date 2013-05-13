@@ -1,4 +1,4 @@
-Coursica::Application.routes.draw do
+Courseseek::Application.routes.draw do
   root :to => "caesar#index"
 
   get "logout" => "sessions#destroy", :as => "logout"
