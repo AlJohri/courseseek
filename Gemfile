@@ -18,6 +18,7 @@ group :development do
 	gem "better_errors", ">= 0.3.2"
 	gem "binding_of_caller", ">= 0.6.8"
 	# gem 'dotenv'
+  gem 'rename'
 end
 
 gem 'dotenv'
