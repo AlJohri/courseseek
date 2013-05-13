@@ -5,7 +5,7 @@ Courseseek::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
 
-  get "submit_feedback" => "caesar#submit_feedback"
+  get "submit_feedback" => "feedback#submit_feedback"
 
   resources :users
   resources :sessions
