@@ -1,0 +1,9 @@
+##
+##  General settings
+##
+phonegap_path:             '~/Development/phonegap-2.7.0'
+api_server:                'http://coursica.herokuapp.com'
+
+##  Android settings
+android:
+   package:                'com.northwestern.courisca'
