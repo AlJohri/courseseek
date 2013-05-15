@@ -19,6 +19,7 @@ function mergeClasses(classList,maxCount) {
 		}
 		return best_match[1];
 	}
+
 	function addSection(course,section) {
 		var key = section.subject + section.number;
 		for (var i in course.sections) {
@@ -30,6 +31,7 @@ function mergeClasses(classList,maxCount) {
 		course.sections.push(section);
 		return course;
 	}
+
 	function checkIfClassExistsAlready(classList,course) {
 		for (var n in classList) {
 			if (course.unique_id == classList[n].unique_id) {
