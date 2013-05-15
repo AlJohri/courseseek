@@ -6,7 +6,7 @@
 
 var fuse;
 var data;
-var CUR_TERM_ID = "4510";
+var CUR_TERM_ID = "4520";
 var COURSE_LIST = {};
 var SEARCH_RESULT_LIST = {};
 var SEARCH_LIST_FROM_NUM = {};
@@ -49,7 +49,7 @@ function makeCalendar() {
 							// "end" : new Date(year + '/' + _month + '/' + day + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
 							"title" : course.subject + " " + course.number + " " + course.title
 						};
-						console.log(calEvent);
+						// console.log(calEvent);
 						$("#calendar").weekCalendar("updateEvent", calEvent);
 						// console.log("sent updateEvent to calendar");
 					}
@@ -79,7 +79,7 @@ function makeCalendar() {
 									// "end" : new Date(year + '/' + _month + '/' + day + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
 									"title" : section.subject + " " + section.number + " " + section.title
 								};
-								console.log(calEvent);
+								// console.log(calEvent);
 								$("#calendar").weekCalendar("updateEvent", calEvent);					
 							}
 						}
@@ -130,10 +130,6 @@ function addToCart(coursename) {
 	for (var k_it in COURSE_LIST) {
 		for (var i in COURSE_LIST[k_it]) {
 			var cur = COURSE_LIST[k_it][i];
-			console.log(cur.start);
-			console.log(cur.start.indexOf("TBA"));
-			console.log(cur.end);
-			console.log(cur.end.indexOf("TBA"));
 			if (cur.onoff == true && cur.start.indexOf("TBA") == -1 && cur.end.indexOf("TBA") == -1) {
 				var existingTimeSlotBegin = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + cur.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + cur.start.match(/(\d+:\d+)(\w+)/)[2]);
 				var existingTimeSlotEnd = new Date(2013 + '/' + 01 + '/' + 01 + ' ' + cur.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + cur.end.match(/(\d+:\d+)(\w+)/)[2]);
@@ -183,12 +179,6 @@ function addToCart(coursename) {
 
 	for (var i in COURSE_LIST[key]) {
 		sectionHtml += '<option value="' + COURSE_LIST[key][i].unique_id + '">' + createSectionString(COURSE_LIST[key][i]) + '</option>';
-		// if (i == 0){
-		// 	newHtml = sectionHtml + '</select></form></div>' + '<div class="DIS">DIS: ' + '<form><select id="DISlist">';
-		// 	for (var j in COURSELIST[key][i].sections){
-		// 		sectionHtml += '<option>section ' + COURSE_LIST[key][i].sections[j] + '</option>';
-		// 	}
-		// }
 	}
 
 	sectionHtml += '</select></form></div>';
@@ -201,15 +191,19 @@ function addToCart(coursename) {
 		sectionHtml += '<option value="' + COURSE_LIST[key][0].sections[j].unique_id + '"> ' + createSectionString(COURSE_LIST[key][0].sections[j]) + '</option>';
 	}
 
+	// if (COURSE_LIST[key][0].sections) {
+	// 	console.log(COURSE_LIST[key][0].sections[0].unique_id);
+	// }
+
+
 	sectionHtml += '</select></form></div>';
 	coursesections.innerHTML = sectionHtml;		
-
 
 	$(carsonWrapper).append(addedcoursenotif);
 	$(carsonWrapper).append(coursesections);
 
 	$("#addedCourses").append(carsonWrapper);
-	
+
 	// console.log((query.toUpperCase()).replace(/\s+/g,''))
 	$('#' + keySpaceless).click(function() {
 		if($(this).next().is(':hidden')) {					
@@ -235,14 +229,18 @@ function addToCart(coursename) {
 		makeCalendar();
 	});
 
-	$('.courseSection').click(function(){ console.log("tell calendar to turn on " + $(this).text()); });
+	$('.courseSection').click(function(){ 
+		console.log("tell calendar to turn on " + $(this).text()); 
+	});
+
 	$("#search").val("");
 	
 	var previousLecID;
+
 	$('#LEC-' + keySpaceless).focus( function() {
-		previousLecID = $(this).val(); }).
-	change( function() {
-		console.log("LECTURE changed to " + $(this).val() + ' from ' + previousLecID);
+		previousLecID = $(this).val(); 
+	}).change( function() {
+		// console.log("LECTURE changed to " + $(this).val() + ' from ' + previousLecID);
 		// Change what lecture shows with code here
 		var newLecture = $(this).val();
 		var lectureName = this.id.substr(4);
@@ -251,7 +249,7 @@ function addToCart(coursename) {
 		for (var i in COURSE_LIST[lectureName]){
 			if (COURSE_LIST[lectureName][i].unique_id == newLecture){
 				var newProfName = COURSE_LIST[lectureName][i].instructor;
-				console.log("NEW PROF NAME: " + newProfName);
+				// console.log("NEW PROF NAME: " + newProfName);
 				var instructorDiv = $("#LEC-" + keySpaceless).parent().parent().prev();
 				instructorDiv.html("<b> Instructor </b> <br>" + newProfName);
 
@@ -290,9 +288,9 @@ function addToCart(coursename) {
 	
 	var previousSecID;
 	$('#SEC-' + keySpaceless).focus( function() {
-		previousSecID = $(this).val(); }).
-	change( function() {
-		console.log("Section changed to " + $(this).val() + " from " + previousSecID);
+		previousSecID = $(this).val(); 
+	}).change( function() {
+		// console.log("Section changed to " + $(this).val() + " from " + previousSecID);
 		var newSecID = $(this).val();
 		var newSection = $(this).val()
 		var lectureName = this.id.substr(4);
@@ -312,6 +310,27 @@ function addToCart(coursename) {
 
 	});
 
+	var url = "/?uniqueID=";
+
+	for (var k in COURSE_LIST) {
+		for (var i in COURSE_LIST[k]){
+			if(COURSE_LIST[k][i].onoff == true) {
+				url += COURSE_LIST[k][i].id + ",";
+				for(var j in COURSE_LIST[k][i].sections) {
+					if (COURSE_LIST[k][i].sections[j].onoff == true){
+						//url += COURSE_LIST[k][i].id + ",";
+					}
+				}
+			}
+		}
+	}
+
+	if (url[url.length - 1] == ",") url = url.slice(0, - 1);
+	window.history.replaceState( {} , '', url );
+
+	// console.log(newCourse.id);
+	// console.log(COURSE_LIST);
+
 }
 
 function getMonday(d) {
@@ -325,12 +344,12 @@ var sidebar = false;
 $(document).ready(function() {
 
 	if (getCookie("splash") == "seen") {
-		console.log("already seen splash screen");
+		// console.log("already seen splash screen");
 		$('#container').show();
 	}
 	else {
 		$('#splashScreen').show();
-		console.log("seeing the splash screen woohoo");
+		// console.log("seeing the splash screen woohoo");
 		//$(document).foundation('joyride', 'start');
 	}
 
@@ -404,7 +423,7 @@ $(document).ready(function() {
 		//adds to cart when user hits enter (must add section after course #)
 		//return -1 if the course entered is not in the list, otherwise return 0; 
 		var check=Object.keys(SEARCH_RESULT_LIST).indexOf($('#search').val().toUpperCase());
-		console.log(check);
+		// console.log(check);
 		if ($('#search').val() != '' &&  check != -1) {
 			// addToCart(SEARCH_RESULT_LIST[$('.searchResult').html()]);
 			addToCart(SEARCH_RESULT_LIST[$('.searchResult').children('#classSubNum').text()][0].subject + ' ' + SEARCH_RESULT_LIST[$('.searchResult').children('#classSubNum').text()][0].number);
@@ -527,10 +546,10 @@ $(document).ready(function() {
 	});
 
 	if (getCookie("joyride") == "ridden") {
-		console.log("already rode the joyride");
+		// console.log("already rode the joyride");
 	}
 	else {
-		console.log("riding the joyride woohoo");
+		// console.log("riding the joyride woohoo");
 		//$(document).foundation('joyride', 'start');
 	}
 	
@@ -575,7 +594,7 @@ window.onresize = function(event) {
     		$('.splashdivider').css(cssObj3);
 
     		if(!isIpad) {
-    			console.log('moo');
+    			// console.log('moo');
     			$('.video-wrap').css(cssObj4);
 			}
     		$('.splashdivider2').css(cssObj3);
