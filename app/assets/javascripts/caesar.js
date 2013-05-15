@@ -294,7 +294,7 @@ function addToCart(coursename) {
 		var lectureName = this.id.substr(4);
 		lectureName = lectureName.replace(/([a-zA-Z]+)([\d-]+)/g, '$1 $2');
 		console.log(lectureName);
-		for (var i in COURSE_LIST[lectureName]){
+		for (var i in COURSE_LIST[lectureName]) {
 			if(COURSE_LIST[lectureName][i].onoff == true){
 				for(var j in COURSE_LIST[lectureName][i].sections){
 					if (COURSE_LIST[lectureName][i].sections[j].unique_id == newSecID){
@@ -374,7 +374,7 @@ $(document).ready(function() {
 		$("#calendar").removeClass("hide");
 
 		var url = decodeURIComponent(document.URL);
-		url = url.replace("http://localhost:3000/?uniqueID=", "");
+		url = url.replace("http://www.courseseek.co/?uniqueID=", "");
 		if(url) {
 			courses = url.split(",");
 			for (i in courses) {
