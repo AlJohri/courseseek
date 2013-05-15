@@ -375,6 +375,7 @@ $(document).ready(function() {
 
 		var url = decodeURIComponent(document.URL);
 		url = url.replace("http://www.courseseek.co/?uniqueID=", "");
+		url = url.replace("+", " ");
 		if(url) {
 			courses = url.split(",");
 			for (i in courses) {
