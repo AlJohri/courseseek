@@ -57,7 +57,7 @@ function mergeClasses(classList,maxCount) {
 		classID = curClass.subject + curClass.number;
 		if (merged[classID] === undefined) {
 			// if curClass is the lecture, add it
-			if (curClass.lecdisc == "LEC") {
+			if (curClass.lecdisc == "LEC" || curClass.lecdisc == "LAB") {
 				merged[classID] = new Array();
                 merged[classID].push(curClass);
                 count++;
