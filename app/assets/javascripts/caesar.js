@@ -19,7 +19,7 @@ function makeCalendar() {
 	/* Clear Calendar */
 	$("#calendar").weekCalendar("clear");
 	var colorCounter = 0;
-	
+
 	var monday = moment(getMonday(new Date()));
 	var monday2 = moment().startOf('week').add('days', 1);
 
@@ -29,7 +29,7 @@ function makeCalendar() {
 			if (course.onoff == true) {
 				// console.log(course);
 				var days = [course.M, course.T, course.W, course.R, course.F];
-	
+
 				/* Create Events */
 				for (var j = 0; j < 5; j++) {
 					if (days[j] == "t") {
@@ -116,8 +116,6 @@ function addToCart(coursename) {
 	if(COURSE_LIST[key] != null) return;
 	
 	var keySpaceless = coursename.toUpperCase().replace(/\s+/g,'');
-
-
 
 	// BEGIN conflict resolution
 	var newCourse = SEARCH_RESULT_LIST[key][0];
@@ -212,7 +210,7 @@ function addToCart(coursename) {
 		} else {
 			$(this).next().slideUp('fast');
 			$($('#' + keySpaceless).children()[1]).css("background-image", "url(assets/downarrow.png)")
-   		}
+		}
 	});
 
 	// Collapse divs on new search
@@ -310,12 +308,14 @@ function addToCart(coursename) {
 
 	});
 
+	// REMOVE CLASS DON'T CHANGE THIS
 	var url = "/?uniqueID=";
 
 	for (var k in COURSE_LIST) {
 		for (var i in COURSE_LIST[k]){
 			if(COURSE_LIST[k][i].onoff == true) {
-				url += COURSE_LIST[k][i].id + ",";
+				// url += COURSE_LIST[k][i].id + ",";
+				url += k + ",";
 				for(var j in COURSE_LIST[k][i].sections) {
 					if (COURSE_LIST[k][i].sections[j].onoff == true){
 						//url += COURSE_LIST[k][i].id + ",";
@@ -356,8 +356,8 @@ $(document).ready(function() {
 
 	$("#calltoaction").click(function() {
 	  $('#splashScreen').fadeOut('slow', function() {
-	    $("#container").fadeIn('slow');
-	    setCookie("splash", "seen", 7 * 365);
+		$("#container").fadeIn('slow');
+		setCookie("splash", "seen", 7 * 365);
 	  });
 	});
 
@@ -372,6 +372,32 @@ $(document).ready(function() {
 
 		$("#loadDiv").addClass("hide"); 
 		$("#calendar").removeClass("hide");
+
+		var url = decodeURIComponent(document.URL);
+		url = url.replace("http://localhost:3000/?uniqueID=", "");
+		if(url) {
+			courses = url.split(",");
+			for (i in courses) {
+				// console.log(courses[i]);
+				query = courses[i];
+				var classes = findMatchingClasses(query.substring(0,query.indexOf(" ")));
+				classes = mergeClasses(classes,-1);
+
+				for (var i in classes) {
+					var key = classes[i][0].subject + ' ' + classes[i][0].number;
+					SEARCH_RESULT_LIST[key] = classes[i];
+				}
+
+				for (var i in SEARCH_RESULT_LIST) {
+					if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
+				}
+
+				addToCart(query);
+				makeCalendar();
+
+			}
+		}
+
 	});
 
 	// http://www.w3schools.com/html/html_colornames.asp
@@ -381,39 +407,39 @@ $(document).ready(function() {
 	// https://github.com/themouette/jquery-week-calendar/wiki/Script-options
 
 	var $calendar = $('#calendar');
-  	$calendar.weekCalendar({
-  	buttons : false,
-    timeslotsPerHour : 2,
-    timeslotHeight : 20,
-    allowCalEventOverlap : true,
-    overlapEventsSeparate: true,
-    firstDayOfWeek : 1,
-    businessHours : { start: 6, end: 22, limitDisplay: true },
-    daysToShow : 5,
-    textSize : 10, 
-    height : function($calendar) { 
+	$calendar.weekCalendar({
+		buttons : false,
+		timeslotsPerHour : 2,
+		timeslotHeight : 20,
+		allowCalEventOverlap : true,
+		overlapEventsSeparate: true,
+		firstDayOfWeek : 1,
+		businessHours : { start: 6, end: 22, limitDisplay: true },
+		daysToShow : 5,
+		textSize : 10, 
+		height : function($calendar) { 
 
-    	winHeight = $(window).height() - 171;
-    	maxHeight = 672;
+			winHeight = $(window).height() - 171;
+			maxHeight = 672;
 
-    	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-    		return maxHeight;
-    	}
-    	else {
-    		return winHeight < maxHeight ? winHeight : maxHeight;
-    	}
+			if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+				return maxHeight;
+			}
+			else {
+				return winHeight < maxHeight ? winHeight : maxHeight;
+			}
 
-    },
-    eventRender : function(calEvent, $event) {
-    	//console.log($event);
-      $event.css("backgroundColor", colors[calEvent.colorid]);
-      $event.find(".wc-time, .wc-title").css({
-         "backgroundColor" : colors[calEvent.colorid],
-         //"border" : "1px solid black",
-         "color" : "black"
-      });
-    }
- 	});
+		},
+		eventRender : function(calEvent, $event) {
+			//console.log($event);
+		  $event.css("backgroundColor", colors[calEvent.colorid]);
+		  $event.find(".wc-time, .wc-title").css({
+			 "backgroundColor" : colors[calEvent.colorid],
+			 //"border" : "1px solid black",
+			 "color" : "black"
+		  });
+		}
+	});
 
 	var idcount = 0;
 
@@ -473,59 +499,58 @@ $(document).ready(function() {
 	function containsNumber(input) {
 		var matches = input.match(/\d+/g);
 		if (matches != null) {
-		    return true;
+			return true;
 		}
 	}
 
 	function createSearchDropDown(){
 			var query = $('#search').val();
-	    	if (containsNumber(query)) {
-		    	SEARCH_RESULT_LIST = jQuery.extend({}, SEARCH_LIST_FROM_NUM); // reset back to when no number entered
+			if (containsNumber(query)) {
+				SEARCH_RESULT_LIST = jQuery.extend({}, SEARCH_LIST_FROM_NUM); // reset back to when no number entered
 
-	    		//console.log(SEARCH_LIST_FROM_NUM);
-	    		for (var i in SEARCH_RESULT_LIST) { // repeat search in case there are some numbers
-	    			if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
-	    		}
+				//console.log(SEARCH_LIST_FROM_NUM);
+				for (var i in SEARCH_RESULT_LIST) { // repeat search in case there are some numbers
+					if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
+				}
 					addCourseSelectionTable(SEARCH_RESULT_LIST);
-	    	}
-	    	else {
-		    	var matches = findMatchingClasses(query);
-		    	matches = mergeClasses(matches,-1);
-		    	addCourseSelectionTable(matches);
-		    	SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
-	    	}
+			}
+			else {
+				var matches = findMatchingClasses(query);
+				matches = mergeClasses(matches,-1);
+				addCourseSelectionTable(matches);
+				SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
+			}
 	}
 
 	var typingTimer;
 	var doneTypingInterval = 200;
 
 	$("#search").keyup(function(event) {
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(
-      function() {
+	clearTimeout(typingTimer);
+	typingTimer = setTimeout(
+	  function() {
 
-		    if(event.keyCode == 13) { $("#enterbutton").click(); }
-		    else if ((event.keyCode >= 48 && event.keyCode <= 122)) {
-		    	var query = $('#search').val();
-		    	if (!containsNumber(query)) {
-			    	var matches = findMatchingClasses(query); //overview
-			    	matches = mergeClasses(matches,-1);
-			    	addCourseSelectionTable(matches);
-			    	//console.log(matches);
-			    	SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
-		    	}
-		    	else {
-		    		for (var i in SEARCH_RESULT_LIST) {
-		    			if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
-		    		}
-		    		addCourseSelectionTable(SEARCH_RESULT_LIST);
-		    	}
-		    }
-		    else if (event.keyCode == 8) { // backspace
-		    		createSearchDropDown();
-		    }
-     },
-    doneTypingInterval
+			if(event.keyCode == 13) { $("#enterbutton").click(); }
+			else if ((event.keyCode >= 48 && event.keyCode <= 122)) {
+				var query = $('#search').val();
+				if (!containsNumber(query)) {
+					var matches = findMatchingClasses(query); //overview
+					matches = mergeClasses(matches,-1);
+					addCourseSelectionTable(matches);
+					SEARCH_LIST_FROM_NUM = jQuery.extend({}, SEARCH_RESULT_LIST);
+				}
+				else {
+					for (var i in SEARCH_RESULT_LIST) {
+						if (i.indexOf(query.toUpperCase()) == -1) delete SEARCH_RESULT_LIST[i];
+					}
+					addCourseSelectionTable(SEARCH_RESULT_LIST);
+				}
+			}
+			else if (event.keyCode == 8) { // backspace
+					createSearchDropDown();
+			}
+	 },
+	doneTypingInterval
    );
 	});	
 
@@ -552,6 +577,7 @@ $(document).ready(function() {
 		// console.log("riding the joyride woohoo");
 		//$(document).foundation('joyride', 'start');
 	}
+
 	
 });
 
@@ -561,7 +587,7 @@ window.onresize = function(event) {
 	searchWidth = $("#search").css("width");
 	$('.searchResultContainer').css("width", searchWidth);	
 
-  winHeight = $(window).height();
+	winHeight = $(window).height();
 	maxHeight = 672;
 
 	$("#searchOutput").css("height", winHeight - 248);
@@ -587,19 +613,19 @@ window.onresize = function(event) {
 				'padding-top' : '60%'
 			};
 
-    		$('#splashexplain').css(cssObj1);
-    		$('#splashexplain2').css(cssObj2);
-    		$('#splashtitle').css("font-size", 60);
-    		$('#calltoaction').css('font-size', 20);
-    		$('.splashdivider').css(cssObj3);
+			$('#splashexplain').css(cssObj1);
+			$('#splashexplain2').css(cssObj2);
+			$('#splashtitle').css("font-size", 60);
+			$('#calltoaction').css('font-size', 20);
+			$('.splashdivider').css(cssObj3);
 
-    		if(!isIpad) {
-    			// console.log('moo');
-    			$('.video-wrap').css(cssObj4);
+			if(!isIpad) {
+				// console.log('moo');
+				$('.video-wrap').css(cssObj4);
 			}
-    		$('.splashdivider2').css(cssObj3);
-   	} else {
-   			cssObj1 = {
+			$('.splashdivider2').css(cssObj3);
+	} else {
+			cssObj1 = {
 				'padding-left' : '20%',
 				'padding-right' : '20%'
 			};
@@ -617,27 +643,27 @@ window.onresize = function(event) {
 				'padding-top' : '21.25%'
 			};
 
-   			$('#splashexplain').css(cssObj1);
-    		$('#splashexplain2').css(cssObj2);
-   			$('#splashtitle').css("font-size", 80);
-   			$('.splashdivider').css(cssObj3);
-   			$('#calltoaction').css('font-size', 24);
-   			$('.video-wrap').css(cssObj4);
-    		$('.splashdivider2').css(cssObj3);
-   	}
+			$('#splashexplain').css(cssObj1);
+			$('#splashexplain2').css(cssObj2);
+			$('#splashtitle').css("font-size", 80);
+			$('.splashdivider').css(cssObj3);
+			$('#calltoaction').css('font-size', 24);
+			$('.video-wrap').css(cssObj4);
+			$('.splashdivider2').css(cssObj3);
+	}
 
 	// this is inefficient
 	$("#calendar").weekCalendar({
-    height : function($calendar) { 
+	height : function($calendar) { 
 
-    	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-    		return maxHeight;
-    	}
-    	else {
-    		return (winHeight - 171) < maxHeight ? (winHeight - 171) : maxHeight;
-    	}
+		if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			return maxHeight;
+		}
+		else {
+			return (winHeight - 171) < maxHeight ? (winHeight - 171) : maxHeight;
+		}
 
-    },
+	},
 	});
 
 	makeCalendar();
@@ -652,20 +678,20 @@ $("#toCalendar").click(function(){
 
 
 
-    	winHeight = $(window).height();
-    	maxHeight = 672;
+		winHeight = $(window).height();
+		maxHeight = 672;
 
 		$("#calendar").weekCalendar({
-	    height : function($calendar) { 
+		height : function($calendar) { 
 
-	    	if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-	    		return (winHeight - 140);
-	    	}
-	    	else {
-	    		return (winHeight - 171) < maxHeight ? (winHeight - 171) : maxHeight;
-	    	}
+			if ($(window).width() <= "768" || /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+				return (winHeight - 140);
+			}
+			else {
+				return (winHeight - 171) < maxHeight ? (winHeight - 171) : maxHeight;
+			}
 
-	    },
+		},
 		});
 
 		$(this).val("Back to Courses");
