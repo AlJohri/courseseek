@@ -1,5 +1,5 @@
 function findMatchingClasses(searchQuery) {
-
+	console.log(searchQuery);
 	return fuse.search(searchQuery);
 
 }
