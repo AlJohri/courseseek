@@ -47,7 +47,7 @@ function makeCalendar() {
 							"end" : end.toDate(),
 							// "start" : new Date(year + '/' + _month + '/' + day + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.start.match(/(\d+:\d+)(\w+)/)[2]),
 							// "end" : new Date(year + '/' + _month + '/' + day + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + course.end.match(/(\d+:\d+)(\w+)/)[2]),
-							"title" : course.subject + " " + course.number + " " + course.title
+							"title" : course.subject + " " + course.number + " " + course.title + " (<i>" + course.unique_id + "</i>)"
 						};
 						// console.log(calEvent);
 						$("#calendar").weekCalendar("updateEvent", calEvent);
@@ -77,7 +77,7 @@ function makeCalendar() {
 									"end" : end.toDate(),									
 									// "start" : new Date(year + '/' + _month + '/' + day + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.start.match(/(\d+:\d+)(\w+)/)[2]),
 									// "end" : new Date(year + '/' + _month + '/' + day + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[1] + ' ' + section.end.match(/(\d+:\d+)(\w+)/)[2]),
-									"title" : section.subject + " " + section.number + " " + section.title
+									"title" : section.subject + " " + section.number + " " + section.title + " (<i>" + section.unique_id + "</i>)"
 								};
 								// console.log(calEvent);
 								$("#calendar").weekCalendar("updateEvent", calEvent);					
