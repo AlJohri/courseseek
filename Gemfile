@@ -21,6 +21,10 @@ group :development do
   gem 'rename'
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
+end
+
 gem 'dotenv'
 gem 'bcrypt-ruby'
 gem 'foreman'
