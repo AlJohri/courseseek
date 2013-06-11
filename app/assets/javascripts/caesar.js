@@ -173,7 +173,12 @@ function addToCart(coursename) {
 					  '<div class="dropInst">' + '<b> Instructor: </b> <br>' + COURSE_LIST[key][0].instructor + '</div>';
 
 	sectionHtml += '<div class="LEC"><b>LECTURE:</b> '+
-					'<form><select id="LEC-'+keySpaceless+'">';
+					'<form><select id="LEC-'+keySpaceless+'"';
+	if (COURSE_LIST[key].length == 1) {
+		sectionHtml += " disabled=true";
+	}
+
+	sectionHtml += '>';
 
 	for (var i in COURSE_LIST[key]) {
 		sectionHtml += '<option value="' + COURSE_LIST[key][i].unique_id + '">' + createSectionString(COURSE_LIST[key][i]) + '</option>';
@@ -183,7 +188,17 @@ function addToCart(coursename) {
 
 	//Populate drop down with discussion sections
 	sectionHtml += '<div class="DIS"><b>DISCUSSION/LAB:</b> '+
-					'<form><select id="SEC-' + keySpaceless + '">';
+					'<form><select id="SEC-' + keySpaceless + '"';
+
+	if (COURSE_LIST[key][0].sections != undefined) {
+		if (COURSE_LIST[key][0].sections.length == 1) {
+			sectionHtml += " disabled=true";
+		}
+	} else {
+		sectionHtml += " disabled=true";
+	}
+
+	sectionHtml += '>';
 
 	for (var j in COURSE_LIST[key][0].sections) {
 		sectionHtml += '<option value="' + COURSE_LIST[key][0].sections[j].unique_id + '"> ' + createSectionString(COURSE_LIST[key][0].sections[j]) + '</option>';
