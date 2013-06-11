@@ -21,6 +21,10 @@ group :development do
   gem 'rename'
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
+end
+
 gem 'dotenv'
 gem 'bcrypt-ruby'
 gem 'foreman'
@@ -35,7 +39,7 @@ gem 'simple_form', '>= 2.0.4'
 gem 'figaro', '>= 0.5.0'
 
 gem 'debugger'
-#gem "debugger-ruby_core_source", :git => "git://github.com/cldwalker/debugger-ruby_core_source.git"
-#gem "debugger", ">= 1.3.2"
+# gem "debugger-ruby_core_source", :git => "git://github.com/cldwalker/debugger-ruby_core_source.git"
+# gem "debugger", ">= 1.3.2"
 
 gem 'hub', '>= 1.10.2', :require => nil, :group => [:development]

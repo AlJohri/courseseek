@@ -44,8 +44,6 @@ class CourseJob
     	@careers.each { |row1|
     		puts row1.career
 			@subjects.each { |row2|
-				puts row2.subject
-
 				doc = @agent.get('https://ses.ent.northwestern.edu/psc/caesar_6/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.CLASS_SEARCH.GBL?Page=SSR_CLSRCH_ENTRY').parser
 				icsid = doc.xpath("//*[@id='ICSID']/@value").text
 				icelementnum = doc.xpath("//*[@id='ICElementNum']/@value").text
@@ -117,10 +115,16 @@ class CourseJob
 						checkEdgeCase = doc.search("div[id='win6divSSR_CLSRCH_MTG1$" + partsCounter1.to_s + "'] > table > tr")
 
 		  				if (checkEdgeCase.length > 2)
-		  					puts "ERROR EDGE CASE #{department} #{number}"
-		  					partsCounter1 += checkEdgeCase.length - 1
-		  					partsCounter2 += 1
-		  					next
+		  					parts.times { |x|
+			  					puts ""
+			  					puts "ERROR EDGE CASE #{partsCounter1.to_s} #{department} #{number}"
+			  					puts "--------------#{department} #{number} has #{parts} parts"
+			  					puts "lalala"
+			  					puts ""
+			  					partsCounter1 += checkEdgeCase.length - 1
+			  					partsCounter2 += 1
+			  				}
+			  				next
 		  				end
 
 						puts "--------------#{department} #{number} has #{parts} parts"

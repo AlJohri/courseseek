@@ -583,8 +583,8 @@ $(document).ready(function() {
 
 	$('#search').blur(function(){
 		keepFocus = false;
-	//		window.setTimeout(hideSearchResult, 150);}).focus(function(){
-	//			keepFocus = true;
+			window.setTimeout(hideSearchResult, 150);}).focus(function(){
+				keepFocus = true;
 	});
 
 	if (getCookie("joyride") == "ridden") {
