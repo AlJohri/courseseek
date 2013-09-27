@@ -41,17 +41,17 @@ class CourseJob
 		@subjects = Subject.all
     	@careers = Career.all
 
-    	# @careers.each { |row1|
-    		# puts row1.career
-			# @subjects.each { |row2|
+    	@careers.each { |row1|
+    		puts row1.career
+			@subjects.each { |row2|
 				doc = @agent.get('https://ses.ent.northwestern.edu/psc/caesar_6/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.CLASS_SEARCH.GBL?Page=SSR_CLSRCH_ENTRY').parser
 				icsid = doc.xpath("//*[@id='ICSID']/@value").text
 				icelementnum = doc.xpath("//*[@id='ICElementNum']/@value").text
 				icstatenum = doc.xpath("//*[@id='ICStateNum']/@value").text
 
 				institution = "NWUNV"
-				career = "UGRD" # row1.career
-				subject = "FRENCH "# row2.subject
+				career = row1.career
+				subject = row2.subject
 				match_type = "E"
 				include_class_days = "J"
 				open_course_only = "N"
@@ -208,8 +208,8 @@ class CourseJob
 						puts error#.red
 					end
 				end
-			# } # end  subjects.each
-		# } #end careers.each
+			} # end  subjects.each
+		} #end careers.each
 
 
 	end
