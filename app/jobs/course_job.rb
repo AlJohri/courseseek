@@ -39,7 +39,7 @@ class CourseJob
 		# error_counter = 0
 
 		@subjects = Subject.all
-    	@careers = Career.all
+    	@careers = [Career.all[16]]
 
     	@careers.each { |row1|
     		puts row1.career
@@ -55,7 +55,7 @@ class CourseJob
 				match_type = "E"
 				include_class_days = "J"
 				open_course_only = "N"
-				term = "4520"
+				term = "4520" # 2014 Winter
 
 				ajax_headers = { 'Content-Type' => 'application/x-www-form-urlencoded; charset=utf-8' }
 				params = {
@@ -63,14 +63,14 @@ class CourseJob
 					"ICSID" => icsid,
 					"ICElementNum" => icelementnum,
 					"ICStateNum" => icstatenum,
-					"DERIVED_SSTSNAV_SSTS_MAIN_GOTO$26$" => "9999",
-					"CLASS_SRCH_WRK2_INSTITUTION$49$" => institution,
-					"CLASS_SRCH_WRK2_STRM$52$"=> term,
-					"CLASS_SRCH_WRK2_SUBJECT$65$"=> subject,
-					"CLASS_SRCH_WRK2_CATALOG_NBR$73$" => "",
-					"CLASS_SRCH_WRK2_SSR_EXACT_MATCH1" => match_type,
-					"CLASS_SRCH_WRK2_ACAD_CAREER" => career,
-					"CLASS_SRCH_WRK2_SSR_OPEN_ONLY$chk" => open_course_only,
+					"DERIVED_SSTSNAV_SSTS_MAIN_GOTO$180$" => "9999",
+					"CLASS_SRCH_WRK2_INSTITUTION$41$" => institution,
+					"CLASS_SRCH_WRK2_STRM$44$"=> term,
+					"SSR_CLSRCH_WRK_SUBJECT$0"=> subject,
+					"SSR_CLSRCH_WRK_CATALOG_NBR$1" => "",
+					"SSR_CLSRCH_WRK_SSR_EXACT_MATCH1$1" => match_type,
+					"SSR_CLSRCH_WRK_ACAD_CAREER$2" => career,
+					"SSR_CLSRCH_WRK_SSR_OPEN_ONLY$chk$3" => open_course_only,
 					"DERIVED_SSTSNAV_SSTS_MAIN_GOTO$152$"=>"9999",
 				}
 
@@ -100,6 +100,8 @@ class CourseJob
 				error = doc.search("span[id^='DERIVED_CLSMSG_ERROR_TEXT']/text()")
 				courses = doc.search("span[id^='DERIVED_CLSRCH_DESCR200$']/text()").to_a
 
+				puts courses
+
 				partsCounter1 = 0
 				partsCounter2 = 0
 
@@ -111,7 +113,7 @@ class CourseJob
 						department = $1
 		          		number = $3
 		          		title = $4
-						parts = doc.search("div[id='win6div$ICField108GP$" + i.to_s + "'] > table > tr > td[2] > span[3]/text()").to_s.gsub(/1.*of\s/, "").to_i
+						parts = doc.search("div[id='win6div$ICField234GP$" + i.to_s + "'] > span[class='PSGRIDCOUNTER']/text()").to_s.gsub(/1.*of\s/, "").to_i
 						checkEdgeCase = doc.search("div[id='win6divSSR_CLSRCH_MTG1$" + partsCounter1.to_s + "'] > table > tr")
 
 		  				if (checkEdgeCase.length > 2)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416140048) do
+ActiveRecord::Schema.define(:version => 20130513221357) do
 
   create_table "careers", :force => true do |t|
     t.string "career", :limit => 4
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(:version => 20130416140048) do
   create_table "descriptions", :force => true do |t|
     t.string "unique_id"
     t.text   "overview"
+  end
+
+  create_table "feedbacks", :force => true do |t|
+    t.string   "type"
+    t.text     "feedback"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "institutions", :force => true do |t|
