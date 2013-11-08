@@ -37,6 +37,7 @@ gem 'thin', '>= 1.5.0'
 gem 'pg', '>= 0.14.1'
 gem 'simple_form', '>= 2.0.4'
 gem 'figaro', '>= 0.5.0'
+gem 'rails_12factor'
 
 #gem 'debugger'
 
