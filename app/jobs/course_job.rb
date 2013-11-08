@@ -160,11 +160,19 @@ class CourseJob
 							# http://stackoverflow.com/questions/452859/inserting-multiple-rows-in-a-single-sql-query
 		            		# course_list.insert(:uniqueid => uniqueid, :dept => department, :course => course, :sec => sec, :title => title, :days => days, :start_time => start_time, :end_time => end_time, :room => room, :instructor => instructor, :seats => seats, :status => status, :datescraped => datescraped)
 		            
-		            		mo = days.include? ("Mo")
-		            		tu = days.include? ("Tu")
-				            we = days.include? ("We")
-				            th = days.include? ("Th")
-				            fr = days.include? ("Fr")
+		            		if (days != nil)
+		            			mo = days.include? ("Mo")
+		            			tu = days.include? ("Tu")
+				            	we = days.include? ("We")
+				            	th = days.include? ("Th")
+				            	fr = days.include? ("Fr")
+				            else
+				            	mo = false
+				            	tu = false
+				            	we = false
+				            	th = false
+				            	fr = false
+				            end
 
 		            		puts "#{subject} #{number} #{title} #{lecdisc} #{instructor} #{days} #{start_time} #{end_time} #{partsCounter1}"
 
