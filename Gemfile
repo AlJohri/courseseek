@@ -41,7 +41,7 @@ gem 'rails_12factor'
 
 #gem 'debugger'
 
-gem "debugger-ruby_core_source"
-gem "debugger"
+# gem "debugger-ruby_core_source"
+# gem "debugger"
 
 gem 'hub', '>= 1.10.2', :require => nil, :group => [:development]
