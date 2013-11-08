@@ -55,7 +55,7 @@ class CourseJob
 				match_type = "E"
 				include_class_days = "J"
 				open_course_only = "N"
-				term = "4520" # 2014 Winter
+				term = "4530" # 2014 Winter
 
 				ajax_headers = { 'Content-Type' => 'application/x-www-form-urlencoded; charset=utf-8' }
 				params = {
