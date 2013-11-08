@@ -113,7 +113,7 @@ class CourseJob
 						department = $1
 		          		number = $3
 		          		title = $4
-						parts = doc.search("div[id='win6div$ICField234GP$" + i.to_s + "'] > span[class='PSGRIDCOUNTER']/text()").to_s.gsub(/1.*of\s/, "").to_i
+						parts = doc.search("div[id='win6div$ICField242GP$" + i.to_s + "'] > span[class='PSGRIDCOUNTER']/text()").to_s.gsub(/1.*of\s/, "").to_i
 						checkEdgeCase = doc.search("div[id='win6divSSR_CLSRCH_MTG1$" + partsCounter1.to_s + "'] > table > tr")
 
 		  				if (checkEdgeCase.length > 2)
